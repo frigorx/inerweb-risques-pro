@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portail Risques Professionnels - Quiz d'orientation métier - LPP Jacques Raynaud Campus Équatio">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Risques Professionnels - Orientation Métier</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Calibri:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f2d52;
+            --navy-mid: #1a4a6e;
+            --accent: #e8914a;
+            --accent-hover: #d47a35;
+            --accent-warm: #fdf6ef;
+            --turquoise: #2aafaf;
+            --mint: #d4f0e8;
+            --bg: #faf7f2;
+            --bg-end: #f0ebe3;
+            --text: #2c3e50;
+            --border: #ece4da;
+            --shadow: 0 4px 16px rgba(15,45,82,0.07), 0 1px 3px rgba(232,145,74,0.05);
+            --card-bg: #ffffff;
+            --success: #27ae60;
+            --error: #e74c3c;
+            --radius: 22px;
+            --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dyslexic-font {
+            font-family: 'OpenDyslexic', system-ui, sans-serif;
+        }
+
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        .accessibility-bar {
+            background: var(--primary);
+            padding: 8px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .a11y-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .a11y-btn:hover, .a11y-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--navy-mid), var(--turquoise));
+            color: white;
+            text-align: center;
+            padding: 50px 20px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255,255,255,0.03) 15px, rgba(255,255,255,0.03) 30px);
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hero .etablissement {
+            font-size: 1.15em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .hero .subtitle {
+            font-size: 1em;
+            opacity: 0.75;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .intro-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--accent);
+        }
+
+        .intro-card h2 {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 12px;
+        }
+
+        .intro-card p { margin-bottom: 10px; }
+
+        /* Quiz */
+        .quiz-container {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .quiz-header h2 {
+            color: var(--primary);
+            font-size: 1.4em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #ff8f5e);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .question-block {
+            display: none;
+        }
+
+        .question-block.active {
+            display: block;
+            animation: fadeSlide 0.4s ease;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question-number {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 18px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--card-bg);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1em;
+            text-align: left;
+            transition: all 0.2s;
+            color: var(--text);
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+            background: #fff8f5;
+        }
+
+        .option-btn.selected {
+            border-color: var(--accent);
+            background: #fff0e8;
+            font-weight: 600;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 999px;
+            font-weight: 600;
+            font-family: inherit;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Résultat */
+        .result-container {
+            display: none;
+            text-align: center;
+        }
+
+        .result-container.visible {
+            display: block;
+            animation: fadeSlide 0.5s ease;
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+        }
+
+        .result-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .result-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .result-desc {
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .filiere-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--accent), #e85a28);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.15em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.3);
+        }
+
+        .filiere-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+        }
+
+        .all-filieres {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .all-filieres h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .filieres-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .filiere-card {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+        }
+
+        .filiere-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .filiere-card .icon { font-size: 2.5em; margin-bottom: 10px; }
+        .filiere-card .name { font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .filiere-card .desc { font-size: 0.85em; color: #666; }
+
+        .filiere-card.locked {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .filiere-card.locked .name::after {
+            content: ' (bientot)';
+            font-size: 0.75em;
+            color: #999;
+            font-weight: 400;
+        }
+
+        /* Footer crédit discret */
+        .credit-footer {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+            font-size: 0.72em;
+        }
+
+        .credit-footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            max-width: 350px;
+            font-size: 0.95em;
+        }
+
+        .notification.show { transform: translateX(0); }
+        .notification.success { background: var(--success); }
+        .notification.info { background: var(--primary); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .filieres-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barre accessibilité -->
+    <div class="accessibility-bar">
+        <button class="a11y-btn" onclick="toggleDyslexic()" id="btnDys">OpenDyslexic</button>
+        <button class="a11y-btn" onclick="setSize('normal')">A</button>
+        <button class="a11y-btn" onclick="setSize('large')">A+</button>
+        <button class="a11y-btn" onclick="setSize('xlarge')">A++</button>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Risques Professionnels</h1>
+            <div class="etablissement">LPP Jacques Raynaud &middot; Campus Équatio</div>
+            <div class="subtitle">Parcours interactif de formation à la sécurité</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction -->
+        <div class="intro-card">
+            <h2>Bienvenue dans ton parcours sécurité</h2>
+            <p>Avant de commencer, réponds à <strong>5 questions rapides</strong> pour identifier ta filière métier. Tu seras ensuite orienté vers le parcours adapté à ton domaine professionnel.</p>
+            <p><strong>Chaque module te demandera de consulter les documents IRIS-ST / INRS papier pour répondre aux questions.</strong> Les réponses ne sont pas données à l'écran : c'est à toi d'aller chercher l'information dans le bon document.</p>
+        </div>
+
+        <!-- Quiz d'orientation -->
+        <div class="quiz-container" id="quizContainer">
+            <div class="quiz-header">
+                <span style="font-size: 1.8em;">🧭</span>
+                <h2>Quiz d'orientation métier</h2>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="question-block active" data-q="1">
+                <div class="question-number">Question 1 / 5</div>
+                <div class="question-text">Dans ton métier, tu travailles principalement avec :</div>
+                <div class="options">
+                    <button class="option-btn" data-value="froid" onclick="selectQuiz(this)">Des fluides frigorigènes et des circuits frigorifiques</button>
+                    <button class="option-btn" data-value="plombier" onclick="selectQuiz(this)">Des tuyaux, de la soudure cuivre et des chaudières</button>
+                    <button class="option-btn" data-value="elec" onclick="selectQuiz(this)">Des câbles, des tableaux électriques et des disjoncteurs</button>
+                </div>
+                <div class="quiz-nav">
+                    <button class="btn btn-accent" onclick="nextQuestion()" id="btnNext1" disabled>Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-block" data-q="2">
+                <div class="question-number">Question 2 / 5</div>
+                <div class="question-text">Quel type de risque te semble le plus présent dans ton futur métier ?</div>
+                <div class="options">
+                    <button class="option-btn" data-value="plombier" onclick="selectQuiz(this)">Brûlures par soudage et risque amiante</button>
+                    <button class="option-btn" data-value="froid" onclick="selectQuiz(this)">Asphyxie par manque d'oxygène et brûlures cryogéniques</button>
+                    <button class="option-btn" data-value="elec" onclick="selectQuiz(this)">Électrocution et arc électrique</button>
+                </div>
+                <div class="quiz-nav">
+                    <button class="btn btn-accent" onclick="nextQuestion()" disabled>Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-block" data-q="3">
+                <div class="question-number">Question 3 / 5</div>
+                <div class="question-text">Quel document de sécurité est le plus pertinent pour toi ?</div>
+                <div class="options">
+                    <button class="option-btn" data-value="froid" onclick="selectQuiz(this)">Mémo IRIS-ST « Frigoristes-chauffagistes : les fluides frigorigènes »</button>
+                    <button class="option-btn" data-value="plombier" onclick="selectQuiz(this)">INRS « Mon métier plombier-chauffagiste » (ED 6232)</button>
+                    <button class="option-btn" data-value="elec" onclick="selectQuiz(this)">IRIS-ST « Risque électrique » pour électriciens</button>
+                </div>
+                <div class="quiz-nav">
+                    <button class="btn btn-accent" onclick="nextQuestion()" disabled>Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-block" data-q="4">
+                <div class="question-number">Question 4 / 5</div>
+                <div class="question-text">Parmi ces EPI, lequel utilises-tu le plus souvent ?</div>
+                <div class="options">
+                    <button class="option-btn" data-value="froid" onclick="selectQuiz(this)">Gants cryogéniques et détecteur de fuites</button>
+                    <button class="option-btn" data-value="plombier" onclick="selectQuiz(this)">Lunettes de soudeur et gants anti-coupure</button>
+                    <button class="option-btn" data-value="elec" onclick="selectQuiz(this)">Gants isolants et VAT (vérificateur d'absence de tension)</button>
+                </div>
+                <div class="quiz-nav">
+                    <button class="btn btn-accent" onclick="nextQuestion()" disabled>Suivant →</button>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-block" data-q="5">
+                <div class="question-number">Question 5 / 5</div>
+                <div class="question-text">Sur un chantier, ta principale préoccupation sécurité serait :</div>
+                <div class="options">
+                    <button class="option-btn" data-value="plombier" onclick="selectQuiz(this)">Vérifier l'absence d'amiante avant de percer un mur</button>
+                    <button class="option-btn" data-value="froid" onclick="selectQuiz(this)">Ventiler le local avant d'intervenir sur un circuit frigorigène</button>
+                    <button class="option-btn" data-value="elec" onclick="selectQuiz(this)">Consigner l'installation électrique avant toute intervention</button>
+                </div>
+                <div class="quiz-nav">
+                    <button class="btn btn-accent" onclick="showResult()" disabled>Voir mon résultat →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Résultat -->
+        <div class="result-container" id="resultContainer">
+            <div class="result-card" id="resultCard">
+                <!-- Rempli dynamiquement -->
+            </div>
+
+            <div class="all-filieres">
+                <h3>Tous les parcours disponibles</h3>
+                <div class="filieres-grid">
+                    <a href="plombier/theme1.html" class="filiere-card">
+                        <div class="icon">🔧</div>
+                        <div class="name">Plombier-Chauffagiste</div>
+                        <div class="desc">INRS ED 6232 — 3 thèmes</div>
+                    </a>
+                    <a href="froid/theme1.html" class="filiere-card">
+                        <div class="icon">❄️</div>
+                        <div class="name">Froid & Climatisation</div>
+                        <div class="desc">IRIS-ST Fluides frigorigènes — 3 thèmes</div>
+                    </a>
+                    <a href="#" class="filiere-card locked">
+                        <div class="icon">⚡</div>
+                        <div class="name">Électricien</div>
+                        <div class="desc">IRIS-ST Risque électrique</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crédit discret -->
+    <div class="credit-footer">
+        inerWeb &middot; F. Henninot &middot; LPP Jacques Raynaud &middot; Campus Équatio
+    </div>
+
+    <script>
+        let answers = [];
+        let currentQ = 1;
+
+        function selectQuiz(btn) {
+            const block = btn.closest('.question-block');
+            block.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            block.querySelector('.quiz-nav .btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            const block = document.querySelector(`.question-block[data-q="${currentQ}"]`);
+            const selected = block.querySelector('.option-btn.selected');
+            if (!selected) return;
+
+            answers.push(selected.dataset.value);
+            block.classList.remove('active');
+            currentQ++;
+
+            const next = document.querySelector(`.question-block[data-q="${currentQ}"]`);
+            if (next) {
+                next.classList.add('active');
+                document.getElementById('progressFill').style.width = ((currentQ - 1) / 5 * 100) + '%';
+            }
+        }
+
+        function showResult() {
+            const block = document.querySelector(`.question-block[data-q="${currentQ}"]`);
+            const selected = block.querySelector('.option-btn.selected');
+            if (!selected) return;
+            answers.push(selected.dataset.value);
+
+            document.getElementById('progressFill').style.width = '100%';
+
+            // Comptabiliser
+            const counts = { froid: 0, plombier: 0, elec: 0 };
+            answers.forEach(a => counts[a]++);
+
+            let filiere = 'froid';
+            let max = 0;
+            for (const [k, v] of Object.entries(counts)) {
+                if (v > max) { max = v; filiere = k; }
+            }
+
+            const filieres = {
+                froid: {
+                    icon: '❄️',
+                    title: 'Froid & Climatisation',
+                    desc: 'Ton profil correspond à la filière frigoriste. Tu vas travailler avec des fluides frigorigènes, des circuits sous pression et des équipements de climatisation. Les risques spécifiques incluent l\'asphyxie, les brûlures cryogéniques et la surpression.',
+                    link: 'froid/theme1.html',
+                    linkText: 'Commencer le parcours Froid'
+                },
+                plombier: {
+                    icon: '🔧',
+                    title: 'Plombier-Chauffagiste',
+                    desc: 'Ton profil correspond à la filière plomberie-chauffage. Tu vas travailler avec des canalisations, du soudage et des systèmes de chauffage. Les risques spécifiques incluent les brûlures, l\'amiante et les TMS.',
+                    link: 'plombier/theme1.html',
+                    linkText: 'Commencer le parcours Plombier'
+                },
+                elec: {
+                    icon: '⚡',
+                    title: 'Électricien',
+                    desc: 'Ton profil correspond à la filière électrique. Ce parcours est en cours de développement. En attendant, tu peux consulter les parcours disponibles ci-dessous.',
+                    link: '#',
+                    linkText: 'Parcours bientôt disponible'
+                }
+            };
+
+            const f = filieres[filiere];
+            const card = document.getElementById('resultCard');
+            card.innerHTML = `
+                <div class="result-icon">${f.icon}</div>
+                <div class="result-title">${f.title}</div>
+                <div class="result-desc">${f.desc}</div>
+                ${filiere !== 'elec' ? `<a href="${f.link}" class="filiere-link">${f.linkText} →</a>` : `<span style="color:#999;font-style:italic;">${f.linkText}</span>`}
+            `;
+
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultContainer').classList.add('visible');
+
+            localStorage.setItem('orientation_filiere', filiere);
+            showNotification('Orientation terminée ! Ta filière : ' + f.title, 'success');
+        }
+
+        // Accessibilité
+        function toggleDyslexic() {
+            document.body.classList.toggle('dyslexic-font');
+            document.getElementById('btnDys').classList.toggle('active');
+            localStorage.setItem('a11y-dyslexic', document.body.classList.contains('dyslexic-font'));
+        }
+
+        function setSize(size) {
+            document.body.classList.remove('font-large', 'font-xlarge');
+            if (size !== 'normal') document.body.classList.add('font-' + size);
+            localStorage.setItem('a11y-size', size);
+        }
+
+        function showNotification(message, type) {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+
+            const n = document.createElement('div');
+            n.className = 'notification ' + type;
+            n.textContent = message;
+            document.body.appendChild(n);
+            setTimeout(() => n.classList.add('show'), 50);
+            setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 3500);
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('a11y-dyslexic') === 'true') {
+                document.body.classList.add('dyslexic-font');
+                document.getElementById('btnDys').classList.add('active');
+            }
+            const savedSize = localStorage.getItem('a11y-size');
+            if (savedSize && savedSize !== 'normal') document.body.classList.add('font-' + savedSize);
+        });
+    </script>
+</body>
+</html>

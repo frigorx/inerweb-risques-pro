@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 1 - Risques liés aux fluides frigorigènes - IRIS-ST">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Thème 1 - Risques Fluides Frigorigènes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Calibri:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f2d52;
+            --navy-mid: #1a4a6e;
+            --accent: #e8914a;
+            --accent-hover: #d47a35;
+            --accent-warm: #fdf6ef;
+            --turquoise: #2aafaf;
+            --mint: #d4f0e8;
+            --bg: #faf7f2;
+            --bg-end: #f0ebe3;
+            --text: #2c3e50;
+            --border: #ece4da;
+            --shadow: 0 4px 16px rgba(15,45,82,0.07), 0 1px 3px rgba(232,145,74,0.05);
+            --card-bg: #ffffff;
+            --success: #27ae60;
+            --error: #e74c3c;
+            --warning: #e8914a;
+            --radius: 22px;
+            --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        /* Barre accessibilité */
+        .a11y-bar {
+            background: linear-gradient(135deg, var(--primary), var(--navy-mid));
+            padding: 8px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            align-items: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .a11y-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .a11y-btn:hover, .a11y-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Header navigation */
+        .header-nav {
+            background: var(--card-bg);
+            padding: 12px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+        }
+
+        .nav-btn.home { background: var(--accent); }
+        .nav-btn.home:hover { background: #e55a2b; }
+        .nav-btn.doc { background: var(--primary); }
+        .nav-btn.doc:hover { background: #143052; }
+
+        .nav-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95em;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
+
+        /* En-tête thème */
+        .theme-header {
+            background: linear-gradient(135deg, var(--primary), var(--navy-mid), var(--turquoise));
+            color: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,255,255,0.03) 12px, rgba(255,255,255,0.03) 24px);
+        }
+
+        .theme-header * { position: relative; z-index: 1; }
+
+        .theme-header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .theme-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title .icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            flex-shrink: 0;
+        }
+
+        .info-box {
+            background: #f0f4f8;
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .info-box h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .warning-box {
+            background: #fff8f0;
+            border-left: 4px solid var(--accent);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .warning-box h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Grille risques */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .risk-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .risk-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .risk-card .risk-icon { font-size: 2.5em; margin-bottom: 10px; }
+
+        .risk-card .risk-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .risk-card .risk-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Tooltip */
+        .tip {
+            position: relative;
+            display: inline;
+            cursor: help;
+            border-bottom: 1px dotted var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .tip .tiptext {
+            visibility: hidden;
+            width: 240px;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            position: absolute;
+            z-index: 100;
+            bottom: 130%;
+            left: 50%;
+            margin-left: -120px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.88em;
+            font-weight: normal;
+            line-height: 1.4;
+        }
+
+        .tip:hover .tiptext { visibility: visible; opacity: 1; }
+
+        /* QCM */
+        .activity {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            color: var(--primary);
+        }
+
+        .activity-header span { font-size: 1.8em; }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .doc-ref {
+            background: #fff8f0;
+            border: 2px dashed var(--accent);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            font-size: 0.95em;
+            color: #7a4a1a;
+            font-weight: 600;
+        }
+
+        .doc-ref strong { color: var(--accent); }
+
+        .qcm-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .qcm-option {
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--card-bg);
+            font-family: inherit;
+            font-size: 1em;
+            text-align: left;
+            color: var(--text);
+        }
+
+        .qcm-option:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .qcm-option.selected { border-color: var(--accent); background: #fff0e8; }
+        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+
+        .qcm-feedback {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            display: none;
+        }
+
+        .qcm-feedback.success { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .qcm-feedback.error { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        /* Drag & Drop */
+        .drag-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 700px) { .drag-container { grid-template-columns: 1fr; } }
+
+        .drag-source, .drag-target {
+            min-height: 180px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+        }
+
+        .drag-source h4, .drag-target h4 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 0.95em;
+        }
+
+        .drag-item {
+            background: var(--primary);
+            color: white;
+            padding: 10px 14px;
+            margin: 6px 0;
+            border-radius: var(--radius-sm);
+            cursor: move;
+            user-select: none;
+            transition: all 0.2s;
+            font-size: 0.95em;
+        }
+
+        .drag-item:hover { background: var(--accent); }
+        .drag-item.dragging { opacity: 0.4; }
+
+        .drop-zone {
+            background: #f8f9fa;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin: 6px 0;
+            text-align: center;
+            transition: all 0.2s;
+            min-height: 42px;
+        }
+
+        .drop-zone.drag-over { border-color: var(--accent); background: #fff0e8; }
+
+        /* Score */
+        .score-display {
+            background: linear-gradient(135deg, #f0f4f8, #e8eef5);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .score-number {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .score-message {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Navigation thème */
+        .theme-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .theme-nav .info { font-size: 0.9em; color: #666; }
+
+        .theme-nav .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 999px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-accent { background: var(--accent); color: white; }
+        .btn-success { background: var(--success); color: white; display: none; }
+        .btn-gray { background: #6c757d; color: white; }
+
+        /* Crédit discret */
+        .credit {
+            text-align: center;
+            padding: 20px;
+            color: #bbb;
+            font-size: 0.72em;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: all 0.3s;
+            max-width: 360px;
+            font-size: 0.95em;
+        }
+
+        .notification.show { transform: translateX(0); }
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--error); }
+        .notification.info { background: var(--primary); }
+
+        @media (max-width: 768px) {
+            .theme-header h1 { font-size: 1.7em; }
+            .risk-grid { grid-template-columns: 1fr; }
+            .theme-nav { flex-direction: column; }
+            .header-nav { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibilité -->
+    <div class="a11y-bar">
+        <button class="a11y-btn" onclick="toggleDyslexic()" id="btnDys">OpenDyslexic</button>
+        <button class="a11y-btn" onclick="setSize('normal')">A</button>
+        <button class="a11y-btn" onclick="setSize('large')">A+</button>
+        <button class="a11y-btn" onclick="setSize('xlarge')">A++</button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="header-nav">
+        <div class="nav-title">Thème 1 / 3 — Froid & Climatisation</div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-btn home">🏠 Accueil</a>
+            <button class="nav-btn doc" onclick="showDocRef()">📄 Doc IRIS-ST</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- En-tête -->
+        <div class="theme-header">
+            <h1>❄️ Risques liés aux fluides frigorigènes</h1>
+            <p>Identifier les dangers spécifiques du métier de frigoriste</p>
+        </div>
+
+        <!-- Objectifs -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🎯</div>
+                Objectifs d'apprentissage
+            </div>
+            <div class="info-box">
+                <h4>Compétence C1 : Identifier les risques liés aux fluides</h4>
+                <p>À la fin de ce thème, tu dois être capable de :</p>
+                <ul style="margin-left: 20px; margin-top: 8px;">
+                    <li>Reconnaître les 4 principaux risques liés aux <span class="tip">fluides frigorigènes<span class="tiptext">Substances chimiques utilisées dans les circuits frigorifiques pour produire du froid (R-410A, R-32, R-134a, etc.)</span></span></li>
+                    <li>Comprendre les conséquences d'une <span class="tip">fuite de fluide<span class="tiptext">Libération accidentelle de gaz frigorigène dans l'atmosphère — risque d'asphyxie en local fermé</span></span> en local fermé</li>
+                    <li>Associer chaque risque à sa mesure de prévention</li>
+                </ul>
+            </div>
+            <div class="warning-box">
+                <h4>📄 Document de référence</h4>
+                <p>Pour répondre aux questions de ce module, tu dois consulter le document papier :<br>
+                <strong>Mémo IRIS-ST « Frigoristes-chauffagistes : les fluides frigorigènes »</strong></p>
+                <p style="margin-top: 8px; font-size: 0.9em; color: #999;">Les réponses ne sont pas données à l'écran. C'est à toi de chercher dans le document.</p>
+            </div>
+        </div>
+
+        <!-- Risques principaux -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">⚠️</div>
+                Les 4 risques majeurs
+            </div>
+            <p style="margin-bottom: 15px;">
+                Le métier de <span class="tip">frigoriste<span class="tiptext">Professionnel qui installe, entretient et dépanne les systèmes de réfrigération et de climatisation</span></span>
+                expose à des risques spécifiques liés à la manipulation des fluides frigorigènes.
+            </p>
+
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="risk-icon">💨</div>
+                    <div class="risk-title">Asphyxie</div>
+                    <div class="risk-desc">Les fluides frigorigènes sont plus lourds que l'air. En cas de fuite massive, ils chassent l'oxygène au niveau du sol.</div>
+                </div>
+
+                <div class="risk-card">
+                    <div class="risk-icon">🧊</div>
+                    <div class="risk-title">Brûlures cryogéniques</div>
+                    <div class="risk-desc">Le contact direct avec un fluide en phase liquide peut provoquer des <span class="tip">gelures graves<span class="tiptext">Lésions cutanées par le froid intense, similaires à des brûlures thermiques</span></span>.</div>
+                </div>
+
+                <div class="risk-card">
+                    <div class="risk-icon">💥</div>
+                    <div class="risk-title">Surpression</div>
+                    <div class="risk-desc">Un circuit sous pression peut exploser en cas de surchauffe ou de mauvaise manipulation, projetant des fragments.</div>
+                </div>
+
+                <div class="risk-card">
+                    <div class="risk-icon">☠️</div>
+                    <div class="risk-title">Toxicité</div>
+                    <div class="risk-desc">Certains fluides ou leurs produits de <span class="tip">décomposition<span class="tiptext">Lorsqu'un fluide frigorigène entre en contact avec une flamme, il peut se décomposer en gaz toxiques (phosgène, acide fluorhydrique)</span></span> sont dangereux par inhalation.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QCM 1 -->
+        <div class="activity" id="qcm1">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 1/2 — Risque d'asphyxie</h3>
+            </div>
+
+            <div class="doc-ref">
+                📖 <strong>Consulte le mémo IRIS-ST</strong> — Rubrique « Risques pour la santé » pour trouver la réponse.
+            </div>
+
+            <p><strong>Selon le document IRIS-ST, pourquoi les fluides frigorigènes peuvent-ils provoquer une asphyxie en local fermé ?</strong></p>
+
+            <div class="qcm-options" id="qcm1-options">
+                <button class="qcm-option" onclick="checkAnswer(this, false, 'qcm1')" data-feedback="Relis la rubrique sur les risques pour la santé dans le mémo IRIS-ST.">A. Parce qu'ils sont inflammables et consomment l'oxygène en brûlant</button>
+                <button class="qcm-option" onclick="checkAnswer(this, true, 'qcm1')" data-feedback="Exact ! Le mémo IRIS-ST précise que les fluides frigorigènes, plus lourds que l'air, chassent l'oxygène au niveau du sol.">B. Parce qu'ils sont plus lourds que l'air et chassent l'oxygène au sol</button>
+                <button class="qcm-option" onclick="checkAnswer(this, false, 'qcm1')" data-feedback="Ce n'est pas le mécanisme décrit par l'IRIS-ST. Relis le document.">C. Parce qu'ils réagissent chimiquement avec l'azote de l'air</button>
+                <button class="qcm-option" onclick="checkAnswer(this, false, 'qcm1')" data-feedback="Les fluides n'ont généralement pas d'odeur forte. Relis le mémo.">D. Parce que leur odeur forte empêche de respirer</button>
+            </div>
+
+            <div class="qcm-feedback" id="feedback-qcm1"></div>
+        </div>
+
+        <!-- Drag & Drop -->
+        <div class="activity" id="dragdrop">
+            <div class="activity-header">
+                <span>🎯</span>
+                <h3 class="activity-title">Activité 2/2 — Associe risque et prévention</h3>
+            </div>
+
+            <div class="doc-ref">
+                📖 <strong>Consulte le mémo IRIS-ST</strong> — Rubrique « Mesures de prévention » pour vérifier tes associations.
+            </div>
+
+            <p>Glisse chaque mesure de prévention vers le risque correspondant :</p>
+
+            <div class="drag-container">
+                <div class="drag-source" id="measures">
+                    <h4>📋 Mesures de prévention</h4>
+                    <div class="drag-item" draggable="true" data-risk="asphyxie">Ventiler le local avant intervention</div>
+                    <div class="drag-item" draggable="true" data-risk="cryogenique">Porter des gants cryogéniques</div>
+                    <div class="drag-item" draggable="true" data-risk="surpression">Vérifier les pressions avant ouverture</div>
+                    <div class="drag-item" draggable="true" data-risk="toxicite">Ne jamais exposer un fluide à une flamme</div>
+                </div>
+
+                <div class="drag-target" id="risks">
+                    <h4>⚠️ Risques</h4>
+                    <div class="drop-zone" data-accept="asphyxie">💨 Asphyxie</div>
+                    <div class="drop-zone" data-accept="cryogenique">🧊 Brûlures cryogéniques</div>
+                    <div class="drop-zone" data-accept="surpression">💥 Surpression</div>
+                    <div class="drop-zone" data-accept="toxicite">☠️ Toxicité</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-display" id="scoreDisplay">
+            <div class="score-number" id="scoreNumber">0%</div>
+            <div class="score-message" id="scoreMessage"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="theme-nav">
+            <div class="info">
+                <p><strong>Thème 1 / 3</strong> — Risques fluides frigorigènes</p>
+                <p>Compétence : <strong>C1</strong> — Identifier les risques</p>
+            </div>
+            <div class="buttons">
+                <a href="../index.html" class="btn btn-gray">🏠 Retour accueil</a>
+                <button class="btn btn-success" onclick="validateTheme()" id="btnNext">➡️ Thème 2</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crédit discret -->
+    <div class="credit">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+    <script>
+        // État
+        let activities = { qcm1: false, dragdrop: false };
+        let currentScore = 0;
+
+        // === Accessibilité ===
+        function toggleDyslexic() {
+            document.body.classList.toggle('dyslexic-font');
+            document.getElementById('btnDys').classList.toggle('active');
+            localStorage.setItem('a11y-dyslexic', document.body.classList.contains('dyslexic-font'));
+        }
+
+        function setSize(size) {
+            document.body.classList.remove('font-large', 'font-xlarge');
+            if (size !== 'normal') document.body.classList.add('font-' + size);
+            localStorage.setItem('a11y-size', size);
+        }
+
+        // === Doc IRIS-ST ===
+        function showDocRef() {
+            showNotification('📄 Ouvre le mémo papier IRIS-ST « Frigoristes-chauffagistes : les fluides frigorigènes » distribué en classe.', 'info');
+        }
+
+        // === QCM ===
+        function checkAnswer(btn, isCorrect, qcmId) {
+            const container = document.getElementById(qcmId + '-options');
+            const feedback = document.getElementById('feedback-' + qcmId);
+
+            container.querySelectorAll('.qcm-option').forEach(o => {
+                o.classList.remove('selected', 'correct', 'incorrect');
+                o.disabled = true;
+                o.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                feedback.textContent = btn.dataset.feedback;
+                feedback.className = 'qcm-feedback success';
+                activities[qcmId] = true;
+            } else {
+                btn.classList.add('incorrect');
+                feedback.textContent = '❌ ' + btn.dataset.feedback;
+                feedback.className = 'qcm-feedback error';
+                // Réactiver après 2s pour nouvel essai
+                setTimeout(() => {
+                    container.querySelectorAll('.qcm-option').forEach(o => {
+                        o.classList.remove('incorrect');
+                        o.style.pointerEvents = '';
+                    });
+                    feedback.className = 'qcm-feedback';
+                }, 2500);
+            }
+
+            updateProgress();
+        }
+
+        // === Drag & Drop ===
+        function setupDragDrop() {
+            document.querySelectorAll('.drag-item').forEach(item => {
+                item.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('text/plain', e.target.dataset.risk);
+                    e.target.classList.add('dragging');
+                });
+                item.addEventListener('dragend', e => e.target.classList.remove('dragging'));
+            });
+
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+                zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    const draggedRisk = e.dataTransfer.getData('text/plain');
+                    const targetRisk = zone.dataset.accept;
+
+                    if (draggedRisk === targetRisk) {
+                        zone.style.background = '#d4edda';
+                        zone.style.borderColor = '#28a745';
+                        zone.style.borderStyle = 'solid';
+                        const item = document.querySelector(`.drag-item[data-risk="${draggedRisk}"]`);
+                        if (item) item.style.display = 'none';
+                        checkDragComplete();
+                        showNotification('Bonne association !', 'success');
+                    } else {
+                        zone.style.background = '#f8d7da';
+                        zone.style.borderColor = '#dc3545';
+                        setTimeout(() => { zone.style.background = ''; zone.style.borderColor = ''; zone.style.borderStyle = ''; }, 1000);
+                        showNotification('Mauvaise association. Consulte le mémo IRIS-ST.', 'error');
+                    }
+                });
+            });
+        }
+
+        function checkDragComplete() {
+            const hidden = document.querySelectorAll('.drag-item[style*="display: none"]');
+            if (hidden.length === 4) {
+                activities.dragdrop = true;
+                updateProgress();
+            }
+        }
+
+        // === Progression ===
+        function updateProgress() {
+            const done = Object.values(activities).filter(Boolean).length;
+            const total = Object.keys(activities).length;
+            const score = Math.round((done / total) * 100);
+            currentScore = score;
+
+            if (done > 0) {
+                const sd = document.getElementById('scoreDisplay');
+                sd.style.display = 'block';
+                document.getElementById('scoreNumber').textContent = score + '%';
+                const msg = document.getElementById('scoreMessage');
+
+                if (score >= 70) {
+                    msg.textContent = 'Bravo ! Tu maîtrises les risques liés aux fluides frigorigènes.';
+                    msg.style.color = '#28a745';
+                    document.getElementById('btnNext').style.display = 'inline-flex';
+                } else if (done === total) {
+                    msg.textContent = 'Relis le mémo IRIS-ST et recommence les activités.';
+                    msg.style.color = '#f59e0b';
+                } else {
+                    msg.textContent = `Continue, il reste ${total - done} activité(s).`;
+                    msg.style.color = '#1b3a63';
+                }
+            }
+        }
+
+        // === Validation thème ===
+        function validateTheme() {
+            if (currentScore >= 70) {
+                const data = JSON.parse(localStorage.getItem('inerweb_froid_data') || '{}');
+                data.progress = data.progress || {};
+                data.progress.theme1 = { completed: true, score: currentScore, completedAt: new Date().toISOString() };
+                localStorage.setItem('inerweb_froid_data', JSON.stringify(data));
+                showNotification('Thème 1 validé ! Redirection vers le thème 2...', 'success');
+                setTimeout(() => { window.location.href = 'theme2.html'; }, 1800);
+            }
+        }
+
+        // === Notification ===
+        function showNotification(message, type) {
+            const old = document.querySelector('.notification');
+            if (old) old.remove();
+            const n = document.createElement('div');
+            n.className = 'notification ' + type;
+            n.textContent = message;
+            document.body.appendChild(n);
+            setTimeout(() => n.classList.add('show'), 50);
+            setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 3500);
+        }
+
+        // === Init ===
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('a11y-dyslexic') === 'true') {
+                document.body.classList.add('dyslexic-font');
+                document.getElementById('btnDys').classList.add('active');
+            }
+            const s = localStorage.getItem('a11y-size');
+            if (s && s !== 'normal') document.body.classList.add('font-' + s);
+            setupDragDrop();
+            showNotification('Thème 1 — Prends le mémo IRIS-ST « Fluides frigorigènes » pour commencer.', 'info');
+        });
+    </script>
+</body>
+</html>

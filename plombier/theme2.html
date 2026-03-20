@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 2 - Accueil sécurité en entreprise pour apprentis plombier-chauffagiste">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    
+    <title>Thème 2 Accueil Plombier - Droits et Obligations</title>
+    
+    <!-- Police Lexend + OpenDyslexic pour accessibilité -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== VARIABLES CSS INERLINE ========== */
+        :root {
+            --primary: #0066cc;
+            --secondary: #00a86b;
+            --accent: #ff6b35;
+            --non-acquis: #ef4444;
+            --en-cours: #f59e0b;
+            --acquis: #3b82f6;
+            --parfait: #10b981;
+            --background: #f8f9fa;
+            --text: #333333;
+            --border: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* ========== THÈMES ACCESSIBILITÉ ========== */
+        .theme-normal {
+            --background: #f8f9fa;
+            --text: #333333;
+            --contrast-bg: white;
+        }
+
+        .theme-high-contrast {
+            --background: #000000;
+            --text: #ffffff;
+            --contrast-bg: #1a1a1a;
+            --border: #ffffff;
+        }
+
+        .theme-dark {
+            --background: #1a1a1a;
+            --text: #e0e0e0;
+            --contrast-bg: #2d2d2d;
+            --border: #404040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        /* Police dyslexique */
+        body.dyslexic-font {
+            font-family: 'OpenDyslexic', 'Lexend', sans-serif;
+        }
+
+        /* Tailles de police */
+        body.font-small { font-size: 14px; }
+        body.font-normal { font-size: 16px; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        /* ========== BOUTONS ACCESSIBILITÉ ========== */
+        .accessibility-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--contrast-bg, white);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            max-width: 300px;
+            transform: translateX(100%);
+            transition: var(--transition);
+        }
+
+        .accessibility-panel.open {
+            transform: translateX(0);
+        }
+
+        .accessibility-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1001;
+            transition: var(--transition);
+        }
+
+        .accessibility-toggle:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .accessibility-section {
+            margin-bottom: 15px;
+        }
+
+        .accessibility-section h4 {
+            color: var(--primary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .accessibility-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .accessibility-btn {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            background: var(--contrast-bg, white);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .accessibility-btn:hover,
+        .accessibility-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ========== HEADER NAVIGATION ========== */
+        .header-nav {
+            background: linear-gradient(135deg, var(--background), rgba(0,102,204,0.05));
+            color: var(--text);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-inerweb svg {
+            width: 120px;
+            height: 40px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .flake {
+            animation: spin 4s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--acquis);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.home {
+            background: var(--accent);
+        }
+
+        .nav-btn.home:hover {
+            background: #e55a2b;
+        }
+
+        /* ========== CONTAINER PRINCIPAL ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        /* ========== EN-TÊTE DU THÈME ========== */
+        .theme-header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: movePattern 20s linear infinite;
+        }
+
+        @keyframes movePattern {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(-30%, -30%); }
+        }
+
+        .theme-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .theme-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== SECTIONS PÉDAGOGIQUES ========== */
+        .section {
+            background: var(--contrast-bg, white);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-icon {
+            font-size: 2em;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* ========== TOOLTIPS AIDE ========== */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            border-bottom: 1px dotted var(--secondary);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1001;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9em;
+            box-shadow: var(--shadow);
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ========== CONTENU PÉDAGOGIQUE ========== */
+        .content-box {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .content-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .right-card {
+            background: var(--contrast-bg, white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary);
+        }
+
+        .right-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .right-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .right-title {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .right-description {
+            color: #666;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        /* ========== QCM ========== */
+        .activity {
+            background: var(--contrast-bg, white);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .activity-header span {
+            font-size: 2em;
+        }
+
+        .activity-title {
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .qcm-options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .qcm-option {
+            padding: 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--contrast-bg, white);
+        }
+
+        .qcm-option:hover {
+            border-color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .qcm-option.selected {
+            border-color: var(--secondary);
+            background: #e8f5e8;
+        }
+
+        .qcm-option.correct {
+            border-color: var(--parfait);
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .qcm-option.incorrect {
+            border-color: var(--non-acquis);
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .qcm-feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .qcm-feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .qcm-feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ========== NAVIGATION THÈME ========== */
+        .theme-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--contrast-bg, white);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-info {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--parfait);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ========== SCORE DISPLAY ========== */
+        .score-display {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .score-number {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .score-message {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* ========== CRÉDITS ========== */
+        .credits {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .credits h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .credits p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        /* ========== NOTIFICATIONS ========== */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            max-width: 350px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success { background: var(--parfait); }
+        .notification.error { background: var(--non-acquis); }
+        .notification.warning { background: var(--en-cours); }
+        .notification.info { background: var(--acquis); }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .theme-title {
+                font-size: 2em;
+            }
+            
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .accessibility-panel {
+                right: 10px;
+                top: 10px;
+                max-width: calc(100vw - 20px);
+            }
+
+            .accessibility-toggle {
+                right: 10px;
+                top: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-normal font-normal">
+    <!-- Bouton d'accessibilité avec œil -->
+    <button class="accessibility-toggle" onclick="toggleAccessibility()">👁️</button>
+    
+    <!-- Panel d'accessibilité -->
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <div class="accessibility-section">
+            <h4>👁️ Contraste</h4>
+            <div class="accessibility-buttons">
+                <button class="accessibility-btn active" onclick="setTheme('normal')">Normal</button>
+                <button class="accessibility-btn" onclick="setTheme('high-contrast')">Fort contraste</button>
+                <button class="accessibility-btn" onclick="setTheme('dark')">Mode sombre</button>
+            </div>
+        </div>
+        
+        <div class="accessibility-section">
+            <h4>📝 Police</h4>
+            <div class="accessibility-buttons">
+                <button class="accessibility-btn active" onclick="setFont('normal')">Standard</button>
+                <button class="accessibility-btn" onclick="setFont('dyslexic')">OpenDyslexic</button>
+            </div>
+        </div>
+        
+        <div class="accessibility-section">
+            <h4>🔍 Taille</h4>
+            <div class="accessibility-buttons">
+                <button class="accessibility-btn" onclick="setFontSize('small')">Petit</button>
+                <button class="accessibility-btn active" onclick="setFontSize('normal')">Normal</button>
+                <button class="accessibility-btn" onclick="setFontSize('large')">Grand</button>
+                <button class="accessibility-btn" onclick="setFontSize('xlarge')">Très grand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header avec navigation et logo InerWeb intégré -->
+    <div class="header-nav">
+        <div class="nav-container">
+            <div class="logo-section">
+                <div class="logo-inerweb">
+                    <svg width="120" height="40" baseProfile="full" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+                        <defs>
+                            <linearGradient id="bgGradient-nav" x1="0%" x2="100%" y1="0%" y2="0%">
+                                <stop offset="0%" stop-color="#0066cc"/>
+                                <stop offset="100%" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                        <rect fill="url(#bgGradient-nav)" height="40" width="120" x="0" y="0" rx="6"/>
+                        <text class="flake" fill="#ffffff" font-size="24px" x="3" y="28">❄️</text>
+                        <text fill="white" font-family="Trebuchet MS, Arial Black, sans-serif" font-size="22px" font-weight="bold" x="30" y="26">iner</text>
+                        <text fill="white" font-family="Segoe Script, cursive, sans-serif" font-size="22px" font-weight="normal" x="75" y="26">Web</text>
+                        <line stroke="#ff6b35" stroke-width="2" x1="30" x2="115" y1="30" y2="30"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="../index.html" class="nav-btn home">
+                    <span>🏠</span>
+                    <span>Accueil</span>
+                </a>
+                <button class="nav-btn" onclick="showPDF()">
+                    <span>📄</span>
+                    <span>Doc INRS</span>
+                </button>
+                <button class="nav-btn" onclick="showHelp()">
+                    <span>❓</span>
+                    <span>Aide</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- En-tête du thème -->
+        <div class="theme-header">
+            <div class="theme-title">🏢 Accueil en Entreprise Plombier</div>
+            <div class="theme-subtitle">Droits et obligations de l'apprenti selon l'INRS</div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <div class="section-title">Objectifs d'apprentissage</div>
+            </div>
+            
+            <div class="content-box">
+                <h4>🏆 Compétence C2 : Droits et obligations</h4>
+                <p>À la fin de ce thème, vous devrez être capable de :</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Connaître vos <span class="tooltip">droits en tant qu'apprenti<span class="tooltiptext">Droits spécifiques aux apprentis mineurs : formation, encadrement, protection renforcée</span></span></li>
+                    <li>Comprendre le rôle du <span class="tooltip">document unique<span class="tooltiptext">Document obligatoire recensant tous les risques professionnels de l'entreprise</span></span></li>
+                    <li>Savoir ce que doit vous fournir l'<span class="tooltip">employeur<span class="tooltiptext">Entreprise d'accueil qui a l'obligation de vous former et vous protéger</span></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Vos droits selon l'INRS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚖️</div>
+                <div class="section-title">Vos droits selon l'INRS</div>
+            </div>
+            
+            <p style="margin-bottom: 20px;">
+                En tant qu'<span class="tooltip">apprenti plombier-chauffagiste<span class="tooltiptext">Jeune en formation professionnelle dans le domaine de la plomberie et du chauffage</span></span>, 
+                vous bénéficiez de droits spécifiques pour votre protection et votre formation.
+            </p>
+
+            <div class="rights-grid">
+                <div class="right-card">
+                    <div class="right-icon">📚</div>
+                    <div class="right-title">Droit à la formation</div>
+                    <div class="right-description">
+                        <span class="tooltip">Formation théorique et pratique<span class="tooltiptext">Apprentissage progressif des gestes professionnels avec un tuteur désigné</span></span> 
+                        adaptée à votre âge et niveau.
+                    </div>
+                </div>
+
+                <div class="right-card">
+                    <div class="right-icon">🛡️</div>
+                    <div class="right-title">Protection renforcée</div>
+                    <div class="right-description">
+                        <span class="tooltip">Travaux interdits<span class="tooltiptext">Liste des tâches dangereuses interdites aux moins de 18 ans (démolition, travail en hauteur non sécurisé)</span></span> 
+                        aux mineurs et <span class="tooltip">surveillance accrue<span class="tooltiptext">Présence obligatoire d'un tuteur expérimenté lors des tâches à risque</span></span>.
+                    </div>
+                </div>
+
+                <div class="right-card">
+                    <div class="right-icon">📋</div>
+                    <div class="right-title">Information sur les risques</div>
+                    <div class="right-description">
+                        Accès au <span class="tooltip">document unique<span class="tooltiptext">Document obligatoire listant tous les risques de l'entreprise et les mesures de prévention</span></span> 
+                        et formation aux risques du poste.
+                    </div>
+                </div>
+
+                <div class="right-card">
+                    <div class="right-icon">👨‍🏫</div>
+                    <div class="right-title">Accompagnement</div>
+                    <div class="right-description">
+                        <span class="tooltip">Tuteur désigné<span class="tooltiptext">Professionnel expérimenté chargé de votre formation et de votre sécurité</span></span> 
+                        pour votre formation et votre sécurité quotidienne.
+                    </div>
+                </div>
+
+                <div class="right-card">
+                    <div class="right-icon">🚫</div>
+                    <div class="right-title">Droit de refus</div>
+                    <div class="right-description">
+                        Possibilité de refuser une tâche que vous jugez 
+                        <span class="tooltip">dangereuse<span class="tooltiptext">Tâche présentant un risque immédiat pour votre santé ou sécurité</span></span> 
+                        sans votre tuteur.
+                    </div>
+                </div>
+
+                <div class="right-card">
+                    <div class="right-icon">⏰</div>
+                    <div class="right-title">Temps de travail adapté</div>
+                    <div class="right-description">
+                        Horaires respectant la <span class="tooltip">réglementation jeunes<span class="tooltiptext">Maximum 8h/jour, interdiction du travail de nuit, repos hebdomadaire obligatoire</span></span> 
+                        et temps de formation inclus.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activité QCM 1 -->
+        <div class="activity" id="qcm1">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 1/2 - Document unique</h3>
+            </div>
+            
+            <div class="qcm-question">
+                <p><strong>Selon l'INRS, le document unique d'évaluation des risques :</strong></p>
+            </div>
+            
+            <div class="qcm-options" id="qcm1-options">
+                <div class="qcm-option" onclick="selectOption(this, 0, 'qcm1', 'C2')" data-feedback="Non, vous avez le droit de le consulter">
+                    A. Est confidentiel et réservé à l'employeur
+                </div>
+                <div class="qcm-option" onclick="selectOption(this, 1, 'qcm1', 'C2')" data-feedback="Exact ! L'INRS précise : 'Vous pouvez le consulter librement'">
+                    B. Peut être consulté librement par les salariés
+                </div>
+                <div class="qcm-option" onclick="selectOption(this, 2, 'qcm1', 'C2')" data-feedback="Faux, il vous concerne directement">
+                    C. Ne concerne pas les apprentis
+                </div>
+                <div class="qcm-option" onclick="selectOption(this, 3, 'qcm1', 'C2')" data-feedback="Il existe et est obligatoire">
+                    D. N'est pas obligatoire pour les petites entreprises
+                </div>
+            </div>
+            
+            <div class="qcm-feedback" id="feedback1"></div>
+        </div>
+
+        <!-- Activité QCM 2 -->
+        <div class="activity" id="qcm2">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 2/2 - Vos obligations</h3>
+            </div>
+            
+            <div class="qcm-question">
+                <p><strong>Votre tuteur vous demande d'effectuer une tâche que vous ne comprenez pas. Que devez-vous faire ?</strong></p>
+            </div>
+            
+            <div class="qcm-options" id="qcm2-options">
+                <div class="qcm-option" onclick="selectOption(this, 0, 'qcm2', 'C2')" data-feedback="Dangereux ! Ne jamais faire quelque chose qu'on ne comprend pas">
+                    A. Faire comme si vous compreniez
+                </div>
+                <div class="qcm-option" onclick="selectOption(this, 1, 'qcm2', 'C2')" data-feedback="Exact ! Demander des explications est votre droit ET votre devoir">
+                    B. Demander des explications à votre tuteur
+                </div>
+                <div class="qcm-option" onclick="selectOption(this, 2, 'qcm2', 'C2')" data-feedback="Non, il faut agir immédiatement pour votre sécurité">
+                    C. Attendre la fin de la journée pour demander
+                </div>
+                <div class="qcm-option" onclick="selectOption(this, 3, 'qcm2', 'C2')" data-feedback="Votre tuteur est là pour vous aider">
+                    D. Ne rien dire pour ne pas déranger
+                </div>
+            </div>
+            
+            <div class="qcm-feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Affichage du score -->
+        <div class="score-display" id="scoreDisplay" style="display: none;">
+            <div class="score-number" id="scoreNumber">0%</div>
+            <div class="score-message" id="scoreMessage">Complétez les activités pour voir votre score</div>
+        </div>
+
+        <!-- Navigation du thème -->
+        <div class="theme-navigation">
+            <div class="theme-info">
+                <p><strong>Thème 2/6</strong> - Accueil en Entreprise Plombier</p>
+                <p>Compétence évaluée : <strong>C2</strong> - Droits et obligations</p>
+            </div>
+            
+            <div class="navigation-buttons">
+                <a href="../index.html" class="btn btn-secondary">
+                    <span>🏠</span>
+                    <span>Retour accueil</span>
+                </a>
+                <button class="btn btn-success" onclick="validateTheme()" id="btnNext" style="display: none;">
+                    <span>➡️</span>
+                    <span>Passer au thème 3</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Crédits -->
+        <div class="credits">
+            <h4>👨‍🏫 Crédits - Formation Plombier</h4>
+            <p><strong>Conception pédagogique :</strong> F. Henninot</p>
+            <p><strong>Fonction :</strong> Enseignant en Froid et Conditionnement d'Air</p>
+            <p><strong>Établissement :</strong> Lycée Professionnel</p>
+            <p><strong>Référentiel :</strong> Document INRS "Mon métier plombier-chauffagiste" (ED 6232)</p>
+            <p><strong>Version du module :</strong> 3.0 - Plateforme InerWeb</p>
+            <p style="margin-top: 10px; font-size: 0.8em; font-style: italic;">
+                Module conforme aux exigences de formation à la sécurité pour les apprentis mineurs en plomberie-chauffage.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let activities = {
+            qcm1: false,
+            qcm2: false
+        };
+        let currentScore = 0;
+        let accessibilityOpen = false;
+
+        // ========== FONCTIONS D'ACCESSIBILITÉ ========== 
+        function toggleAccessibility() {
+            const panel = document.getElementById('accessibilityPanel');
+            accessibilityOpen = !accessibilityOpen;
+            
+            if (accessibilityOpen) {
+                panel.classList.add('open');
+            } else {
+                panel.classList.remove('open');
+            }
+        }
+
+        function setTheme(theme) {
+            document.body.classList.remove('theme-normal', 'theme-high-contrast', 'theme-dark');
+            document.body.classList.add(`theme-${theme}`);
+            
+            document.querySelectorAll('.accessibility-section:first-child .accessibility-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            localStorage.setItem('accessibility-theme', theme);
+            showNotification(`Thème "${theme}" appliqué`, 'success');
+        }
+
+        function setFont(font) {
+            if (font === 'dyslexic') {
+                document.body.classList.add('dyslexic-font');
+            } else {
+                document.body.classList.remove('dyslexic-font');
+            }
+            
+            document.querySelectorAll('.accessibility-section:nth-child(2) .accessibility-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            localStorage.setItem('accessibility-font', font);
+            showNotification(`Police "${font === 'dyslexic' ? 'OpenDyslexic' : 'standard'}" appliquée`, 'success');
+        }
+
+        function setFontSize(size) {
+            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
+            document.body.classList.add(`font-${size}`);
+            
+            document.querySelectorAll('.accessibility-section:last-child .accessibility-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            localStorage.setItem('accessibility-font-size', size);
+            showNotification(`Taille "${size}" appliquée`, 'success');
+        }
+
+        // ========== FONCTION PDF CORRIGÉE ========== 
+        function showPDF() {
+            const pdfUrl = './Monmetierplombierchauffagiste.pdf';
+            
+            // Navigation par chapitre selon le thème actuel
+            const currentTheme = getCurrentThemeNumber();
+            const chapters = {
+                1: '#page=2',   // Thème 1 → Page 2 (Pas d'obstacle)
+                2: '#page=4',   // Thème 2 → Page 4 (Risque amiante)  
+                3: '#page=6',   // Thème 3 → Page 6 (Produits chimiques)
+                4: '#page=8',   // Thème 4 → Page 8 (Je limite efforts)
+                5: '#page=10',  // Thème 5 → Page 10 (Protection)
+                6: '#page=12'   // Thème 6 → Page 12 (Pour en savoir plus)
+            };
+            
+            const pageAnchor = chapters[currentTheme] || '';
+            
+            // Vérifier existence du fichier
+            fetch(pdfUrl, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.open(pdfUrl + pageAnchor, '_blank');
+                        showNotification(`📄 Document INRS ouvert - Chapitre ${currentTheme} (Plombier)`, 'success');
+                    } else {
+                        showNotification('❌ Document PDF non trouvé. Vérifiez que le fichier "Monmetierplombierchauffagiste.pdf" est présent.', 'error');
+                    }
+                })
+                .catch(() => {
+                    window.open(pdfUrl + pageAnchor, '_blank');
+                    showNotification('📄 Ouverture du document INRS Plombier...', 'info');
+                });
+        }
+
+        // ========== FONCTION HELPER THEME NUMBER ========== 
+        function getCurrentThemeNumber() {
+            const filename = window.location.pathname.split('/').pop();
+            if (filename.includes('theme1')) return 1;
+            if (filename.includes('theme2')) return 2;
+            if (filename.includes('theme3')) return 3;
+            if (filename.includes('theme4')) return 4;
+            if (filename.includes('theme5')) return 5;
+            if (filename.includes('theme6')) return 6;
+            return 2;
+        }
+
+        // ========== AIDE ========== 
+        function showHelp() {
+            showNotification(`
+                🎯 OBJECTIF : Connaître vos droits et obligations plombier
+                📖 RESSOURCES : Tooltips sur les mots en vert
+                📄 DOCUMENT : Cliquez "Doc INRS" pour le PDF officiel (page 4)
+                👁️ ACCESSIBILITÉ : Bouton en haut à droite
+                🏆 VALIDATION : 70% minimum pour passer au thème suivant
+            `, 'info');
+        }
+
+        // ========== GESTION QCM ========== 
+        function selectOption(element, optionIndex, qcmId, competence) {
+            const options = document.querySelectorAll(`#${qcmId}-options .qcm-option`);
+            const feedback = document.getElementById(`feedback${qcmId.slice(-1)}`);
+            
+            // Désélectionner toutes les options
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+            
+            // Sélectionner l'option cliquée
+            element.classList.add('selected');
+            
+            // Vérifier la réponse (la bonne réponse est toujours l'option B = index 1)
+            const isCorrect = optionIndex === 1;
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.textContent = element.dataset.feedback;
+                feedback.className = 'qcm-feedback success';
+                activities[qcmId] = true;
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = "❌ " + element.dataset.feedback;
+                feedback.className = 'qcm-feedback error';
+            }
+            
+            updateProgress();
+        }
+
+        // ========== PROGRESSION ========== 
+        function updateProgress() {
+            const completedActivities = Object.values(activities).filter(Boolean).length;
+            const totalActivities = Object.keys(activities).length;
+            const score = Math.round((completedActivities / totalActivities) * 100);
+            
+            currentScore = score;
+            
+            // Afficher le score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreNumber = document.getElementById('scoreNumber');
+            const scoreMessage = document.getElementById('scoreMessage');
+            const btnNext = document.getElementById('btnNext');
+            
+            if (completedActivities > 0) {
+                scoreDisplay.style.display = 'block';
+                scoreNumber.textContent = score + '%';
+                
+                if (score >= 70) {
+                    scoreMessage.textContent = '🎉 Excellent ! Vous connaissez vos droits et obligations plombier';
+                    scoreMessage.style.color = '#28a745';
+                    btnNext.style.display = 'flex';
+                } else if (completedActivities === totalActivities) {
+                    scoreMessage.textContent = '📚 Révisez les notions et recommencez';
+                    scoreMessage.style.color = '#ffc107';
+                } else {
+                    scoreMessage.textContent = `Continuez, ${totalActivities - completedActivities} activité(s) restante(s)`;
+                    scoreMessage.style.color = '#17a2b8';
+                }
+            }
+        }
+
+        // ========== VALIDATION THÈME ========== 
+        function validateTheme() {
+            if (currentScore >= 70) {
+                // Sauvegarder la progression
+                const moduleData = JSON.parse(localStorage.getItem('inerweb_accueil_securite_plombier_data') || '{}');
+                moduleData.progress = moduleData.progress || {};
+                moduleData.progress.theme2 = {
+                    completed: true,
+                    score: currentScore,
+                    completedAt: new Date().toISOString()
+                };
+                localStorage.setItem('inerweb_accueil_securite_plombier_data', JSON.stringify(moduleData));
+                
+                showNotification('✅ Thème 2 Accueil Plombier validé ! Redirection vers le thème 3...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'theme3.html';
+                }, 2000);
+            } else {
+                showNotification('❌ Score insuffisant (minimum 70%)', 'error');
+            }
+        }
+
+        // ========== NOTIFICATIONS ========== 
+        function showNotification(message, type = 'success') {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+        }
+
+        // ========== INITIALISATION ========== 
+        document.addEventListener('DOMContentLoaded', function() {
+            // Charger les préférences d'accessibilité
+            const savedTheme = localStorage.getItem('accessibility-theme') || 'normal';
+            const savedFont = localStorage.getItem('accessibility-font') || 'normal';
+            const savedFontSize = localStorage.getItem('accessibility-font-size') || 'normal';
+            
+            document.body.classList.add(`theme-${savedTheme}`);
+            if (savedFont === 'dyslexic') {
+                document.body.classList.add('dyslexic-font');
+            }
+            document.body.classList.add(`font-${savedFontSize}`);
+            
+            // Mettre à jour la progression
+            updateProgress();
+            
+            // Message de bienvenue
+            showNotification('🏢 Bienvenue dans le Thème 2 Accueil Plombier - Connaissez vos droits !', 'info');
+        });
+
+        // Fermer le panel d'accessibilité en cliquant ailleurs
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('accessibilityPanel');
+            const toggle = document.querySelector('.accessibility-toggle');
+            
+            if (accessibilityOpen && !panel.contains(e.target) && !toggle.contains(e.target)) {
+                toggleAccessibility();
+            }
+        });
+    </script>
+</body>
+</html>

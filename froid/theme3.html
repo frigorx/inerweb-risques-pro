@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 3 - Réglementation et bonnes pratiques - Fluides frigorigènes - IRIS-ST">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Thème 3 - Réglementation Fluides Frigorigènes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Calibri:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f2d52;
+            --navy-mid: #1a4a6e;
+            --accent: #e8914a;
+            --accent-hover: #d47a35;
+            --accent-warm: #fdf6ef;
+            --turquoise: #2aafaf;
+            --mint: #d4f0e8;
+            --bg: #faf7f2;
+            --bg-end: #f0ebe3;
+            --text: #2c3e50;
+            --border: #ece4da;
+            --shadow: 0 4px 16px rgba(15,45,82,0.07), 0 1px 3px rgba(232,145,74,0.05);
+            --card-bg: #ffffff;
+            --success: #27ae60;
+            --error: #e74c3c;
+            --warning: #e8914a;
+            --radius: 22px;
+            --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        .a11y-bar {
+            background: linear-gradient(135deg, var(--primary), var(--navy-mid));
+            padding: 8px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .a11y-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .a11y-btn:hover, .a11y-btn.active { background: var(--accent); border-color: var(--accent); }
+
+        .header-nav {
+            background: var(--card-bg);
+            padding: 12px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .nav-btn {
+            padding: 8px 16px; border: none; border-radius: 999px;
+            font-family: inherit; font-size: 0.9em; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px; color: white;
+        }
+
+        .nav-btn.home { background: var(--accent); }
+        .nav-btn.doc { background: var(--primary); }
+        .nav-title { font-weight: 600; color: var(--primary); font-size: 0.95em; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px 20px 60px; }
+
+        .theme-header {
+            background: linear-gradient(135deg, var(--turquoise), var(--navy-mid), var(--primary));
+            color: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,255,255,0.04) 12px, rgba(255,255,255,0.04) 24px);
+        }
+
+        .theme-header * { position: relative; z-index: 1; }
+        .theme-header h1 { font-size: 2.2em; font-weight: 700; margin-bottom: 8px; }
+        .theme-header p { font-size: 1.1em; opacity: 0.9; }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 1.5em; font-weight: 700; color: var(--primary);
+            margin-bottom: 18px; padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title .icon {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--turquoise), var(--primary));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7em; flex-shrink: 0;
+        }
+
+        .info-box {
+            background: #f0f4f8;
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .info-box h4 { color: var(--primary); margin-bottom: 10px; }
+
+        .warning-box {
+            background: #fff8f0;
+            border-left: 4px solid var(--accent);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .warning-box h4 { color: var(--accent); margin-bottom: 10px; }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .rule-card:hover { border-color: var(--turquoise); transform: translateY(-3px); box-shadow: var(--shadow); }
+        .rule-card .rule-icon { font-size: 2em; margin-bottom: 8px; }
+        .rule-card .rule-title { font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .rule-card .rule-desc { font-size: 0.9em; color: #666; }
+
+        .tip {
+            position: relative; display: inline; cursor: help;
+            border-bottom: 1px dotted var(--accent);
+            color: var(--accent); font-weight: 600;
+        }
+
+        .tip .tiptext {
+            visibility: hidden; width: 240px;
+            background: #333; color: #fff;
+            text-align: center; border-radius: var(--radius-sm); padding: 10px;
+            position: absolute; z-index: 100; bottom: 130%;
+            left: 50%; margin-left: -120px; opacity: 0;
+            transition: opacity 0.3s; font-size: 0.88em;
+            font-weight: normal; line-height: 1.4;
+        }
+
+        .tip:hover .tiptext { visibility: visible; opacity: 1; }
+
+        .activity {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-header {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 18px; color: var(--primary);
+        }
+
+        .activity-header span { font-size: 1.8em; }
+        .activity-title { font-size: 1.2em; font-weight: 700; }
+
+        .doc-ref {
+            background: #fff8f0;
+            border: 2px dashed var(--accent);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            font-size: 0.95em;
+            color: #7a4a1a;
+            font-weight: 600;
+        }
+
+        .doc-ref strong { color: var(--accent); }
+
+        .qcm-options { display: grid; gap: 10px; margin-top: 15px; }
+
+        .qcm-option {
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--card-bg);
+            font-family: inherit;
+            font-size: 1em;
+            text-align: left;
+            color: var(--text);
+        }
+
+        .qcm-option:hover { border-color: var(--turquoise); transform: translateX(4px); }
+        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+
+        .qcm-feedback {
+            margin-top: 12px; padding: 12px; border-radius: var(--radius-sm);
+            font-weight: 600; display: none;
+        }
+
+        .qcm-feedback.success { display: block; background: #d4edda; color: #155724; }
+        .qcm-feedback.error { display: block; background: #f8d7da; color: #721c24; }
+
+        /* Drag & Drop tri */
+        .sorting-area { margin-top: 18px; }
+
+        .sort-items {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            padding: 18px; background: #f8f9fa;
+            border: 2px dashed var(--border); border-radius: var(--radius-sm);
+            margin-bottom: 20px; min-height: 60px;
+        }
+
+        .sort-item {
+            background: var(--primary);
+            color: white;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            cursor: move;
+            user-select: none;
+            transition: all 0.2s;
+            font-size: 0.95em;
+        }
+
+        .sort-item:hover { background: var(--accent); }
+        .sort-item.dragging { opacity: 0.4; }
+
+        .sort-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 700px) { .sort-zones { grid-template-columns: 1fr; } }
+
+        .sort-zone {
+            min-height: 150px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .sort-zone.zone-obligatoire { border-color: var(--turquoise); background: rgba(42,175,175,0.05); }
+        .sort-zone.zone-interdit { border-color: var(--error); background: rgba(220,53,69,0.05); }
+        .sort-zone.drag-over { background: rgba(255,107,53,0.1); border-color: var(--accent); }
+        .sort-zone h4 { margin-bottom: 10px; font-weight: 700; }
+        .zone-obligatoire h4 { color: var(--turquoise); }
+        .zone-interdit h4 { color: var(--error); }
+
+        .dropped-item {
+            background: var(--primary);
+            color: white;
+            padding: 8px 14px;
+            margin: 5px;
+            border-radius: 6px;
+            font-size: 0.88em;
+            display: inline-block;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, var(--mint), #b8e6d8);
+            border: 2px solid var(--turquoise);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .score-number { font-size: 3em; font-weight: 700; color: var(--turquoise); }
+        .score-message { font-size: 1.15em; font-weight: 600; margin-top: 8px; }
+
+        /* Bilan de parcours */
+        .bilan-container {
+            background: linear-gradient(135deg, var(--primary), #2a5298);
+            color: white;
+            border-radius: var(--radius);
+            padding: 35px;
+            text-align: center;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .bilan-container h2 { font-size: 1.8em; margin-bottom: 15px; }
+        .bilan-container p { margin-bottom: 10px; opacity: 0.9; }
+
+        .bilan-scores {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .bilan-score-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: var(--radius-sm);
+            padding: 15px 25px;
+            min-width: 120px;
+        }
+
+        .bilan-score-item .label { font-size: 0.85em; opacity: 0.8; }
+        .bilan-score-item .value { font-size: 2em; font-weight: 700; }
+
+        .btn-print {
+            background: var(--accent);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1.05em;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 15px;
+            transition: all 0.2s;
+        }
+
+        .btn-print:hover { transform: translateY(-2px); }
+
+        .theme-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .theme-nav .info { font-size: 0.9em; color: #666; }
+        .theme-nav .buttons { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 12px 22px; border: none; border-radius: 999px;
+            font-weight: 600; font-family: inherit; cursor: pointer;
+            transition: all 0.2s; display: inline-flex; align-items: center;
+            gap: 8px; text-decoration: none; font-size: 0.95em;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-success { background: var(--success); color: white; display: none; }
+        .btn-gray { background: #6c757d; color: white; }
+
+        .credit { text-align: center; padding: 20px; color: #bbb; font-size: 0.72em; }
+
+        .notification {
+            position: fixed; top: 60px; right: 20px;
+            padding: 14px 20px; border-radius: var(--radius-sm); color: white;
+            font-weight: 600; z-index: 1000;
+            transform: translateX(400px); transition: all 0.3s;
+            max-width: 360px; font-size: 0.95em;
+        }
+
+        .notification.show { transform: translateX(0); }
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--error); }
+        .notification.info { background: var(--primary); }
+
+        @media (max-width: 768px) {
+            .theme-header h1 { font-size: 1.7em; }
+            .rules-grid { grid-template-columns: 1fr; }
+            .theme-nav { flex-direction: column; }
+            .header-nav { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media print {
+            .a11y-bar, .header-nav, .notification, .theme-nav, .activity, .credit { display: none; }
+            .bilan-container { display: block !important; break-inside: avoid; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <div class="a11y-bar">
+        <button class="a11y-btn" onclick="toggleDyslexic()" id="btnDys">OpenDyslexic</button>
+        <button class="a11y-btn" onclick="setSize('normal')">A</button>
+        <button class="a11y-btn" onclick="setSize('large')">A+</button>
+        <button class="a11y-btn" onclick="setSize('xlarge')">A++</button>
+    </div>
+
+    <div class="header-nav">
+        <div class="nav-title">Thème 3 / 3 — Froid & Climatisation</div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-btn home">🏠 Accueil</a>
+            <button class="nav-btn doc" onclick="showDocRef()">📄 Doc IRIS-ST</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="theme-header">
+            <h1>📋 Réglementation et bonnes pratiques</h1>
+            <p>Manipuler, stocker et récupérer les fluides dans les règles</p>
+        </div>
+
+        <!-- Objectifs -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🎯</div>
+                Objectifs d'apprentissage
+            </div>
+            <div class="info-box">
+                <h4>Compétence C3 : Connaître la réglementation</h4>
+                <p>À la fin de ce thème, tu dois être capable de :</p>
+                <ul style="margin-left: 20px; margin-top: 8px;">
+                    <li>Connaître les obligations légales pour la <span class="tip">manipulation des fluides<span class="tiptext">La réglementation impose une attestation de capacité pour manipuler les fluides frigorigènes</span></span></li>
+                    <li>Comprendre l'obligation de <span class="tip">récupération des fluides<span class="tiptext">Il est strictement interdit de rejeter un fluide frigorigène dans l'atmosphère — obligation de récupération dans une bouteille dédiée</span></span></li>
+                    <li>Identifier les règles de <span class="tip">stockage<span class="tiptext">Les bouteilles de fluide doivent être stockées debout, dans un local ventilé, à l'abri de la chaleur</span></span> des bouteilles de fluide</li>
+                </ul>
+            </div>
+            <div class="warning-box">
+                <h4>📄 Document de référence</h4>
+                <p>Consulte le mémo IRIS-ST — Rubriques <strong>« Réglementation »</strong> et <strong>« Bonnes pratiques »</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Règles essentielles -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">⚖️</div>
+                Les règles essentielles
+            </div>
+            <p style="margin-bottom: 15px;">Le cadre réglementaire impose des règles strictes pour la protection de l'environnement et la sécurité des personnes.</p>
+
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <div class="rule-icon">🏛️</div>
+                    <div class="rule-title">Attestation de capacité</div>
+                    <div class="rule-desc">Toute entreprise manipulant des fluides frigorigènes doit détenir une <span class="tip">attestation de capacité<span class="tiptext">Document délivré par un organisme agréé, obligatoire pour toute opération sur des équipements contenant des fluides frigorigènes</span></span>.</div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">♻️</div>
+                    <div class="rule-title">Récupération obligatoire</div>
+                    <div class="rule-desc">Il est <strong>interdit</strong> de rejeter un fluide dans l'atmosphère. Tout fluide doit être <span class="tip">récupéré<span class="tiptext">Transféré dans une bouteille de récupération dédiée à l'aide d'une station de récupération</span></span> dans une bouteille dédiée.</div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">📦</div>
+                    <div class="rule-title">Stockage sécurisé</div>
+                    <div class="rule-desc">Bouteilles <strong>debout</strong>, dans un local <span class="tip">ventilé<span class="tiptext">Local avec aération naturelle ou mécanique pour éviter l'accumulation de gaz en cas de fuite</span></span>, à l'abri de la chaleur et des chocs.</div>
+                </div>
+
+                <div class="rule-card">
+                    <div class="rule-icon">📝</div>
+                    <div class="rule-title">Fiche d'intervention</div>
+                    <div class="rule-desc">Chaque intervention sur un circuit doit être <span class="tip">tracée<span class="tiptext">Enregistrée sur une fiche de suivi avec le type et la quantité de fluide manipulé</span></span> avec le type et la quantité de fluide.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QCM 1 -->
+        <div class="activity" id="qcm1">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 1/2 — Récupération des fluides</h3>
+            </div>
+            <div class="doc-ref">
+                📖 <strong>Consulte le mémo IRIS-ST</strong> — Rubrique « Réglementation » pour trouver la réponse.
+            </div>
+            <p><strong>Selon le mémo IRIS-ST, que doit faire le frigoriste avec le fluide frigorigène lors d'une intervention sur un circuit ?</strong></p>
+            <div class="qcm-options" id="qcm1-options">
+                <button class="qcm-option" onclick="checkAnswer(this, false, 'qcm1')" data-feedback="Strictement interdit ! Relis la rubrique réglementation du mémo IRIS-ST.">A. Le laisser s'échapper dans l'atmosphère si la quantité est faible</button>
+                <button class="qcm-option" onclick="checkAnswer(this, true, 'qcm1')" data-feedback="Exact ! Le mémo IRIS-ST rappelle l'obligation de récupérer le fluide dans une bouteille dédiée, quel que soit le type ou la quantité.">B. Le récupérer obligatoirement dans une bouteille de récupération</button>
+                <button class="qcm-option" onclick="checkAnswer(this, false, 'qcm1')" data-feedback="Le brûler est interdit et dangereux — cela produit des gaz toxiques. Relis le mémo.">C. Le brûler pour l'éliminer en toute sécurité</button>
+                <button class="qcm-option" onclick="checkAnswer(this, false, 'qcm1')" data-feedback="On ne le verse jamais dans un réseau d'évacuation. Cherche la bonne réponse dans le mémo.">D. Le verser dans les égouts avec précaution</button>
+            </div>
+            <div class="qcm-feedback" id="feedback-qcm1"></div>
+        </div>
+
+        <!-- Activité tri -->
+        <div class="activity" id="dragdrop">
+            <div class="activity-header">
+                <span>🎯</span>
+                <h3 class="activity-title">Activité 2/2 — Trie les pratiques</h3>
+            </div>
+            <div class="doc-ref">
+                📖 <strong>Consulte le mémo IRIS-ST</strong> — Rubrique « Bonnes pratiques » pour vérifier tes réponses.
+            </div>
+            <p><strong>Classe chaque pratique dans la bonne catégorie :</strong></p>
+
+            <div class="sorting-area">
+                <div class="sort-items" id="sortItems">
+                    <div class="sort-item" draggable="true" data-cat="obligatoire">Récupérer le fluide avant ouverture du circuit</div>
+                    <div class="sort-item" draggable="true" data-cat="interdit">Rejeter du R-410A dans l'air</div>
+                    <div class="sort-item" draggable="true" data-cat="obligatoire">Stocker les bouteilles debout en local ventilé</div>
+                    <div class="sort-item" draggable="true" data-cat="interdit">Mélanger deux fluides différents dans une bouteille</div>
+                    <div class="sort-item" draggable="true" data-cat="obligatoire">Remplir la fiche d'intervention</div>
+                    <div class="sort-item" draggable="true" data-cat="interdit">Chauffer une bouteille de fluide à la flamme</div>
+                </div>
+
+                <div class="sort-zones">
+                    <div class="sort-zone zone-obligatoire" data-cat="obligatoire">
+                        <h4>✅ OBLIGATOIRE</h4>
+                        <p style="font-size: 0.85em; color: #666;">Bonnes pratiques à respecter</p>
+                    </div>
+                    <div class="sort-zone zone-interdit" data-cat="interdit">
+                        <h4>🚫 INTERDIT</h4>
+                        <p style="font-size: 0.85em; color: #666;">Pratiques dangereuses interdites</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="validateSort()" style="margin-top: 15px;">🔍 Vérifier mes réponses</button>
+            <div class="qcm-feedback" id="feedback-dragdrop"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-display" id="scoreDisplay">
+            <div class="score-number" id="scoreNumber">0%</div>
+            <div class="score-message" id="scoreMessage"></div>
+        </div>
+
+        <!-- Bilan de parcours -->
+        <div class="bilan-container" id="bilanContainer">
+            <h2>🏆 Bilan de parcours</h2>
+            <p>Parcours « Risques Professionnels — Froid & Climatisation »</p>
+            <p>Document de référence : Mémo IRIS-ST « Fluides frigorigènes »</p>
+
+            <div class="bilan-scores" id="bilanScores">
+                <!-- Rempli dynamiquement -->
+            </div>
+
+            <p style="margin-top: 15px;"><strong>LPP Jacques Raynaud · Campus Équatio</strong></p>
+            <p style="font-size: 0.85em; opacity: 0.7;" id="bilanDate"></p>
+
+            <button class="btn-print" onclick="window.print()">🖨️ Imprimer le bilan de parcours</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="theme-nav">
+            <div class="info">
+                <p><strong>Thème 3 / 3</strong> — Réglementation et bonnes pratiques</p>
+                <p>Compétence : <strong>C3</strong> — Connaître la réglementation</p>
+            </div>
+            <div class="buttons">
+                <a href="../index.html" class="btn btn-gray">🏠 Retour accueil</a>
+                <button class="btn btn-success" onclick="showBilan()" id="btnBilan">🏆 Voir le bilan de parcours</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="credit">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+    <script>
+        let activities = { qcm1: false, dragdrop: false };
+        let currentScore = 0;
+
+        function toggleDyslexic() {
+            document.body.classList.toggle('dyslexic-font');
+            document.getElementById('btnDys').classList.toggle('active');
+            localStorage.setItem('a11y-dyslexic', document.body.classList.contains('dyslexic-font'));
+        }
+
+        function setSize(size) {
+            document.body.classList.remove('font-large', 'font-xlarge');
+            if (size !== 'normal') document.body.classList.add('font-' + size);
+            localStorage.setItem('a11y-size', size);
+        }
+
+        function showDocRef() {
+            showNotification('📄 Ouvre le mémo papier IRIS-ST « Frigoristes-chauffagistes : les fluides frigorigènes » distribué en classe.', 'info');
+        }
+
+        function checkAnswer(btn, isCorrect, qcmId) {
+            const container = document.getElementById(qcmId + '-options');
+            const feedback = document.getElementById('feedback-' + qcmId);
+
+            container.querySelectorAll('.qcm-option').forEach(o => {
+                o.classList.remove('correct', 'incorrect');
+                o.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                feedback.textContent = btn.dataset.feedback;
+                feedback.className = 'qcm-feedback success';
+                activities[qcmId] = true;
+            } else {
+                btn.classList.add('incorrect');
+                feedback.textContent = '❌ ' + btn.dataset.feedback;
+                feedback.className = 'qcm-feedback error';
+                setTimeout(() => {
+                    container.querySelectorAll('.qcm-option').forEach(o => {
+                        o.classList.remove('incorrect');
+                        o.style.pointerEvents = '';
+                    });
+                    feedback.className = 'qcm-feedback';
+                }, 2500);
+            }
+            updateProgress();
+        }
+
+        // Drag & Drop tri
+        function setupDragDrop() {
+            document.querySelectorAll('.sort-item').forEach(item => {
+                item.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('application/json', JSON.stringify({
+                        cat: item.dataset.cat,
+                        text: item.textContent.trim()
+                    }));
+                    item.classList.add('dragging');
+                });
+                item.addEventListener('dragend', e => e.target.classList.remove('dragging'));
+            });
+
+            document.querySelectorAll('.sort-zone').forEach(zone => {
+                zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+                zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    const data = JSON.parse(e.dataTransfer.getData('application/json'));
+
+                    const dropped = document.createElement('div');
+                    dropped.className = 'dropped-item';
+                    dropped.textContent = data.text;
+                    dropped.dataset.cat = data.cat;
+                    dropped.dataset.zone = zone.dataset.cat;
+                    zone.appendChild(dropped);
+
+                    // Masquer l'original
+                    const items = document.querySelectorAll('.sort-item');
+                    items.forEach(it => {
+                        if (it.textContent.trim() === data.text) it.style.display = 'none';
+                    });
+                });
+            });
+        }
+
+        function validateSort() {
+            const dropped = document.querySelectorAll('.dropped-item');
+            let correct = 0;
+
+            dropped.forEach(item => {
+                if (item.dataset.cat === item.dataset.zone) {
+                    item.style.background = '#28a745';
+                    correct++;
+                } else {
+                    item.style.background = '#dc3545';
+                }
+            });
+
+            const feedback = document.getElementById('feedback-dragdrop');
+            const total = dropped.length;
+            const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+            if (pct >= 70) {
+                feedback.textContent = `Bravo ! ${correct}/${total} bonnes réponses (${pct}%)`;
+                feedback.className = 'qcm-feedback success';
+                activities.dragdrop = true;
+            } else {
+                feedback.textContent = `${correct}/${total} bonnes réponses (${pct}%). Relis le mémo IRIS-ST et recommence.`;
+                feedback.className = 'qcm-feedback error';
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const done = Object.values(activities).filter(Boolean).length;
+            const total = Object.keys(activities).length;
+            const score = Math.round((done / total) * 100);
+            currentScore = score;
+
+            if (done > 0) {
+                document.getElementById('scoreDisplay').style.display = 'block';
+                document.getElementById('scoreNumber').textContent = score + '%';
+                const msg = document.getElementById('scoreMessage');
+
+                if (score >= 70) {
+                    msg.textContent = 'Bravo ! Tu maîtrises la réglementation des fluides frigorigènes.';
+                    msg.style.color = '#28a745';
+                    document.getElementById('btnBilan').style.display = 'inline-flex';
+
+                    // Sauvegarder
+                    const data = JSON.parse(localStorage.getItem('inerweb_froid_data') || '{}');
+                    data.progress = data.progress || {};
+                    data.progress.theme3 = { completed: true, score: currentScore, completedAt: new Date().toISOString() };
+                    localStorage.setItem('inerweb_froid_data', JSON.stringify(data));
+                } else if (done === total) {
+                    msg.textContent = 'Relis le mémo IRIS-ST et recommence.';
+                    msg.style.color = '#f59e0b';
+                } else {
+                    msg.textContent = `Continue, il reste ${total - done} activité(s).`;
+                    msg.style.color = '#1b3a63';
+                }
+            }
+        }
+
+        function showBilan() {
+            const data = JSON.parse(localStorage.getItem('inerweb_froid_data') || '{}');
+            const progress = data.progress || {};
+
+            const scores = document.getElementById('bilanScores');
+            scores.innerHTML = '';
+
+            let themes = [
+                { key: 'theme1', label: 'Thème 1 — Risques' },
+                { key: 'theme2', label: 'Thème 2 — EPI' },
+                { key: 'theme3', label: 'Thème 3 — Réglementation' }
+            ];
+
+            themes.forEach(t => {
+                const p = progress[t.key];
+                const score = p ? p.score : 0;
+                const status = p && p.completed ? score + '%' : 'Non terminé';
+
+                scores.innerHTML += `
+                    <div class="bilan-score-item">
+                        <div class="label">${t.label}</div>
+                        <div class="value">${status}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('bilanDate').textContent = 'Généré le ' + new Date().toLocaleDateString('fr-FR') + ' à ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+            document.getElementById('bilanContainer').style.display = 'block';
+            document.getElementById('bilanContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showNotification(message, type) {
+            const old = document.querySelector('.notification');
+            if (old) old.remove();
+            const n = document.createElement('div');
+            n.className = 'notification ' + type;
+            n.textContent = message;
+            document.body.appendChild(n);
+            setTimeout(() => n.classList.add('show'), 50);
+            setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 3500);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('a11y-dyslexic') === 'true') {
+                document.body.classList.add('dyslexic-font');
+                document.getElementById('btnDys').classList.add('active');
+            }
+            const s = localStorage.getItem('a11y-size');
+            if (s && s !== 'normal') document.body.classList.add('font-' + s);
+            setupDragDrop();
+            showNotification('Thème 3 — Dernier thème ! Prends le mémo IRIS-ST.', 'info');
+        });
+    </script>
+</body>
+</html>
