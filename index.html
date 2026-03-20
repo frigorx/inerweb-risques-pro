@@ -203,71 +203,72 @@ body.f-xl{font-size:20px}
 <div class="wrap">
 
   <div class="card">
-    <h2>Comment ça marche ?</h2>
-    <p>Réponds à <strong>5 questions simples</strong> pour découvrir quelle filière te correspond le mieux. Ensuite, tu suivras :</p>
-    <ul>
-      <li><strong>2 modules communs</strong> à tous les métiers (accueil sécurité + risque électrique)</li>
-      <li><strong>3 modules spécialisés</strong> selon ta filière</li>
-    </ul>
-    <p style="margin-top:10px">Pour les QCM, tu devras chercher les réponses dans le <strong>document papier</strong> distribué en classe. Rien n'est donné à l'écran !</p>
+    <h2>Petit quiz pour commencer</h2>
+    <p>5 questions rapides sur ta <strong>culture générale</strong> du bâtiment et de l'énergie. Pas besoin de connaître les réponses — c'est pour voir ce qui t'attire !</p>
+    <p style="margin-top:8px">Tu feras ensuite <strong>tous les parcours</strong> : 2 modules communs + 3 modules de ta filière. On commence juste par celle qui te parle le plus.</p>
   </div>
 
   <div class="quiz-box" id="quizBox">
     <div class="progress"><div class="progress-fill" id="pBar"></div></div>
 
+    <!-- Q1 : situation quotidienne -->
     <div class="q-block active" data-q="1">
       <div class="q-num">Question 1 / 5</div>
-      <div class="q-text">Qu'est-ce qui t'attire le plus ?</div>
+      <div class="q-text">En plein été, il fait 40°C dehors. Qu'est-ce qui te vient en tête ?</div>
       <div class="opts">
-        <button class="opt" data-v="plombier" onclick="pick(this)">Travailler avec de l'eau, installer des tuyaux, réparer des fuites</button>
-        <button class="opt" data-v="froid" onclick="pick(this)">Être dans une salle des machines, entendre un compresseur tourner, faire du froid</button>
-        <button class="opt" data-v="elec" onclick="pick(this)">Câbler, brancher, faire fonctionner des appareils électriques</button>
+        <button class="opt" onclick="pick(this)" data-f="3" data-p="0" data-e="1">« Heureusement que la clim existe ! Sans elle on tiendrait pas. »</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="1">« Faut surtout boire de l'eau — d'ailleurs, j'espère que le robinet marche ! »</button>
+        <button class="opt" onclick="pick(this)" data-f="1" data-p="0" data-e="3">« Mon ventilateur tourne à fond, pourvu que le compteur tienne le coup ! »</button>
       </div>
       <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
+    <!-- Q2 : culture générale supermarché -->
     <div class="q-block" data-q="2">
       <div class="q-num">Question 2 / 5</div>
-      <div class="q-text">Sur un chantier, tu préfères :</div>
+      <div class="q-text">Au supermarché, tu passes devant le rayon surgelés. Tu te demandes :</div>
       <div class="opts">
-        <button class="opt" data-v="plombier" onclick="pick(this)">Souder des tubes de cuivre et raccorder des canalisations</button>
-        <button class="opt" data-v="froid" onclick="pick(this)">Charger un circuit en gaz, vérifier des températures et des pressions</button>
-        <button class="opt" data-v="elec" onclick="pick(this)">Tirer des câbles et raccorder un tableau électrique</button>
+        <button class="opt" onclick="pick(this)" data-f="3" data-p="1" data-e="0">« Comment ils font pour garder tout ça à -18°C ? Ça doit être une sacrée machine derrière ! »</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="1">« Y'a de la condensation partout, j'espère que les tuyaux d'évacuation sont bien faits. »</button>
+        <button class="opt" onclick="pick(this)" data-f="1" data-p="0" data-e="3">« Ça doit consommer une énergie de dingue tous ces meubles froids ! »</button>
       </div>
       <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
+    <!-- Q3 : problème chez le voisin -->
     <div class="q-block" data-q="3">
       <div class="q-num">Question 3 / 5</div>
-      <div class="q-text">Quel outil te parle le plus ?</div>
+      <div class="q-text">Ton voisin te dit : « J'ai plus d'eau chaude et la clim fait un bruit bizarre. » Toi tu penses :</div>
       <div class="opts">
-        <button class="opt" data-v="plombier" onclick="pick(this)">Un chalumeau et une clé à molette</button>
-        <button class="opt" data-v="froid" onclick="pick(this)">Un manomètre et une bouteille de gaz réfrigérant</button>
-        <button class="opt" data-v="elec" onclick="pick(this)">Un multimètre et un tournevis testeur</button>
+        <button class="opt" onclick="pick(this)" data-f="3" data-p="1" data-e="0">« La clim, ça m'intéresse — je vais aller voir ce qui fait ce bruit. »</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="1">« L'eau chaude, c'est sûrement le ballon ou la chaudière, j'irais vérifier. »</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="1" data-e="3">« Ça sent le disjoncteur qui a sauté — faut regarder le tableau électrique. »</button>
       </div>
       <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
+    <!-- Q4 : immeuble neuf -->
     <div class="q-block" data-q="4">
       <div class="q-num">Question 4 / 5</div>
-      <div class="q-text">Imagine ton premier jour de stage. On te dit :</div>
+      <div class="q-text">Tu visites un immeuble en construction. Qu'est-ce qui attire ton regard ?</div>
       <div class="opts">
-        <button class="opt" data-v="plombier" onclick="pick(this)">« Viens, on va installer un chauffe-eau chez un client ! »</button>
-        <button class="opt" data-v="froid" onclick="pick(this)">« Aujourd'hui, on fait la maintenance d'une chambre froide ! »</button>
-        <button class="opt" data-v="elec" onclick="pick(this)">« On va câbler l'installation électrique d'un appartement neuf ! »</button>
+        <button class="opt" onclick="pick(this)" data-f="3" data-p="0" data-e="1">« Les gros groupes de clim sur le toit et les gaines qui descendent dans les murs. »</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="0">« Tous les tuyaux en cuivre dans les murs, les radiateurs, les arrivées d'eau. »</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="3">« Le tableau électrique avec tous ses disjoncteurs bien alignés, les gaines partout. »</button>
       </div>
       <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
+    <!-- Q5 : stage -->
     <div class="q-block" data-q="5">
       <div class="q-num">Question 5 / 5</div>
-      <div class="q-text">Le soir, tu racontes ta journée. Qu'est-ce qui te rendrait le plus fier ?</div>
+      <div class="q-text">On te propose 3 stages. Lequel te tente le plus ?</div>
       <div class="opts">
-        <button class="opt" data-v="plombier" onclick="pick(this)">« J'ai réparé une fuite, le client était super content ! »</button>
-        <button class="opt" data-v="froid" onclick="pick(this)">« La clim remarche — il faisait 35° dehors et 22° dans le magasin ! »</button>
-        <button class="opt" data-v="elec" onclick="pick(this)">« J'ai branché tout le tableau, et quand on a mis le courant, tout marchait du premier coup ! »</button>
+        <button class="opt" onclick="pick(this)" data-f="3" data-p="0" data-e="0">Chez un installateur de climatisation — tu vas sur les chantiers, tu vois des chambres froides, des splits, des pompes à chaleur.</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="0">Chez un plombier-chauffagiste — tu installes des salles de bain, des chaudières, tu fais de la soudure cuivre.</button>
+        <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="3">Chez un électricien — tu câbles des maisons neuves, tu raccordes des tableaux, tu fais passer le courant.</button>
       </div>
-      <div class="q-nav"><button class="btn btn--orange" onclick="showResult()" disabled>Voir mon résultat →</button></div>
+      <div class="q-nav"><button class="btn btn--orange" onclick="showResult()" disabled>Voir mon profil →</button></div>
     </div>
   </div>
 
@@ -296,7 +297,7 @@ body.f-xl{font-size:20px}
 <div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
 
 <script>
-let answers=[],curQ=1;
+let scores={froid:0,plombier:0,elec:0}, curQ=1;
 
 function pick(btn){
   btn.closest('.q-block').querySelectorAll('.opt').forEach(o=>o.classList.remove('picked'));
@@ -304,40 +305,56 @@ function pick(btn){
   btn.closest('.q-block').querySelector('.q-nav .btn').disabled=false;
 }
 
-function next(){
+function addPoints(){
   const block=document.querySelector('.q-block[data-q="'+curQ+'"]');
   const sel=block.querySelector('.opt.picked');
-  if(!sel)return;
-  answers.push(sel.dataset.v);
-  block.classList.remove('active');
+  if(!sel)return false;
+  scores.froid+=parseInt(sel.dataset.f||0);
+  scores.plombier+=parseInt(sel.dataset.p||0);
+  scores.elec+=parseInt(sel.dataset.e||0);
+  return true;
+}
+
+function next(){
+  if(!addPoints())return;
+  document.querySelector('.q-block[data-q="'+curQ+'"]').classList.remove('active');
   curQ++;
   const nb=document.querySelector('.q-block[data-q="'+curQ+'"]');
   if(nb){nb.classList.add('active');document.getElementById('pBar').style.width=((curQ-1)/5*100)+'%';}
 }
 
 function showResult(){
-  const block=document.querySelector('.q-block[data-q="'+curQ+'"]');
-  const sel=block.querySelector('.opt.picked');
-  if(!sel)return;
-  answers.push(sel.dataset.v);
+  if(!addPoints())return;
   document.getElementById('pBar').style.width='100%';
 
-  const c={froid:0,plombier:0,elec:0};
-  answers.forEach(a=>c[a]++);
+  // Filière avec le plus de points
   let fil='froid',mx=0;
-  for(const[k,v]of Object.entries(c)){if(v>mx){mx=v;fil=k;}}
+  for(const[k,v]of Object.entries(scores)){if(v>mx){mx=v;fil=k;}}
+  const total=scores.froid+scores.plombier+scores.elec;
 
   const info={
-    froid:{ico:'❄️',title:'Froid & Climatisation',desc:'Tu es attiré par les systèmes de réfrigération et de climatisation. Tu vas découvrir les risques liés aux fluides frigorigènes et apprendre à te protéger sur le terrain.'},
-    plombier:{ico:'🔧',title:'Plombier-Chauffagiste',desc:'Tu aimes travailler avec l\'eau, le cuivre et le chauffage. Tu vas découvrir les risques du métier : brûlures, amiante, manutention, et comment t\'en protéger.'},
-    elec:{ico:'💡',title:'Électricien',desc:'Tu es passionné par l\'électricité et les installations. Tu vas apprendre à identifier les dangers du courant et les règles de sécurité pour intervenir sans risque.'}
+    froid:{ico:'❄️',title:'Froid & Climatisation',desc:'La clim, les chambres froides, les pompes à chaleur — tu es attiré par le monde du froid et de la climatisation ! Tu vas découvrir les risques liés aux fluides et apprendre à travailler en sécurité.'},
+    plombier:{ico:'🔧',title:'Plombier-Chauffagiste',desc:'L\'eau, le cuivre, les chaudières — tu aimes le concret ! Tu vas découvrir les risques du métier et comment te protéger sur le terrain.'},
+    elec:{ico:'💡',title:'Électricien',desc:'Les câbles, les tableaux, le courant — l\'électricité te passionne ! Tu vas apprendre les dangers du courant et les règles de sécurité pour intervenir sans risque.'}
   };
 
   const f=info[fil];
+
+  // Barre de scores visuelles
+  const barHtml=function(label,pts,color){
+    const pct=total>0?Math.round(pts/total*100):0;
+    return '<div style="margin:6px 0"><div style="display:flex;justify-content:space-between;font-size:.85em;margin-bottom:3px"><span>'+label+'</span><span style="font-weight:700;color:'+color+'">'+pts+' pts</span></div><div style="height:8px;background:var(--line);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+color+';border-radius:4px;transition:width .5s"></div></div></div>';
+  };
+
   document.getElementById('resultCard').innerHTML=
     '<div class="result-icon">'+f.ico+'</div>'+
     '<div class="result-title">'+f.title+'</div>'+
     '<div class="result-desc">'+f.desc+'</div>'+
+    '<div style="max-width:400px;margin:0 auto 20px;text-align:left">'+
+      barHtml('❄️ Froid & Climatisation',scores.froid,'var(--turquoise)')+
+      barHtml('🔧 Plomberie-Chauffage',scores.plombier,'var(--orange)')+
+      barHtml('💡 Électricité',scores.elec,'var(--navy)')+
+    '</div>'+
     '<a href="commun/accueil.html" class="btn btn--orange" style="text-decoration:none">Commencer le parcours commun →</a>';
 
   document.getElementById('quizBox').style.display='none';
@@ -346,7 +363,7 @@ function showResult(){
     c.classList.toggle('recommended',c.dataset.filiere===fil);
   });
   localStorage.setItem('orientation_filiere',fil);
-  notif('Quiz terminé ! Ta filière suggérée : '+f.title,'ok');
+  notif('Ton profil : '+f.title+' ('+mx+' pts) — mais tu feras tous les parcours !','ok');
 }
 
 function checkCode(){
