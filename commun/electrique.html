@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le risque électrique - Dangers communs à tous les métiers du bâtiment - IRIS-ST">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Le risque électrique</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
+            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
+            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
+            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        /* Mode guidé */
+        .page-hint { display: none; }
+        body.guided .page-hint { display: inline; }
+
+        /* Topbar */
+        .topbar {
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            border-bottom: 4px solid var(--orange);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .topbar-brand {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* Barre accessibilité */
+        .a11y-bar {
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            padding: 8px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .a11y-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .a11y-btn:hover, .a11y-btn.active {
+            background: var(--orange);
+            border-color: var(--orange);
+        }
+
+        /* Navigation header */
+        .header-nav {
+            background: var(--card);
+            padding: 12px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+        }
+
+        .nav-btn.home { background: var(--orange); }
+        .nav-btn.home:hover { background: var(--orange-hover); }
+        .nav-btn.doc { background: var(--navy); }
+        .nav-btn.doc:hover { background: #143052; }
+
+        .nav-title {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 0.95em;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
+
+        /* En-tête thème */
+        .theme-header {
+            background: linear-gradient(135deg, var(--orange), var(--orange-hover), var(--navy));
+            color: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,255,255,0.03) 12px, rgba(255,255,255,0.03) 24px);
+        }
+
+        .theme-header * { position: relative; z-index: 1; }
+
+        .theme-header h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .theme-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .theme-header .doc-badge {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.9em;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Sections */
+        .section {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title .icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--navy), var(--orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            flex-shrink: 0;
+        }
+
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .objectives-list li {
+            padding: 10px 0 10px 35px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .objectives-list li:last-child { border-bottom: none; }
+
+        .objectives-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        /* Grille risk cards */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .risk-card {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .risk-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .risk-card .card-icon { font-size: 2.5em; margin-bottom: 10px; }
+
+        .risk-card .card-title {
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .risk-card .card-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Les 5 règles d'or */
+        .rules-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: rule;
+        }
+
+        .rules-list li {
+            counter-increment: rule;
+            padding: 16px 16px 16px 65px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.05em;
+        }
+
+        .rules-list li:last-child { border-bottom: none; }
+
+        .rules-list li::before {
+            content: counter(rule);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--navy), var(--orange));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .rules-list li strong {
+            color: var(--navy);
+        }
+
+        /* QCM */
+        .activity {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            color: var(--navy);
+        }
+
+        .activity-header span { font-size: 1.8em; }
+
+        .activity-title {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .doc-ref {
+            background: var(--orange-warm);
+            border: 2px dashed var(--orange);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            font-size: 0.95em;
+            color: #7a4a1a;
+            font-weight: 600;
+        }
+
+        .doc-ref strong { color: var(--orange); }
+
+        .qcm-question {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .qcm-options {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .qcm-option {
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--card);
+            font-family: inherit;
+            font-size: 1em;
+            text-align: left;
+            color: var(--text);
+            width: 100%;
+        }
+
+        .qcm-option:hover:not(.correct):not(.incorrect) {
+            border-color: var(--orange);
+            transform: translateX(4px);
+        }
+
+        .qcm-option.correct {
+            border-color: var(--success);
+            background: #d4edda;
+            color: #155724;
+            cursor: default;
+        }
+
+        .qcm-option.incorrect {
+            border-color: var(--error);
+            background: #f8d7da;
+            color: #721c24;
+            cursor: default;
+        }
+
+        .qcm-option:disabled { cursor: default; }
+
+        .qcm-feedback {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            display: none;
+        }
+
+        .qcm-feedback.show-success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .qcm-feedback.show-error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Drag & Drop */
+        .drag-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 18px;
+        }
+
+        .drag-column h4 {
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .drag-item {
+            background: var(--navy);
+            color: white;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: var(--radius-sm);
+            cursor: grab;
+            user-select: none;
+            transition: all 0.2s;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        .drag-item:active { cursor: grabbing; }
+        .drag-item.dragging { opacity: 0.5; transform: scale(0.95); }
+
+        .drop-zone {
+            min-height: 55px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+
+        .drop-zone .zone-label {
+            font-size: 0.85em;
+            color: #999;
+            text-align: center;
+        }
+
+        .drop-zone.drag-over {
+            border-color: var(--orange);
+            background: var(--orange-warm);
+        }
+
+        .drop-zone.matched {
+            border-color: var(--success);
+            background: #d4edda;
+            border-style: solid;
+        }
+
+        .drop-zone.matched .drag-item {
+            background: var(--success);
+            cursor: default;
+        }
+
+        .drop-zone.wrong {
+            border-color: var(--error);
+            background: #f8d7da;
+            border-style: solid;
+        }
+
+        .drop-zone.wrong .drag-item {
+            background: var(--error);
+        }
+
+        .drag-validate-btn {
+            display: block;
+            margin: 18px auto 0;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 999px;
+            background: var(--orange);
+            color: white;
+            font-family: inherit;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .drag-validate-btn:hover { background: var(--orange-hover); }
+        .drag-validate-btn:disabled { opacity: 0.5; cursor: default; }
+
+        /* Score */
+        .score-section {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .score-bar-container {
+            background: var(--border);
+            border-radius: 999px;
+            height: 28px;
+            margin: 18px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .score-bar {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.6s ease;
+            background: linear-gradient(90deg, var(--turquoise), var(--success));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85em;
+            min-width: 0;
+        }
+
+        .score-bar.fail { background: linear-gradient(90deg, var(--orange), var(--error)); }
+
+        .score-text {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .score-message {
+            margin-top: 10px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .score-message.pass { color: var(--success); }
+        .score-message.no-pass { color: var(--error); }
+
+        .threshold-line {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        /* Navigation bas de page */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .bottom-nav a {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+        }
+
+        .btn-prev { background: var(--navy); }
+        .btn-prev:hover { background: #143052; }
+        .btn-next { background: var(--orange); }
+        .btn-next:hover { background: var(--orange-hover); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+            font-size: 0.8em;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .theme-header h1 { font-size: 1.5em; }
+            .section, .activity { padding: 18px; }
+            .risk-grid { grid-template-columns: 1fr; }
+            .drag-container { grid-template-columns: 1fr; }
+            .topbar { flex-direction: column; text-align: center; }
+            .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+            .bottom-nav a { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="topbar-brand">LPP Jacques Raynaud · Campus Équatio</div>
+    </div>
+
+    <!-- Barre accessibilité -->
+    <div class="a11y-bar">
+        <button class="a11y-btn" id="btnDyslexic" onclick="toggleDyslexic()" title="Police OpenDyslexic">Dyslexie</button>
+        <button class="a11y-btn" id="btnFontA" onclick="setFontSize('')" title="Taille normale">A</button>
+        <button class="a11y-btn" id="btnFontA1" onclick="setFontSize('font-large')" title="Taille grande">A+</button>
+        <button class="a11y-btn" id="btnFontA2" onclick="setFontSize('font-xlarge')" title="Taille très grande">A++</button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="header-nav">
+        <div class="nav-links">
+            <a href="../index.html" class="nav-btn home">🏠 Accueil</a>
+            <a href="../docs-irst/Iris-ST-Risque-Electrique-2015_Internet-100x150-1.pdf" target="_blank" class="nav-btn doc">📄 Document</a>
+        </div>
+        <div class="nav-title">Le risque électrique</div>
+    </div>
+
+    <div class="container">
+
+        <!-- En-tête -->
+        <div class="theme-header">
+            <h1>Le risque électrique</h1>
+            <p>Dangers communs à tous les métiers du bâtiment</p>
+            <div class="doc-badge">📖 Mémo IRIS-ST « Le risque électrique »</div>
+        </div>
+
+        <!-- Objectifs -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🎯</div>
+                Objectifs
+            </div>
+            <ul class="objectives-list">
+                <li>Identifier les dangers de l'électricité</li>
+                <li>Connaître les 5 règles d'or de la consignation</li>
+                <li>Savoir réagir face à un accident électrique</li>
+            </ul>
+        </div>
+
+        <!-- Risk cards -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">⚠️</div>
+                Les dangers de l'électricité
+            </div>
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Électrocution</div>
+                    <div class="card-desc">Passage du courant à travers le corps</div>
+                </div>
+                <div class="risk-card">
+                    <div class="card-icon">🔥</div>
+                    <div class="card-title">Arc électrique</div>
+                    <div class="card-desc">Flash thermique, brûlures graves</div>
+                </div>
+                <div class="risk-card">
+                    <div class="card-icon">💥</div>
+                    <div class="card-title">Court-circuit</div>
+                    <div class="card-desc">Incendie, explosion</div>
+                </div>
+                <div class="risk-card">
+                    <div class="card-icon">🫀</div>
+                    <div class="card-title">Fibrillation cardiaque</div>
+                    <div class="card-desc">Arrêt du cœur</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Les 5 règles d'or -->
+        <div class="section">
+            <div class="section-title">
+                <div class="icon">🏅</div>
+                Les 5 règles d'or de la consignation
+            </div>
+            <ol class="rules-list">
+                <li><strong>Séparer</strong> — Couper l'alimentation électrique</li>
+                <li><strong>Condamner</strong> — Verrouiller le disjoncteur (cadenas)</li>
+                <li><strong>Identifier</strong> — Vérifier le bon circuit concerné</li>
+                <li><strong>Vérifier</strong> — VAT : confirmer l'absence de tension</li>
+                <li><strong>Mettre à la terre et en court-circuit</strong> — Sécuriser l'installation</li>
+            </ol>
+        </div>
+
+        <!-- Activité 1 : QCM -->
+        <div class="activity" id="activity-q1">
+            <div class="activity-header">
+                <span>❓</span>
+                <div class="activity-title">Question 1 – Première action avant intervention</div>
+            </div>
+            <div class="doc-ref">
+                📖 Consulte le document <strong>Mémo Le risque électrique</strong><span class="page-hint"> — Page 2</span>
+            </div>
+            <div class="qcm-question">Selon le mémo IRIS-ST, quelle est la PREMIÈRE action à faire avant d'intervenir sur une installation électrique ?</div>
+            <div class="qcm-options">
+                <button class="qcm-option" onclick="checkAnswer('q1', this, false)">A. Mettre ses gants isolants</button>
+                <button class="qcm-option" onclick="checkAnswer('q1', this, true)">B. Séparer l'installation de sa source d'alimentation</button>
+                <button class="qcm-option" onclick="checkAnswer('q1', this, false)">C. Prévenir un collègue</button>
+                <button class="qcm-option" onclick="checkAnswer('q1', this, false)">D. Vérifier la tension avec un multimètre</button>
+            </div>
+            <div class="qcm-feedback" id="feedback-q1"></div>
+        </div>
+
+        <!-- Activité 2 : QCM -->
+        <div class="activity" id="activity-q2">
+            <div class="activity-header">
+                <span>❓</span>
+                <div class="activity-title">Question 2 – Le VAT</div>
+            </div>
+            <div class="doc-ref">
+                📖 Consulte le document <strong>Mémo Le risque électrique</strong><span class="page-hint"> — Page 3</span>
+            </div>
+            <div class="qcm-question">Le VAT (Vérificateur d'Absence de Tension) sert à :</div>
+            <div class="qcm-options">
+                <button class="qcm-option" onclick="checkAnswer('q2', this, false)">A. Mesurer la puissance consommée</button>
+                <button class="qcm-option" onclick="checkAnswer('q2', this, true)">B. Confirmer qu'il n'y a plus de tension après consignation</button>
+                <button class="qcm-option" onclick="checkAnswer('q2', this, false)">C. Détecter les fuites de courant dans le sol</button>
+                <button class="qcm-option" onclick="checkAnswer('q2', this, false)">D. Tester la qualité des câbles</button>
+            </div>
+            <div class="qcm-feedback" id="feedback-q2"></div>
+        </div>
+
+        <!-- Activité 3 : Drag & Drop -->
+        <div class="activity" id="activity-q3">
+            <div class="activity-header">
+                <span>🔗</span>
+                <div class="activity-title">Question 3 – Associe chaque risque à sa conséquence</div>
+            </div>
+            <div class="doc-ref">
+                📖 Consulte le document <strong>Mémo Le risque électrique</strong><span class="page-hint"> — Page 2</span>
+            </div>
+            <div class="qcm-question">Glisse chaque risque vers la bonne conséquence :</div>
+
+            <div class="drag-container">
+                <!-- Colonne gauche : items à glisser -->
+                <div class="drag-column">
+                    <h4>Risques</h4>
+                    <div id="dragSource">
+                        <div class="drag-item" draggable="true" data-match="electrocution">⚡ Électrocution</div>
+                        <div class="drag-item" draggable="true" data-match="arc">🔥 Arc électrique</div>
+                        <div class="drag-item" draggable="true" data-match="court-circuit">💥 Court-circuit</div>
+                        <div class="drag-item" draggable="true" data-match="contact-indirect">🔌 Contact indirect</div>
+                    </div>
+                </div>
+                <!-- Colonne droite : zones de dépôt -->
+                <div class="drag-column">
+                    <h4>Conséquences</h4>
+                    <div class="drop-zone" data-expect="electrocution">
+                        <span class="zone-label">Passage du courant dans le corps</span>
+                    </div>
+                    <div class="drop-zone" data-expect="arc">
+                        <span class="zone-label">Brûlures thermiques graves</span>
+                    </div>
+                    <div class="drop-zone" data-expect="court-circuit">
+                        <span class="zone-label">Risque d'incendie</span>
+                    </div>
+                    <div class="drop-zone" data-expect="contact-indirect">
+                        <span class="zone-label">Courant de fuite par un défaut d'isolement</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="drag-validate-btn" id="btnValidateDrag" onclick="validateDragDrop()">Valider mes réponses</button>
+            <div class="qcm-feedback" id="feedback-q3"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-section" id="scoreSection" style="display:none;">
+            <div class="section-title" style="justify-content:center; border:none; padding:0; margin-bottom:12px;">
+                <div class="icon">🏆</div>
+                Ton score
+            </div>
+            <div class="score-text" id="scoreText">0 / 3</div>
+            <div class="score-bar-container">
+                <div class="score-bar" id="scoreBar" style="width:0%"></div>
+            </div>
+            <div class="score-message" id="scoreMessage"></div>
+            <div class="threshold-line">Seuil de validation : 70 % (2 / 3)</div>
+        </div>
+
+        <!-- Navigation bas de page -->
+        <div class="bottom-nav">
+            <a href="accueil.html" class="btn-prev">← Accueil apprenti</a>
+            <a href="../index.html" class="btn-next">Choisir mon parcours métier →</a>
+        </div>
+
+    </div>
+
+    <div class="footer">inerWeb · F. Henninot</div>
+
+    <script>
+        // Mode guidé
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            initDragDrop();
+        });
+
+        // Accessibilité
+        function toggleDyslexic() {
+            document.body.classList.toggle('dyslexic-font');
+            document.getElementById('btnDyslexic').classList.toggle('active');
+            localStorage.setItem('dyslexicFont', document.body.classList.contains('dyslexic-font'));
+        }
+
+        function setFontSize(cls) {
+            document.body.classList.remove('font-large', 'font-xlarge');
+            if (cls) document.body.classList.add(cls);
+            document.querySelectorAll('#btnFontA, #btnFontA1, #btnFontA2').forEach(function(b) { b.classList.remove('active'); });
+            if (cls === '') document.getElementById('btnFontA').classList.add('active');
+            if (cls === 'font-large') document.getElementById('btnFontA1').classList.add('active');
+            if (cls === 'font-xlarge') document.getElementById('btnFontA2').classList.add('active');
+            localStorage.setItem('fontSize', cls);
+        }
+
+        // Restaurer préférences
+        (function() {
+            if (localStorage.getItem('dyslexicFont') === 'true') {
+                document.body.classList.add('dyslexic-font');
+                document.getElementById('btnDyslexic').classList.add('active');
+            }
+            var fs = localStorage.getItem('fontSize');
+            if (fs === 'font-large' || fs === 'font-xlarge') {
+                document.body.classList.add(fs);
+                if (fs === 'font-large') document.getElementById('btnFontA1').classList.add('active');
+                if (fs === 'font-xlarge') document.getElementById('btnFontA2').classList.add('active');
+            }
+        })();
+
+        // QCM
+        var activities = { q1: null, q2: null, q3: null };
+        var totalQuestions = 3;
+
+        function checkAnswer(qId, btn, isCorrect) {
+            if (activities[qId] !== null) return;
+
+            var options = btn.parentElement.querySelectorAll('.qcm-option');
+            var feedback = document.getElementById('feedback-' + qId);
+
+            if (isCorrect) {
+                activities[qId] = true;
+                btn.classList.add('correct');
+                options.forEach(function(o) { o.disabled = true; });
+                feedback.textContent = '✅ Bonne réponse !';
+                feedback.className = 'qcm-feedback show-success';
+                updateScore();
+            } else {
+                btn.classList.add('incorrect');
+                feedback.textContent = '❌ Ce n\'est pas la bonne réponse. Relis le document et réessaie.';
+                feedback.className = 'qcm-feedback show-error';
+                setTimeout(function() {
+                    btn.classList.remove('incorrect');
+                    feedback.className = 'qcm-feedback';
+                }, 2500);
+            }
+        }
+
+        // Drag & Drop
+        var draggedItem = null;
+
+        function initDragDrop() {
+            var items = document.querySelectorAll('.drag-item');
+            var zones = document.querySelectorAll('.drop-zone');
+
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', function(e) {
+                    draggedItem = item;
+                    item.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                item.addEventListener('dragend', function() {
+                    item.classList.remove('dragging');
+                    draggedItem = null;
+                });
+
+                // Touch support
+                item.addEventListener('touchstart', function(e) {
+                    draggedItem = item;
+                    item.classList.add('dragging');
+                }, { passive: true });
+
+                item.addEventListener('touchend', function(e) {
+                    item.classList.remove('dragging');
+                    var touch = e.changedTouches[0];
+                    var target = document.elementFromPoint(touch.clientX, touch.clientY);
+                    var zone = target ? target.closest('.drop-zone') : null;
+                    if (zone && !zone.classList.contains('matched') && draggedItem) {
+                        // Remove existing item from zone
+                        var existing = zone.querySelector('.drag-item');
+                        if (existing) {
+                            document.getElementById('dragSource').appendChild(existing);
+                        }
+                        zone.appendChild(draggedItem);
+                        var label = zone.querySelector('.zone-label');
+                        if (label) label.style.display = 'none';
+                    }
+                    draggedItem = null;
+                    zones.forEach(function(z) { z.classList.remove('drag-over'); });
+                });
+            });
+
+            zones.forEach(function(zone) {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    if (!zone.classList.contains('matched')) {
+                        zone.classList.add('drag-over');
+                    }
+                });
+                zone.addEventListener('dragleave', function() {
+                    zone.classList.remove('drag-over');
+                });
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    if (zone.classList.contains('matched') || !draggedItem) return;
+
+                    // Remove existing item
+                    var existing = zone.querySelector('.drag-item');
+                    if (existing) {
+                        document.getElementById('dragSource').appendChild(existing);
+                    }
+
+                    zone.appendChild(draggedItem);
+                    var label = zone.querySelector('.zone-label');
+                    if (label) label.style.display = 'none';
+                });
+            });
+        }
+
+        function validateDragDrop() {
+            if (activities.q3 !== null) return;
+
+            var zones = document.querySelectorAll('.drop-zone');
+            var allFilled = true;
+            var allCorrect = true;
+
+            zones.forEach(function(zone) {
+                var item = zone.querySelector('.drag-item');
+                if (!item) {
+                    allFilled = false;
+                    return;
+                }
+                var expected = zone.getAttribute('data-expect');
+                var match = item.getAttribute('data-match');
+                if (match === expected) {
+                    zone.classList.add('matched');
+                    zone.classList.remove('wrong');
+                } else {
+                    zone.classList.add('wrong');
+                    zone.classList.remove('matched');
+                    allCorrect = false;
+                }
+            });
+
+            if (!allFilled) {
+                var fb = document.getElementById('feedback-q3');
+                fb.textContent = '⚠️ Place tous les risques dans une zone avant de valider.';
+                fb.className = 'qcm-feedback show-error';
+                setTimeout(function() { fb.className = 'qcm-feedback'; }, 2500);
+                return;
+            }
+
+            var feedback = document.getElementById('feedback-q3');
+
+            if (allCorrect) {
+                activities.q3 = true;
+                feedback.textContent = '✅ Parfait ! Toutes les associations sont correctes.';
+                feedback.className = 'qcm-feedback show-success';
+                document.getElementById('btnValidateDrag').disabled = true;
+                // Disable dragging
+                document.querySelectorAll('.drag-item').forEach(function(i) {
+                    i.setAttribute('draggable', 'false');
+                    i.style.cursor = 'default';
+                });
+                updateScore();
+            } else {
+                feedback.textContent = '❌ Certaines associations sont incorrectes. Relis le document et réessaie.';
+                feedback.className = 'qcm-feedback show-error';
+                setTimeout(function() {
+                    feedback.className = 'qcm-feedback';
+                    // Reset wrong ones
+                    zones.forEach(function(zone) {
+                        if (zone.classList.contains('wrong')) {
+                            var item = zone.querySelector('.drag-item');
+                            if (item) document.getElementById('dragSource').appendChild(item);
+                            zone.classList.remove('wrong');
+                            var label = zone.querySelector('.zone-label');
+                            if (label) label.style.display = '';
+                        }
+                    });
+                }, 2500);
+            }
+        }
+
+        function updateScore() {
+            var answered = 0;
+            var correct = 0;
+            for (var k in activities) {
+                if (activities[k] !== null) {
+                    answered++;
+                    if (activities[k]) correct++;
+                }
+            }
+            if (answered === totalQuestions) {
+                var section = document.getElementById('scoreSection');
+                section.style.display = 'block';
+                var pct = Math.round((correct / totalQuestions) * 100);
+                document.getElementById('scoreText').textContent = correct + ' / ' + totalQuestions + ' (' + pct + ' %)';
+                var bar = document.getElementById('scoreBar');
+                bar.style.width = pct + '%';
+                bar.textContent = pct + '%';
+                if (pct < 70) bar.classList.add('fail');
+
+                var msg = document.getElementById('scoreMessage');
+                if (pct >= 70) {
+                    msg.textContent = '🎉 Bravo ! Tu as validé cette séquence.';
+                    msg.className = 'score-message pass';
+                } else {
+                    msg.textContent = '⚠️ Score insuffisant. Relis le document et recommence.';
+                    msg.className = 'score-message no-pass';
+                }
+                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 3 - Travaux interdits et réglementés pour apprentis plombier-chauffagiste">
+    <meta name="author" content="F. Henninot - LPP Jacques Raynaud · Campus Équatio">
+    <title>Thème 3 — Travaux Interdits Plombier</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
+            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
+            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
+            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.6; font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+        body.font-small { font-size: 14px; }
+        body.font-normal { font-size: 16px; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        .page-hint { display: none; color: var(--orange); font-weight: 700; }
+        body.guided .page-hint { display: inline; }
+
+        .doc-ref {
+            background: var(--orange-warm); border: 1px solid var(--orange);
+            border-radius: var(--radius-sm); padding: 12px 18px; margin-bottom: 18px; font-size: 0.95em;
+        }
+
+        .header-nav {
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            color: white; padding: 0;
+            box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100;
+            border-bottom: 4px solid var(--orange);
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; padding: 12px 20px;
+        }
+        .nav-brand { display: flex; flex-direction: column; }
+        .nav-title { font-size: 1.1em; font-weight: 700; color: white; }
+        .nav-subtitle { font-size: 0.8em; opacity: 0.8; color: var(--mint); }
+        .nav-buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .nav-btn {
+            background: var(--orange); color: white; border: none;
+            padding: 8px 18px; border-radius: 999px; font-family: inherit;
+            font-size: 0.85em; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .nav-btn:hover { background: var(--orange-hover); transform: translateY(-1px); }
+        .nav-btn.home { background: var(--turquoise); }
+        .nav-btn.home:hover { background: #239292; }
+
+        .a11y-bar {
+            background: var(--navy); padding: 6px 20px;
+            display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap;
+        }
+        .a11y-btn {
+            background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 12px; border-radius: 999px; font-family: inherit;
+            font-size: 0.78em; cursor: pointer; transition: all 0.2s;
+        }
+        .a11y-btn:hover, .a11y-btn.active { background: var(--orange); border-color: var(--orange); }
+        .a11y-label { color: rgba(255,255,255,0.6); font-size: 0.75em; margin-right: 2px; }
+        .a11y-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.2); margin: 0 4px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 40px; }
+
+        .theme-header {
+            background: linear-gradient(135deg, var(--orange), var(--error));
+            color: white; border-radius: var(--radius); padding: 32px; margin-bottom: 28px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .theme-header::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+        }
+        .theme-title { font-size: 2.2em; font-weight: 700; margin-bottom: 10px; position: relative; z-index: 1; }
+        .theme-subtitle { font-size: 1.1em; opacity: 0.9; position: relative; z-index: 1; }
+
+        .section {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .section-header {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+            padding-bottom: 14px; border-bottom: 2px solid var(--border);
+        }
+        .section-icon {
+            font-size: 1.8em; background: linear-gradient(135deg, var(--orange), var(--error));
+            border-radius: 50%; width: 54px; height: 54px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .section-title { font-size: 1.6em; font-weight: 700; }
+
+        .tooltip {
+            position: relative; display: inline-block; cursor: help;
+            border-bottom: 1px dotted var(--orange); color: var(--orange); font-weight: 600;
+        }
+        .tooltiptext {
+            visibility: hidden; width: 240px; background-color: var(--navy); color: #fff;
+            text-align: center; border-radius: var(--radius-sm); padding: 10px;
+            position: absolute; z-index: 1001; bottom: 125%; left: 50%; margin-left: -120px;
+            opacity: 0; transition: opacity 0.3s; font-size: 0.88em;
+            box-shadow: var(--shadow); font-weight: normal;
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .content-box {
+            background: var(--orange-warm); border-radius: var(--radius-sm); padding: 22px;
+            margin-bottom: 18px; border-left: 4px solid var(--orange);
+        }
+        .content-box h4 { color: var(--navy); margin-bottom: 12px; font-weight: 700; }
+
+        .categories-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px; margin-top: 18px;
+        }
+        .category-card {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 20px; box-shadow: var(--shadow); transition: all 0.3s ease;
+        }
+        .category-card.interdit { border-top: 4px solid var(--error); }
+        .category-card.reglemente { border-top: 4px solid #f0ad4e; }
+        .category-card.autorise { border-top: 4px solid var(--success); }
+        .category-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,45,82,0.12); }
+        .category-icon { font-size: 2.2em; margin-bottom: 12px; text-align: center; }
+        .category-title { font-weight: 700; margin-bottom: 8px; text-align: center; }
+        .category-description { color: #666; font-size: 0.9em; text-align: center; }
+
+        .activity {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .activity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--navy); }
+        .activity-header span { font-size: 1.8em; }
+        .activity-title { font-size: 1.2em; font-weight: 700; }
+
+        .qcm-options { display: grid; gap: 10px; margin-top: 16px; }
+        .qcm-option {
+            padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+            cursor: pointer; transition: all 0.25s ease; background: var(--card);
+        }
+        .qcm-option:hover { border-color: var(--orange); transform: translateX(4px); }
+        .qcm-option.selected { border-color: var(--orange); background: var(--orange-warm); }
+        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+
+        .qcm-feedback { margin-top: 14px; padding: 12px; border-radius: var(--radius-sm); font-weight: 600; }
+        .qcm-feedback.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .qcm-feedback.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        /* Drag & Drop */
+        .sorting-container { margin-top: 18px; }
+        .drag-items {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px; margin-bottom: 22px; padding: 18px;
+            background: var(--orange-warm); border-radius: var(--radius-sm); border: 2px dashed var(--border);
+        }
+        .drag-item {
+            background: var(--navy); color: white; padding: 10px 14px; border-radius: 999px;
+            cursor: move; user-select: none; transition: all 0.25s ease;
+            text-align: center; font-weight: 600;
+        }
+        .drag-item:hover { background: var(--navy-mid); transform: scale(1.02); }
+        .drag-item.dragging { opacity: 0.5; }
+        .sort-zones {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;
+        }
+        .sort-zone {
+            min-height: 180px; border: 2px dashed var(--border); border-radius: var(--radius-sm);
+            padding: 18px; text-align: center; transition: all 0.25s ease;
+        }
+        .sort-zone.zone-interdit { border-color: var(--error); background: rgba(231,76,60,0.04); }
+        .sort-zone.zone-reglemente { border-color: #f0ad4e; background: rgba(240,173,78,0.04); }
+        .sort-zone.zone-autorise { border-color: var(--success); background: rgba(39,174,96,0.04); }
+        .sort-zone.drag-over { background: var(--orange-warm); border-color: var(--orange); }
+        .sort-zone h4 { margin-bottom: 8px; font-weight: 700; }
+        .zone-interdit h4 { color: var(--error); }
+        .zone-reglemente h4 { color: #d4880a; }
+        .zone-autorise h4 { color: var(--success); }
+        .dropped-item {
+            background: var(--navy); color: white; padding: 6px 12px; margin: 4px;
+            border-radius: 999px; font-size: 0.85em; display: inline-block;
+        }
+
+        .score-display {
+            background: var(--mint); border: 2px solid var(--turquoise);
+            border-radius: var(--radius); padding: 24px; text-align: center; margin: 28px 0;
+        }
+        .score-number { font-size: 2.8em; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        .score-message { font-size: 1.1em; font-weight: 600; margin-bottom: 16px; }
+
+        .theme-navigation {
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 24px; margin-top: 32px; box-shadow: var(--shadow);
+        }
+        .theme-info { font-size: 0.9em; color: #666; }
+        .navigation-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .btn {
+            padding: 12px 22px; border: none; border-radius: 999px; font-weight: 600;
+            cursor: pointer; transition: all 0.25s ease; font-family: inherit;
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-primary { background: var(--navy); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-orange { background: var(--orange); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* ========== BILAN DE PARCOURS ========== */
+        .bilan-section {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 30px; margin-top: 32px; box-shadow: var(--shadow); display: none;
+        }
+        .bilan-section.visible { display: block; }
+        .bilan-header {
+            text-align: center; margin-bottom: 24px; padding-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+        }
+        .bilan-header h2 { font-size: 1.6em; color: var(--navy); margin-bottom: 6px; }
+        .bilan-header p { color: #666; font-size: 0.95em; }
+        .bilan-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 24px;
+        }
+        .bilan-card {
+            background: var(--bg); border-radius: var(--radius-sm); padding: 18px;
+            text-align: center; border: 1px solid var(--border);
+        }
+        .bilan-card.done { border-color: var(--success); background: #eafaf1; }
+        .bilan-card.pending { border-color: var(--border); }
+        .bilan-theme-num { font-size: 2em; font-weight: 700; color: var(--navy); }
+        .bilan-theme-name { font-size: 0.85em; color: #666; margin: 4px 0; }
+        .bilan-theme-score { font-weight: 700; font-size: 1.1em; }
+        .bilan-theme-score.pass { color: var(--success); }
+        .bilan-theme-score.fail { color: var(--error); }
+        .bilan-theme-score.na { color: #999; }
+        .bilan-summary {
+            text-align: center; padding: 20px; background: var(--mint);
+            border-radius: var(--radius-sm); margin-bottom: 20px;
+        }
+        .bilan-summary .big-score { font-size: 2.5em; font-weight: 700; color: var(--navy); }
+        .bilan-summary .verdict { font-size: 1.1em; font-weight: 600; margin-top: 6px; }
+        .bilan-info {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+            margin-bottom: 20px; font-size: 0.9em;
+        }
+        .bilan-info div { padding: 8px 12px; background: var(--bg); border-radius: var(--radius-sm); }
+        .bilan-info label { font-weight: 600; color: var(--navy); }
+        .bilan-actions { text-align: center; margin-top: 16px; }
+        .bilan-print-area { display: none; }
+        @media print {
+            body * { visibility: hidden; }
+            .bilan-print-area, .bilan-print-area * { visibility: visible; display: block !important; }
+            .bilan-print-area { position: absolute; left: 0; top: 0; width: 100%; padding: 30px; }
+        }
+
+        .site-footer {
+            text-align: center; padding: 18px 20px; margin-top: 30px;
+            font-size: 0.8em; color: #999; border-top: 1px solid var(--border);
+        }
+
+        .notification {
+            position: fixed; top: 80px; right: 20px; padding: 14px 20px;
+            border-radius: 999px; color: white; font-weight: 600; z-index: 1000;
+            transform: translateX(400px); transition: all 0.3s ease; max-width: 380px; font-size: 0.9em;
+        }
+        .notification.show { transform: translateX(0); }
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--error); }
+        .notification.warning { background: #f0ad4e; }
+        .notification.info { background: var(--turquoise); }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 10px; }
+            .theme-title { font-size: 1.7em; }
+            .categories-grid, .sort-zones { grid-template-columns: 1fr; }
+            .theme-navigation { flex-direction: column; gap: 16px; }
+            .a11y-bar { justify-content: center; }
+            .bilan-info { grid-template-columns: 1fr; }
+            .bilan-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="font-normal">
+
+    <div class="a11y-bar">
+        <span class="a11y-label">Police :</span>
+        <button class="a11y-btn active" onclick="setFont('normal')">Standard</button>
+        <button class="a11y-btn" onclick="setFont('dyslexic')">OpenDyslexic</button>
+        <div class="a11y-sep"></div>
+        <span class="a11y-label">Taille :</span>
+        <button class="a11y-btn" onclick="setFontSize('small')">A-</button>
+        <button class="a11y-btn active" onclick="setFontSize('normal')">A</button>
+        <button class="a11y-btn" onclick="setFontSize('large')">A+</button>
+        <button class="a11y-btn" onclick="setFontSize('xlarge')">A++</button>
+    </div>
+
+    <div class="header-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-title">LPP Jacques Raynaud · Campus Équatio</span>
+                <span class="nav-subtitle">2nde TNE</span>
+            </div>
+            <div class="nav-buttons">
+                <a href="../index.html" class="nav-btn home">🏠 Accueil</a>
+                <button class="nav-btn" onclick="showPDF()">📄 Doc INRS</button>
+                <button class="nav-btn" onclick="showHelp()">❓ Aide</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="theme-header">
+            <div class="theme-title">🚫 Travaux Interdits Plombier</div>
+            <div class="theme-subtitle">Connaître les limites légales pour votre sécurité</div>
+        </div>
+
+        <!-- Objectifs -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <div class="section-title">Objectifs d'apprentissage</div>
+            </div>
+            <div class="content-box">
+                <h4>🏆 Compétence C3 : Travaux interdits</h4>
+                <p>À la fin de ce thème, vous devrez être capable de :</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Distinguer les <span class="tooltip">travaux strictement interdits<span class="tooltiptext">Travaux jamais autorisés aux moins de 18 ans : électricité sous tension, démolition, vibrations</span></span> aux mineurs</li>
+                    <li>Identifier les <span class="tooltip">travaux réglementés<span class="tooltiptext">Travaux possibles avec dérogation, formation et surveillance : machines dangereuses, produits chimiques</span></span> nécessitant une dérogation</li>
+                    <li>Connaître le processus de <span class="tooltip">dérogation<span class="tooltiptext">Procédure permettant d'autoriser certains travaux interdits avec conditions strictes</span></span> selon l'INRS</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Catégories -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <div class="section-title">Les 3 catégories selon l'INRS</div>
+            </div>
+            <p style="margin-bottom: 18px;">
+                L'INRS classe les travaux en 3 catégories pour les <span class="tooltip">apprentis plombiers-chauffagistes<span class="tooltiptext">Jeunes de moins de 18 ans en formation dans le domaine de la plomberie et du chauffage</span></span> mineurs :
+            </p>
+            <div class="categories-grid">
+                <div class="category-card interdit">
+                    <div class="category-icon">🚫</div>
+                    <div class="category-title" style="color: var(--error);">INTERDITS</div>
+                    <div class="category-description">Jamais autorisés : <span class="tooltip">électricité sous tension<span class="tooltiptext">Travaux sur installations électriques alimentées - risque d'électrocution mortel</span></span>, <span class="tooltip">démolition<span class="tooltiptext">Destruction de murs, cloisons - risque d'effondrement</span></span>, <span class="tooltip">vibrations importantes<span class="tooltiptext">Utilisation de marteaux-piqueurs, perforateurs lourds</span></span></div>
+                </div>
+                <div class="category-card reglemente">
+                    <div class="category-icon">⚠️</div>
+                    <div class="category-title" style="color: #d4880a;">RÉGLEMENTÉS</div>
+                    <div class="category-description">Avec <span class="tooltip">dérogation<span class="tooltiptext">Autorisation spéciale de l'employeur avec conditions strictes</span></span> : machines dangereuses, <span class="tooltip">produits chimiques<span class="tooltiptext">Solvants, détartrants, colles - nécessitent formation et protection</span></span>, travail en hauteur, <span class="tooltip">port de charges lourdes<span class="tooltiptext">Manutention supérieure aux limites légales selon l'âge</span></span></div>
+                </div>
+                <div class="category-card autorise">
+                    <div class="category-icon">✅</div>
+                    <div class="category-title" style="color: var(--success);">AUTORISÉS</div>
+                    <div class="category-description">Avec protections normales : travaux sur <span class="tooltip">établi<span class="tooltiptext">Poste de travail fixe et sécurisé en atelier</span></span>, finitions, montage simple, <span class="tooltip">maintenance légère<span class="tooltiptext">Nettoyage, vérifications visuelles, petit entretien</span></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QCM 1 -->
+        <div class="activity" id="qcm1">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 1/3 — Travaux strictement interdits</h3>
+            </div>
+            <div class="doc-ref">📖 Consulte le document INRS « Mon métier plombier-chauffagiste » ED 6232 <span class="page-hint"> — Pages 6-7</span></div>
+            <div class="qcm-question">
+                <p><strong>D'après le document INRS, lequel de ces travaux est strictement INTERDIT avant 18 ans ?</strong></p>
+            </div>
+            <div class="qcm-options" id="qcm1-options">
+                <div class="qcm-option" onclick="selectOption(this, 0, 'qcm1', 'C3')" data-feedback="Non, les machines dangereuses peuvent être autorisées avec dérogation selon l'INRS">A. Utiliser une bétonnière avec formation</div>
+                <div class="qcm-option" onclick="selectOption(this, 1, 'qcm1', 'C3')" data-feedback="Exact ! L'INRS indique que 'les travaux électriques sous tension' sont interdits">B. Travaux électriques sous tension</div>
+                <div class="qcm-option" onclick="selectOption(this, 2, 'qcm1', 'C3')" data-feedback="Non, l'utilisation d'échelles peut être autorisée selon l'INRS">C. Utiliser une échelle avec surveillance</div>
+                <div class="qcm-option" onclick="selectOption(this, 3, 'qcm1', 'C3')" data-feedback="Non, c'est généralement autorisé avec les protections normales">D. Travail sur établi en atelier</div>
+            </div>
+            <div class="qcm-feedback" id="feedback1"></div>
+        </div>
+
+        <!-- Drag & Drop -->
+        <div class="activity" id="dragdrop">
+            <div class="activity-header">
+                <span>🎯</span>
+                <h3 class="activity-title">Activité 2/3 — Classez ces travaux selon l'INRS</h3>
+            </div>
+            <div class="doc-ref">📖 Consulte le document INRS « Mon métier plombier-chauffagiste » ED 6232 <span class="page-hint"> — Pages 6-7</span></div>
+            <p><strong>Glissez chaque travail dans la bonne catégorie selon le document INRS :</strong></p>
+            <div class="sorting-container">
+                <div class="drag-items" id="dragItems">
+                    <div class="drag-item" draggable="true" data-category="interdit">Démolition de mur</div>
+                    <div class="drag-item" draggable="true" data-category="reglemente">Utiliser une bétonnière</div>
+                    <div class="drag-item" draggable="true" data-category="autorise">Montage sur établi</div>
+                    <div class="drag-item" draggable="true" data-category="interdit">Travaux électriques sous tension</div>
+                    <div class="drag-item" draggable="true" data-category="reglemente">Conduite d'un chariot élévateur</div>
+                    <div class="drag-item" draggable="true" data-category="autorise">Travaux de finition</div>
+                </div>
+                <div class="sort-zones">
+                    <div class="sort-zone zone-interdit" data-category="interdit">
+                        <h4>🚫 INTERDITS</h4>
+                        <p style="font-size: 0.85em; color: #666;">Jamais autorisés</p>
+                    </div>
+                    <div class="sort-zone zone-reglemente" data-category="reglemente">
+                        <h4>⚠️ RÉGLEMENTÉS</h4>
+                        <p style="font-size: 0.85em; color: #666;">Avec dérogation + formation</p>
+                    </div>
+                    <div class="sort-zone zone-autorise" data-category="autorise">
+                        <h4>✅ AUTORISÉS</h4>
+                        <p style="font-size: 0.85em; color: #666;">Avec protections normales</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="validateSorting()" style="margin-top: 16px;">🔍 Vérifier mes réponses</button>
+            <div class="qcm-feedback" id="dragFeedback"></div>
+        </div>
+
+        <!-- QCM 3 -->
+        <div class="activity" id="qcm2">
+            <div class="activity-header">
+                <span>⚖️</span>
+                <h3 class="activity-title">Question 3/3 — Les dérogations</h3>
+            </div>
+            <div class="doc-ref">📖 Consulte le document INRS « Mon métier plombier-chauffagiste » ED 6232 <span class="page-hint"> — Pages 6-7</span></div>
+            <div class="qcm-question">
+                <p><strong>L'INRS explique que certains travaux réglementés peuvent être autorisés "sur simple déclaration par votre patron". Que signifie cela ?</strong></p>
+            </div>
+            <div class="qcm-options" id="qcm2-options">
+                <div class="qcm-option" onclick="selectOption(this, 0, 'qcm2', 'C3')" data-feedback="Non ! Il faut obligatoirement une formation et une surveillance selon l'INRS">A. Vous pouvez faire le travail sans formation particulière</div>
+                <div class="qcm-option" onclick="selectOption(this, 1, 'qcm2', 'C3')" data-feedback="Exact ! L'INRS précise 'afin de vous permettre d'apprendre le métier en toute sécurité'">B. Vous devez avoir une formation et être surveillé</div>
+                <div class="qcm-option" onclick="selectOption(this, 2, 'qcm2', 'C3')" data-feedback="Non, les travaux strictement interdits ne peuvent jamais être autorisés">C. Cela concerne aussi les travaux strictement interdits</div>
+                <div class="qcm-option" onclick="selectOption(this, 3, 'qcm2', 'C3')" data-feedback="Non, l'employeur peut faire cette dérogation selon l'INRS">D. Seul l'inspection du travail peut autoriser</div>
+            </div>
+            <div class="qcm-feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-display" id="scoreDisplay" style="display: none;">
+            <div class="score-number" id="scoreNumber">0%</div>
+            <div class="score-message" id="scoreMessage">Complétez les activités pour voir votre score</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="theme-navigation">
+            <div class="theme-info">
+                <p><strong>Thème 3/3</strong> — Travaux Interdits Plombier</p>
+                <p>Compétence évaluée : <strong>C3</strong> — Travaux interdits</p>
+            </div>
+            <div class="navigation-buttons">
+                <a href="../index.html" class="btn btn-secondary">🏠 Retour accueil</a>
+                <button class="btn btn-orange" onclick="showBilan()" id="btnBilan" style="display: none;">📋 Bilan de parcours</button>
+            </div>
+        </div>
+
+        <!-- ==================== BILAN DE PARCOURS ==================== -->
+        <div class="bilan-section" id="bilanSection">
+            <div class="bilan-header">
+                <h2>📋 Bilan de parcours</h2>
+                <p>Risques Professionnels — Plombier-Chauffagiste — LPP Jacques Raynaud · Campus Équatio</p>
+            </div>
+
+            <div class="bilan-info" id="bilanInfo">
+                <div><label>Nom / Prénom :</label> <span id="bilanNom">—</span></div>
+                <div><label>Classe :</label> <span>2nde TNE</span></div>
+                <div><label>Date :</label> <span id="bilanDate">—</span></div>
+                <div><label>Établissement :</label> <span>LPP Jacques Raynaud · Campus Équatio</span></div>
+            </div>
+
+            <div class="bilan-grid" id="bilanGrid">
+                <div class="bilan-card" id="bilan-t1">
+                    <div class="bilan-theme-num">1</div>
+                    <div class="bilan-theme-name">Risques professionnels</div>
+                    <div class="bilan-theme-score na" id="bilan-score-t1">—</div>
+                </div>
+                <div class="bilan-card" id="bilan-t2">
+                    <div class="bilan-theme-num">2</div>
+                    <div class="bilan-theme-name">Droits et obligations</div>
+                    <div class="bilan-theme-score na" id="bilan-score-t2">—</div>
+                </div>
+                <div class="bilan-card" id="bilan-t3">
+                    <div class="bilan-theme-num">3</div>
+                    <div class="bilan-theme-name">Travaux interdits</div>
+                    <div class="bilan-theme-score na" id="bilan-score-t3">—</div>
+                </div>
+            </div>
+
+            <div class="bilan-summary" id="bilanSummary">
+                <div class="big-score" id="bilanTotal">—</div>
+                <div class="verdict" id="bilanVerdict">Complétez tous les thèmes pour obtenir votre bilan</div>
+            </div>
+
+            <div class="bilan-actions">
+                <button class="btn btn-primary" onclick="printBilan()">🖨️ Imprimer / PDF</button>
+                <button class="btn btn-secondary" onclick="resetAll()" style="margin-left: 8px;">🔄 Recommencer</button>
+            </div>
+        </div>
+
+        <!-- Zone impression -->
+        <div class="bilan-print-area" id="bilanPrintArea"></div>
+
+        <div class="site-footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+    </div>
+
+    <script>
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+
+        let activities = { qcm1: false, dragdrop: false, qcm2: false };
+        let currentScore = 0;
+
+        function setFont(font) {
+            if (font === 'dyslexic') document.body.classList.add('dyslexic-font');
+            else document.body.classList.remove('dyslexic-font');
+            document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
+                if (b.textContent === 'Standard' || b.textContent === 'OpenDyslexic') b.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            localStorage.setItem('accessibility-font', font);
+        }
+
+        function setFontSize(size) {
+            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
+            document.body.classList.add('font-' + size);
+            const sizeMap = {'small':'A-','normal':'A','large':'A+','xlarge':'A++'};
+            document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
+                if (['A-','A','A+','A++'].includes(b.textContent)) b.classList.toggle('active', b.textContent === sizeMap[size]);
+            });
+            localStorage.setItem('accessibility-font-size', size);
+        }
+
+        function showPDF() {
+            const pdfUrl = './Monmetierplombierchauffagiste.pdf';
+            const chapters = { 1:'#page=2', 2:'#page=4', 3:'#page=6' };
+            const n = getCurrentThemeNumber();
+            const anchor = chapters[n] || '';
+            fetch(pdfUrl, { method: 'HEAD' })
+                .then(r => { if (r.ok) { window.open(pdfUrl + anchor, '_blank'); showNotification('Document INRS ouvert', 'success'); } else showNotification('Document PDF non trouvé.', 'error'); })
+                .catch(() => window.open(pdfUrl + anchor, '_blank'));
+        }
+
+        function getCurrentThemeNumber() {
+            const f = window.location.pathname.split('/').pop();
+            if (f.includes('theme1')) return 1;
+            if (f.includes('theme2')) return 2;
+            if (f.includes('theme3')) return 3;
+            return 3;
+        }
+
+        function showHelp() {
+            showNotification('Objectif : Connaître les travaux interdits. Cliquez sur les mots soulignés pour des explications. 70% minimum pour valider.', 'info');
+        }
+
+        function selectOption(element, optionIndex, qcmId, competence) {
+            const options = document.querySelectorAll('#' + qcmId + '-options .qcm-option');
+            const feedback = document.getElementById('feedback' + qcmId.slice(-1));
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+            element.classList.add('selected');
+            if (optionIndex === 1) {
+                element.classList.add('correct');
+                feedback.textContent = element.dataset.feedback;
+                feedback.className = 'qcm-feedback success';
+                activities[qcmId] = true;
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '\u274C ' + element.dataset.feedback;
+                feedback.className = 'qcm-feedback error';
+            }
+            updateProgress();
+        }
+
+        // ========== DRAG & DROP ==========
+        function setupDragAndDrop() {
+            document.querySelectorAll('.drag-item').forEach(item => {
+                item.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('text/plain', JSON.stringify({ category: e.target.dataset.category, text: e.target.textContent.trim() }));
+                    e.target.classList.add('dragging');
+                });
+                item.addEventListener('dragend', e => e.target.classList.remove('dragging'));
+            });
+            document.querySelectorAll('.sort-zone').forEach(zone => {
+                zone.addEventListener('dragover', e => e.preventDefault());
+                zone.addEventListener('dragenter', e => { e.preventDefault(); e.currentTarget.classList.add('drag-over'); });
+                zone.addEventListener('dragleave', e => e.currentTarget.classList.remove('drag-over'));
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+                    const tz = e.currentTarget.closest('.sort-zone') || e.currentTarget;
+                    tz.classList.remove('drag-over');
+                    const di = document.createElement('div');
+                    di.className = 'dropped-item';
+                    di.textContent = data.text;
+                    di.dataset.category = data.category;
+                    di.dataset.zone = tz.dataset.category;
+                    tz.appendChild(di);
+                    const orig = document.querySelector('.drag-item.dragging');
+                    if (orig) orig.style.display = 'none';
+                });
+            });
+        }
+
+        function validateSorting() {
+            const items = document.querySelectorAll('.dropped-item');
+            let correct = 0, total = items.length;
+            items.forEach(item => {
+                if (item.dataset.category === item.dataset.zone) {
+                    item.style.background = '#27ae60';
+                    correct++;
+                } else {
+                    item.style.background = '#e74c3c';
+                }
+            });
+            const fb = document.getElementById('dragFeedback');
+            const sc = total > 0 ? Math.round((correct / total) * 100) : 0;
+            if (sc >= 70) {
+                fb.textContent = 'Excellent ! ' + correct + '/' + total + ' bonnes réponses (' + sc + '%)';
+                fb.className = 'qcm-feedback success';
+                activities.dragdrop = true;
+            } else {
+                fb.textContent = 'À revoir : ' + correct + '/' + total + ' bonnes réponses (' + sc + '%) — Il faut 70% minimum';
+                fb.className = 'qcm-feedback error';
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const done = Object.values(activities).filter(Boolean).length;
+            const total = Object.keys(activities).length;
+            const score = Math.round((done / total) * 100);
+            currentScore = score;
+            const sd = document.getElementById('scoreDisplay');
+            const sn = document.getElementById('scoreNumber');
+            const sm = document.getElementById('scoreMessage');
+            const bn = document.getElementById('btnBilan');
+            if (done > 0) {
+                sd.style.display = 'block';
+                sn.textContent = score + '%';
+                if (score >= 70) {
+                    sm.textContent = 'Excellent ! Vous maîtrisez les règles sur les travaux interdits';
+                    sm.style.color = '#27ae60';
+                    bn.style.display = 'flex';
+                } else if (done === total) {
+                    sm.textContent = 'À revoir. Ces règles sont cruciales pour votre sécurité !';
+                    sm.style.color = '#e67e22';
+                } else {
+                    sm.textContent = 'Continuez, ' + (total - done) + ' activité(s) restante(s)';
+                    sm.style.color = '#2aafaf';
+                }
+            }
+        }
+
+        function validateTheme() {
+            if (currentScore >= 70) {
+                const d = JSON.parse(localStorage.getItem('inerweb_plombier_data') || '{}');
+                d.progress = d.progress || {};
+                d.progress.theme3 = { completed: true, score: currentScore, completedAt: new Date().toISOString() };
+                localStorage.setItem('inerweb_plombier_data', JSON.stringify(d));
+            }
+        }
+
+        // ========== BILAN DE PARCOURS ==========
+        function showBilan() {
+            // Sauvegarder thème 3 d'abord
+            validateTheme();
+
+            const section = document.getElementById('bilanSection');
+            section.classList.add('visible');
+            section.scrollIntoView({ behavior: 'smooth' });
+
+            const d = JSON.parse(localStorage.getItem('inerweb_plombier_data') || '{}');
+            const progress = d.progress || {};
+
+            // Nom
+            const nom = d.studentName || prompt('Entrez votre nom et prénom :') || 'Non renseigné';
+            if (!d.studentName) {
+                d.studentName = nom;
+                localStorage.setItem('inerweb_plombier_data', JSON.stringify(d));
+            }
+            document.getElementById('bilanNom').textContent = nom;
+            document.getElementById('bilanDate').textContent = new Date().toLocaleDateString('fr-FR');
+
+            const themes = ['theme1', 'theme2', 'theme3'];
+            const names = ['Risques professionnels', 'Droits et obligations', 'Travaux interdits'];
+            let totalScore = 0, completedCount = 0;
+
+            themes.forEach((t, i) => {
+                const card = document.getElementById('bilan-t' + (i + 1));
+                const scoreEl = document.getElementById('bilan-score-t' + (i + 1));
+                if (progress[t] && progress[t].completed) {
+                    card.classList.add('done');
+                    card.classList.remove('pending');
+                    scoreEl.textContent = progress[t].score + '%';
+                    scoreEl.className = 'bilan-theme-score ' + (progress[t].score >= 70 ? 'pass' : 'fail');
+                    totalScore += progress[t].score;
+                    completedCount++;
+                } else {
+                    card.classList.add('pending');
+                    card.classList.remove('done');
+                    scoreEl.textContent = 'Non terminé';
+                    scoreEl.className = 'bilan-theme-score na';
+                }
+            });
+
+            const avg = completedCount > 0 ? Math.round(totalScore / themes.length) : 0;
+            document.getElementById('bilanTotal').textContent = avg + '%';
+            const verdict = document.getElementById('bilanVerdict');
+            if (completedCount === themes.length && avg >= 70) {
+                verdict.textContent = 'Parcours validé ! Toutes les compétences sont acquises.';
+                verdict.style.color = '#27ae60';
+            } else if (completedCount === themes.length) {
+                verdict.textContent = 'Parcours terminé mais score insuffisant. Certains thèmes sont à revoir.';
+                verdict.style.color = '#e67e22';
+            } else {
+                verdict.textContent = completedCount + '/' + themes.length + ' thèmes terminés. Complétez tous les thèmes.';
+                verdict.style.color = '#2aafaf';
+            }
+        }
+
+        function printBilan() {
+            window.print();
+        }
+
+        function resetAll() {
+            if (confirm('Voulez-vous vraiment effacer toute votre progression ?')) {
+                localStorage.removeItem('inerweb_plombier_data');
+                showNotification('Progression effacée', 'warning');
+                setTimeout(() => location.reload(), 1000);
+            }
+        }
+
+        function showNotification(message, type) {
+            const ex = document.querySelector('.notification');
+            if (ex) ex.remove();
+            const n = document.createElement('div');
+            n.className = 'notification ' + type;
+            n.textContent = message;
+            document.body.appendChild(n);
+            setTimeout(() => n.classList.add('show'), 100);
+            setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 4000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            const sf = localStorage.getItem('accessibility-font') || 'normal';
+            const ss = localStorage.getItem('accessibility-font-size') || 'normal';
+            if (sf === 'dyslexic') document.body.classList.add('dyslexic-font');
+            document.body.classList.add('font-' + ss);
+            setupDragAndDrop();
+            updateProgress();
+            showNotification('Bienvenue — Thème 3 : Connaissez les limites légales', 'info');
+        });
+    </script>
+</body>
+</html>

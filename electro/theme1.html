@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 1 - Risques électriques sur le terrain - Électricien">
+    <meta name="author" content="F. Henninot - inerWeb">
+    <title>Thème 1 — Risques électriques sur le terrain</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0f2d52;
+            --navy-mid: #1a4a6e;
+            --orange: #e8914a;
+            --orange-hover: #d47a35;
+            --orange-warm: #fdf6ef;
+            --turquoise: #2aafaf;
+            --mint: #d4f0e8;
+            --bg: #faf7f2;
+            --text: #2c3e50;
+            --border: #ece4da;
+            --shadow: 0 4px 16px rgba(15,45,82,0.07);
+            --card: #ffffff;
+            --success: #27ae60;
+            --error: #e74c3c;
+            --radius: 22px;
+            --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dyslexic { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        /* ========== PAGE HINT (GUIDED MODE) ========== */
+        .page-hint { display: none; font-weight: 700; color: var(--orange); }
+        body.guided .page-hint { display: inline; }
+
+        /* ========== TOPBAR ========== */
+        .topbar {
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            border-bottom: 4px solid var(--orange);
+            padding: 14px 24px;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .topbar-inner {
+            max-width: 960px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+        .topbar-brand {
+            color: #fff; font-size: 1.15em; font-weight: 700; letter-spacing: .3px;
+        }
+        .topbar-nav { display: flex; gap: 8px; flex-wrap: wrap; }
+        .topbar-btn {
+            background: var(--orange); color: #fff; border: none;
+            padding: 8px 18px; border-radius: 999px; font-weight: 600;
+            cursor: pointer; font-size: .88em; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: background .2s;
+        }
+        .topbar-btn:hover { background: var(--orange-hover); }
+        .topbar-btn.secondary { background: rgba(255,255,255,.15); }
+        .topbar-btn.secondary:hover { background: rgba(255,255,255,.25); }
+
+        /* ========== ACCESSIBILITY FLOAT ========== */
+        .a11y-toggle {
+            position: fixed; bottom: 20px; right: 20px; z-index: 200;
+            background: var(--navy); color: #fff; border: none;
+            width: 48px; height: 48px; border-radius: 50%;
+            font-size: 1.3em; cursor: pointer; box-shadow: var(--shadow);
+            transition: transform .2s;
+        }
+        .a11y-toggle:hover { transform: scale(1.1); }
+        .a11y-panel {
+            position: fixed; bottom: 80px; right: 20px; z-index: 200;
+            background: var(--card); border: 2px solid var(--border);
+            border-radius: var(--radius); padding: 18px; width: 260px;
+            box-shadow: var(--shadow); display: none;
+        }
+        .a11y-panel.open { display: block; }
+        .a11y-panel h4 { font-size: .9em; color: var(--navy); margin-bottom: 8px; }
+        .a11y-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+        .a11y-btn {
+            padding: 5px 12px; border: 1px solid var(--border); background: var(--card);
+            border-radius: 999px; cursor: pointer; font-size: .82em; transition: all .2s;
+        }
+        .a11y-btn:hover, .a11y-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+        /* ========== CONTAINER ========== */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 20px 40px; }
+
+        /* ========== HEADER THEME ========== */
+        .theme-header {
+            background: linear-gradient(135deg, var(--navy), var(--turquoise));
+            color: #fff; border-radius: var(--radius); padding: 36px 30px;
+            margin: 24px 0 28px; text-align: center; position: relative; overflow: hidden;
+        }
+        .theme-header::before {
+            content: ''; position: absolute; inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,255,255,.04) 12px, rgba(255,255,255,.04) 24px);
+        }
+        .theme-header h1 { font-size: 2.2em; position: relative; z-index: 1; margin-bottom: 8px; }
+        .theme-header p { font-size: 1.1em; opacity: .92; position: relative; z-index: 1; }
+
+        /* ========== SECTION ========== */
+        .section {
+            background: var(--card); border-radius: var(--radius);
+            padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .section-title {
+            font-size: 1.5em; font-weight: 700; margin-bottom: 18px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--border);
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        /* ========== OBJECTIFS ========== */
+        .objectifs-list { list-style: none; padding: 0; }
+        .objectifs-list li {
+            padding: 10px 14px; margin-bottom: 8px;
+            background: var(--orange-warm); border-radius: var(--radius-sm);
+            border-left: 4px solid var(--orange);
+        }
+
+        /* ========== RISK CARDS ========== */
+        .risk-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 18px; margin-top: 16px;
+        }
+        .risk-card {
+            background: var(--card); border-radius: var(--radius-sm);
+            padding: 22px; box-shadow: var(--shadow); border-top: 4px solid var(--error);
+            transition: transform .2s;
+        }
+        .risk-card:hover { transform: translateY(-3px); }
+        .risk-card .icon { font-size: 2.2em; margin-bottom: 10px; text-align: center; }
+        .risk-card h3 { text-align: center; color: var(--navy); margin-bottom: 8px; font-size: 1.05em; }
+        .risk-card p { font-size: .92em; color: #555; text-align: center; }
+
+        /* ========== INFO BOX ========== */
+        .info-box {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-left: 5px solid var(--orange); border-radius: var(--radius-sm);
+            padding: 20px 24px; margin-top: 18px; font-weight: 600;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .info-box .emoji { font-size: 1.8em; }
+
+        /* ========== DOC REF ========== */
+        .doc-ref {
+            background: var(--mint); border-radius: var(--radius-sm);
+            padding: 14px 18px; margin-bottom: 16px; font-size: .93em;
+            border-left: 4px solid var(--turquoise);
+        }
+
+        /* ========== QCM ========== */
+        .activity {
+            background: var(--card); border-radius: var(--radius);
+            padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .activity-title {
+            font-size: 1.2em; font-weight: 700; color: var(--navy);
+            margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+        }
+        .qcm-question { font-weight: 600; margin-bottom: 16px; }
+        .qcm-options { display: grid; gap: 10px; }
+        .qcm-option {
+            padding: 14px 18px; border: 2px solid var(--border);
+            border-radius: var(--radius-sm); cursor: pointer;
+            transition: all .2s; background: var(--card);
+        }
+        .qcm-option:hover { border-color: var(--navy); transform: translateX(4px); }
+        .qcm-option.correct { border-color: var(--success); background: #d4edda; }
+        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; }
+        .qcm-option.disabled { pointer-events: none; opacity: .7; }
+        .qcm-feedback {
+            margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm);
+            font-weight: 600; display: none;
+        }
+        .qcm-feedback.show { display: block; }
+        .qcm-feedback.success { background: #d4edda; color: #155724; }
+        .qcm-feedback.error { background: #f8d7da; color: #721c24; }
+
+        /* ========== SCORE ========== */
+        .score-display {
+            background: linear-gradient(135deg, var(--orange-warm), #fff);
+            border: 2px solid var(--orange); border-radius: var(--radius);
+            padding: 28px; text-align: center; margin: 28px 0; display: none;
+        }
+        .score-display.show { display: block; }
+        .score-number { font-size: 3em; font-weight: 700; color: var(--navy); }
+        .score-msg { font-size: 1.1em; margin-top: 8px; font-weight: 600; }
+
+        /* ========== NAV BOTTOM ========== */
+        .theme-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px; margin-top: 32px;
+        }
+        .nav-pill {
+            padding: 12px 24px; border: none; border-radius: 999px;
+            font-weight: 600; cursor: pointer; font-size: .95em;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all .2s;
+        }
+        .nav-pill.primary { background: var(--navy); color: #fff; }
+        .nav-pill.primary:hover { background: var(--navy-mid); }
+        .nav-pill.success { background: var(--success); color: #fff; }
+        .nav-pill.success:hover { background: #219150; }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            text-align: center; padding: 24px; margin-top: 32px;
+            color: #888; font-size: .85em; border-top: 1px solid var(--border);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 640px) {
+            .topbar-inner { flex-direction: column; text-align: center; }
+            .theme-header h1 { font-size: 1.6em; }
+            .risk-grid { grid-template-columns: 1fr; }
+            .theme-nav { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-brand">inerWeb &middot; Risques Pro</div>
+            <nav class="topbar-nav">
+                <a href="../index.html" class="topbar-btn secondary">Accueil</a>
+                <a href="../docs-irst/ed6276.pdf" target="_blank" class="topbar-btn">Doc INRS</a>
+                <span class="topbar-btn secondary" style="pointer-events:none;">Thème 1/3 — Électricien</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ACCESSIBILITY -->
+    <button class="a11y-toggle" onclick="toggleA11y()" aria-label="Accessibilité">⚙️</button>
+    <div class="a11y-panel" id="a11yPanel">
+        <h4>Police</h4>
+        <div class="a11y-row">
+            <button class="a11y-btn active" onclick="setDyslexic(false)">Standard</button>
+            <button class="a11y-btn" onclick="setDyslexic(true)">OpenDyslexic</button>
+        </div>
+        <h4>Taille</h4>
+        <div class="a11y-row">
+            <button class="a11y-btn active" onclick="setSize('')">Normal</button>
+            <button class="a11y-btn" onclick="setSize('font-large')">Grand</button>
+            <button class="a11y-btn" onclick="setSize('font-xlarge')">Très grand</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="theme-header">
+            <h1>⚡ Risques électriques sur le terrain</h1>
+            <p>Identifier les dangers de l'électricité sur chantier</p>
+        </div>
+
+        <!-- OBJECTIFS -->
+        <div class="section">
+            <div class="section-title">🎯 Objectifs — Compétence C1</div>
+            <ul class="objectifs-list">
+                <li>Identifier les risques électriques : contact direct, contact indirect, arc électrique</li>
+                <li>Comprendre les zones de danger autour des installations électriques</li>
+                <li>Connaître les seuils de tension dangereux pour le corps humain</li>
+            </ul>
+        </div>
+
+        <!-- RISK CARDS -->
+        <div class="section">
+            <div class="section-title">⚠️ Les risques électriques</div>
+
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="icon">⚡</div>
+                    <h3>Contact direct</h3>
+                    <p>Toucher un conducteur sous tension (câble dénudé, borne accessible, rail électrique)</p>
+                </div>
+                <div class="risk-card">
+                    <div class="icon">🔌</div>
+                    <h3>Contact indirect</h3>
+                    <p>Toucher une masse métallique mise sous tension par un défaut d'isolement</p>
+                </div>
+                <div class="risk-card">
+                    <div class="icon">🔥</div>
+                    <h3>Arc électrique</h3>
+                    <p>Court-circuit provoquant un flash thermique pouvant atteindre 20 000 °C</p>
+                </div>
+                <div class="risk-card">
+                    <div class="icon">💀</div>
+                    <h3>Effets sur le corps</h3>
+                    <p>Brûlures, tétanisation musculaire, fibrillation cardiaque, arrêt respiratoire</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <span class="emoji">⚠️</span>
+                <span>À partir de <strong>50 V alternatif</strong> / <strong>120 V continu</strong>, le courant est mortel.</span>
+            </div>
+        </div>
+
+        <!-- ACTIVITÉS QCM -->
+        <div class="section">
+            <div class="section-title">📝 Activités — Évaluation des connaissances</div>
+
+            <!-- Q1 -->
+            <div class="activity" id="act-q1">
+                <div class="activity-title">❓ Question 1 / 3</div>
+                <div class="doc-ref">📖 Consulte le document INRS « Mon métier électricien » ED 6276 <span class="page-hint"> — Page 3</span></div>
+                <div class="qcm-question">D'après le document INRS ED 6276, à partir de quelle tension le courant alternatif est-il considéré comme dangereux ?</div>
+                <div class="qcm-options" id="opts-q1">
+                    <div class="qcm-option" onclick="answer('q1',this,0)">A. 12 V</div>
+                    <div class="qcm-option" onclick="answer('q1',this,1)">B. 50 V</div>
+                    <div class="qcm-option" onclick="answer('q1',this,2)">C. 230 V</div>
+                    <div class="qcm-option" onclick="answer('q1',this,3)">D. 400 V</div>
+                </div>
+                <div class="qcm-feedback" id="fb-q1"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="activity" id="act-q2">
+                <div class="activity-title">❓ Question 2 / 3</div>
+                <div class="doc-ref">📖 Consulte le document INRS « Mon métier électricien » ED 6276 <span class="page-hint"> — Page 4</span></div>
+                <div class="qcm-question">Qu'est-ce qu'un contact indirect selon l'INRS ?</div>
+                <div class="qcm-options" id="opts-q2">
+                    <div class="qcm-option" onclick="answer('q2',this,0)">A. Toucher un câble dénudé</div>
+                    <div class="qcm-option" onclick="answer('q2',this,1)">B. Toucher une masse métallique mise accidentellement sous tension</div>
+                    <div class="qcm-option" onclick="answer('q2',this,2)">C. Recevoir une décharge statique</div>
+                    <div class="qcm-option" onclick="answer('q2',this,3)">D. Être proche d'une ligne haute tension</div>
+                </div>
+                <div class="qcm-feedback" id="fb-q2"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="activity" id="act-q3">
+                <div class="activity-title">❓ Question 3 / 3</div>
+                <div class="doc-ref">📖 Consulte le document INRS « Mon métier électricien » ED 6276 <span class="page-hint"> — Page 3</span></div>
+                <div class="qcm-question">Quel est l'effet le plus dangereux du courant électrique sur le corps humain ?</div>
+                <div class="qcm-options" id="opts-q3">
+                    <div class="qcm-option" onclick="answer('q3',this,0)">A. La brûlure cutanée</div>
+                    <div class="qcm-option" onclick="answer('q3',this,1)">B. La fibrillation ventriculaire (arrêt du cœur)</div>
+                    <div class="qcm-option" onclick="answer('q3',this,2)">C. La contraction musculaire</div>
+                    <div class="qcm-option" onclick="answer('q3',this,3)">D. La sensation de picotement</div>
+                </div>
+                <div class="qcm-feedback" id="fb-q3"></div>
+            </div>
+        </div>
+
+        <!-- SCORE -->
+        <div class="score-display" id="scoreBox">
+            <div class="score-number" id="scoreNum">0 / 3</div>
+            <div class="score-msg" id="scoreMsg"></div>
+        </div>
+
+        <!-- NAV -->
+        <div class="theme-nav">
+            <a href="../index.html" class="nav-pill primary">← Accueil</a>
+            <a href="theme2.html" class="nav-pill success" id="btnNext" style="display:none;">Thème 2 →</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+    <script>
+        /* ========== GUIDED MODE ========== */
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+
+        /* ========== STATE ========== */
+        const STORAGE_KEY = 'inerweb_electro_data';
+        const correctAnswers = { q1: 1, q2: 1, q3: 1 };
+        let results = {};
+        let answered = 0;
+
+        function loadData() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+        }
+        function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+        /* ========== QCM ========== */
+        function answer(qid, el, idx) {
+            if (results[qid] !== undefined) return;
+            const opts = document.querySelectorAll('#opts-' + qid + ' .qcm-option');
+            const fb = document.getElementById('fb-' + qid);
+            const correct = idx === correctAnswers[qid];
+
+            results[qid] = correct;
+            answered++;
+
+            opts.forEach(o => o.classList.add('disabled'));
+            if (correct) {
+                el.classList.add('correct');
+                fb.textContent = 'Bonne réponse !';
+                fb.className = 'qcm-feedback show success';
+            } else {
+                el.classList.add('incorrect');
+                opts[correctAnswers[qid]].classList.add('correct');
+                fb.textContent = 'Ce n\'est pas la bonne réponse.';
+                fb.className = 'qcm-feedback show error';
+            }
+            updateScore();
+        }
+
+        function updateScore() {
+            if (answered < 3) return;
+            const good = Object.values(results).filter(Boolean).length;
+            const pct = Math.round((good / 3) * 100);
+            const box = document.getElementById('scoreBox');
+            box.classList.add('show');
+            document.getElementById('scoreNum').textContent = good + ' / 3 (' + pct + ' %)';
+
+            const msg = document.getElementById('scoreMsg');
+            if (pct >= 70) {
+                msg.textContent = 'Bravo ! Tu peux passer au thème suivant.';
+                msg.style.color = 'var(--success)';
+                document.getElementById('btnNext').style.display = 'inline-flex';
+            } else {
+                msg.textContent = 'Score insuffisant. Relis le document INRS et réessaie.';
+                msg.style.color = 'var(--error)';
+            }
+
+            /* Save */
+            const data = loadData();
+            data.theme1 = { score: pct, answers: results, date: new Date().toISOString() };
+            saveData(data);
+        }
+
+        /* ========== ACCESSIBILITY ========== */
+        function toggleA11y() {
+            document.getElementById('a11yPanel').classList.toggle('open');
+        }
+        function setDyslexic(on) {
+            document.body.classList.toggle('dyslexic', on);
+            document.querySelectorAll('.a11y-panel h4')[0].nextElementSibling.querySelectorAll('.a11y-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        function setSize(cls) {
+            document.body.classList.remove('font-large', 'font-xlarge');
+            if (cls) document.body.classList.add(cls);
+            document.querySelectorAll('.a11y-panel h4')[1].nextElementSibling.querySelectorAll('.a11y-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        /* ========== INIT ========== */
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+        });
+    </script>
+</body>
+</html>

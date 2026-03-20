@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 2 - Accueil sécurité en entreprise pour apprentis plombier-chauffagiste">
+    <meta name="author" content="F. Henninot - LPP Jacques Raynaud · Campus Équatio">
+    <title>Thème 2 — Droits et Obligations Plombier</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
+            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
+            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
+            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg); color: var(--text);
+            line-height: 1.6; font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+        body.font-small { font-size: 14px; }
+        body.font-normal { font-size: 16px; }
+        body.font-large { font-size: 18px; }
+        body.font-xlarge { font-size: 20px; }
+
+        .page-hint { display: none; color: var(--orange); font-weight: 700; }
+        body.guided .page-hint { display: inline; }
+
+        .doc-ref {
+            background: var(--orange-warm); border: 1px solid var(--orange);
+            border-radius: var(--radius-sm); padding: 12px 18px; margin-bottom: 18px; font-size: 0.95em;
+        }
+
+        .header-nav {
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            color: white; padding: 0;
+            box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100;
+            border-bottom: 4px solid var(--orange);
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center; padding: 12px 20px;
+        }
+        .nav-brand { display: flex; flex-direction: column; }
+        .nav-title { font-size: 1.1em; font-weight: 700; color: white; }
+        .nav-subtitle { font-size: 0.8em; opacity: 0.8; color: var(--mint); }
+        .nav-buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .nav-btn {
+            background: var(--orange); color: white; border: none;
+            padding: 8px 18px; border-radius: 999px; font-family: inherit;
+            font-size: 0.85em; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .nav-btn:hover { background: var(--orange-hover); transform: translateY(-1px); }
+        .nav-btn.home { background: var(--turquoise); }
+        .nav-btn.home:hover { background: #239292; }
+
+        .a11y-bar {
+            background: var(--navy); padding: 6px 20px;
+            display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap;
+        }
+        .a11y-btn {
+            background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 12px; border-radius: 999px; font-family: inherit;
+            font-size: 0.78em; cursor: pointer; transition: all 0.2s;
+        }
+        .a11y-btn:hover, .a11y-btn.active { background: var(--orange); border-color: var(--orange); }
+        .a11y-label { color: rgba(255,255,255,0.6); font-size: 0.75em; margin-right: 2px; }
+        .a11y-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.2); margin: 0 4px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 40px; }
+
+        .theme-header {
+            background: linear-gradient(135deg, var(--navy), var(--turquoise));
+            color: white; border-radius: var(--radius); padding: 32px; margin-bottom: 28px;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .theme-header::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+        }
+        .theme-title { font-size: 2.2em; font-weight: 700; margin-bottom: 10px; position: relative; z-index: 1; }
+        .theme-subtitle { font-size: 1.1em; opacity: 0.9; position: relative; z-index: 1; }
+
+        .section {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .section-header {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+            padding-bottom: 14px; border-bottom: 2px solid var(--border);
+        }
+        .section-icon {
+            font-size: 1.8em; background: linear-gradient(135deg, var(--navy), var(--turquoise));
+            border-radius: 50%; width: 54px; height: 54px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .section-title { font-size: 1.6em; font-weight: 700; }
+
+        .tooltip {
+            position: relative; display: inline-block; cursor: help;
+            border-bottom: 1px dotted var(--orange); color: var(--orange); font-weight: 600;
+        }
+        .tooltiptext {
+            visibility: hidden; width: 240px; background-color: var(--navy); color: #fff;
+            text-align: center; border-radius: var(--radius-sm); padding: 10px;
+            position: absolute; z-index: 1001; bottom: 125%; left: 50%; margin-left: -120px;
+            opacity: 0; transition: opacity 0.3s; font-size: 0.88em;
+            box-shadow: var(--shadow); font-weight: normal;
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .content-box {
+            background: var(--orange-warm); border-radius: var(--radius-sm); padding: 22px;
+            margin-bottom: 18px; border-left: 4px solid var(--turquoise);
+        }
+        .content-box h4 { color: var(--navy); margin-bottom: 12px; font-weight: 700; }
+
+        .rights-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px; margin-top: 18px;
+        }
+        .right-card {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 20px; box-shadow: var(--shadow); transition: all 0.3s ease;
+            border-top: 4px solid var(--turquoise);
+        }
+        .right-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,45,82,0.12); }
+        .right-icon { font-size: 2.2em; margin-bottom: 12px; text-align: center; }
+        .right-title { font-weight: 700; color: var(--navy); margin-bottom: 8px; text-align: center; }
+        .right-description { color: #666; font-size: 0.9em; text-align: center; }
+
+        .activity {
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .activity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--navy); }
+        .activity-header span { font-size: 1.8em; }
+        .activity-title { font-size: 1.2em; font-weight: 700; }
+
+        .qcm-options { display: grid; gap: 10px; margin-top: 16px; }
+        .qcm-option {
+            padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+            cursor: pointer; transition: all 0.25s ease; background: var(--card);
+        }
+        .qcm-option:hover { border-color: var(--orange); transform: translateX(4px); }
+        .qcm-option.selected { border-color: var(--orange); background: var(--orange-warm); }
+        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+
+        .qcm-feedback { margin-top: 14px; padding: 12px; border-radius: var(--radius-sm); font-weight: 600; }
+        .qcm-feedback.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .qcm-feedback.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        .score-display {
+            background: var(--mint); border: 2px solid var(--turquoise);
+            border-radius: var(--radius); padding: 24px; text-align: center; margin: 28px 0;
+        }
+        .score-number { font-size: 2.8em; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        .score-message { font-size: 1.1em; font-weight: 600; margin-bottom: 16px; }
+
+        .theme-navigation {
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            padding: 24px; margin-top: 32px; box-shadow: var(--shadow);
+        }
+        .theme-info { font-size: 0.9em; color: #666; }
+        .navigation-buttons { display: flex; gap: 10px; }
+
+        .btn {
+            padding: 12px 22px; border: none; border-radius: 999px; font-weight: 600;
+            cursor: pointer; transition: all 0.25s ease; font-family: inherit;
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn-primary { background: var(--navy); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .site-footer {
+            text-align: center; padding: 18px 20px; margin-top: 30px;
+            font-size: 0.8em; color: #999; border-top: 1px solid var(--border);
+        }
+
+        .notification {
+            position: fixed; top: 80px; right: 20px; padding: 14px 20px;
+            border-radius: 999px; color: white; font-weight: 600; z-index: 1000;
+            transform: translateX(400px); transition: all 0.3s ease; max-width: 380px; font-size: 0.9em;
+        }
+        .notification.show { transform: translateX(0); }
+        .notification.success { background: var(--success); }
+        .notification.error { background: var(--error); }
+        .notification.warning { background: #f0ad4e; }
+        .notification.info { background: var(--turquoise); }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 10px; }
+            .theme-title { font-size: 1.7em; }
+            .rights-grid { grid-template-columns: 1fr; }
+            .theme-navigation { flex-direction: column; gap: 16px; }
+            .a11y-bar { justify-content: center; }
+        }
+    </style>
+</head>
+<body class="font-normal">
+
+    <!-- Barre accessibilité -->
+    <div class="a11y-bar">
+        <span class="a11y-label">Police :</span>
+        <button class="a11y-btn active" onclick="setFont('normal')">Standard</button>
+        <button class="a11y-btn" onclick="setFont('dyslexic')">OpenDyslexic</button>
+        <div class="a11y-sep"></div>
+        <span class="a11y-label">Taille :</span>
+        <button class="a11y-btn" onclick="setFontSize('small')">A-</button>
+        <button class="a11y-btn active" onclick="setFontSize('normal')">A</button>
+        <button class="a11y-btn" onclick="setFontSize('large')">A+</button>
+        <button class="a11y-btn" onclick="setFontSize('xlarge')">A++</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-title">LPP Jacques Raynaud · Campus Équatio</span>
+                <span class="nav-subtitle">2nde TNE</span>
+            </div>
+            <div class="nav-buttons">
+                <a href="../index.html" class="nav-btn home">🏠 Accueil</a>
+                <button class="nav-btn" onclick="showPDF()">📄 Doc INRS</button>
+                <button class="nav-btn" onclick="showHelp()">❓ Aide</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="theme-header">
+            <div class="theme-title">🏢 Accueil en Entreprise Plombier</div>
+            <div class="theme-subtitle">Droits et obligations de l'apprenti selon l'INRS</div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <div class="section-title">Objectifs d'apprentissage</div>
+            </div>
+            <div class="content-box">
+                <h4>🏆 Compétence C2 : Droits et obligations</h4>
+                <p>À la fin de ce thème, vous devrez être capable de :</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Connaître vos <span class="tooltip">droits en tant qu'apprenti<span class="tooltiptext">Droits spécifiques aux apprentis mineurs : formation, encadrement, protection renforcée</span></span></li>
+                    <li>Comprendre le rôle du <span class="tooltip">document unique<span class="tooltiptext">Document obligatoire recensant tous les risques professionnels de l'entreprise</span></span></li>
+                    <li>Savoir ce que doit vous fournir l'<span class="tooltip">employeur<span class="tooltiptext">Entreprise d'accueil qui a l'obligation de vous former et vous protéger</span></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Vos droits -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon">⚖️</div>
+                <div class="section-title">Vos droits selon l'INRS</div>
+            </div>
+            <p style="margin-bottom: 18px;">
+                En tant qu'<span class="tooltip">apprenti plombier-chauffagiste<span class="tooltiptext">Jeune en formation professionnelle dans le domaine de la plomberie et du chauffage</span></span>,
+                vous bénéficiez de droits spécifiques pour votre protection et votre formation.
+            </p>
+            <div class="rights-grid">
+                <div class="right-card">
+                    <div class="right-icon">📚</div>
+                    <div class="right-title">Droit à la formation</div>
+                    <div class="right-description"><span class="tooltip">Formation théorique et pratique<span class="tooltiptext">Apprentissage progressif des gestes professionnels avec un tuteur désigné</span></span> adaptée à votre âge et niveau.</div>
+                </div>
+                <div class="right-card">
+                    <div class="right-icon">🛡️</div>
+                    <div class="right-title">Protection renforcée</div>
+                    <div class="right-description"><span class="tooltip">Travaux interdits<span class="tooltiptext">Liste des tâches dangereuses interdites aux moins de 18 ans (démolition, travail en hauteur non sécurisé)</span></span> aux mineurs et <span class="tooltip">surveillance accrue<span class="tooltiptext">Présence obligatoire d'un tuteur expérimenté lors des tâches à risque</span></span>.</div>
+                </div>
+                <div class="right-card">
+                    <div class="right-icon">📋</div>
+                    <div class="right-title">Information sur les risques</div>
+                    <div class="right-description">Accès au <span class="tooltip">document unique<span class="tooltiptext">Document obligatoire listant tous les risques de l'entreprise et les mesures de prévention</span></span> et formation aux risques du poste.</div>
+                </div>
+                <div class="right-card">
+                    <div class="right-icon">👨‍🏫</div>
+                    <div class="right-title">Accompagnement</div>
+                    <div class="right-description"><span class="tooltip">Tuteur désigné<span class="tooltiptext">Professionnel expérimenté chargé de votre formation et de votre sécurité</span></span> pour votre formation et votre sécurité quotidienne.</div>
+                </div>
+                <div class="right-card">
+                    <div class="right-icon">🚫</div>
+                    <div class="right-title">Droit de refus</div>
+                    <div class="right-description">Possibilité de refuser une tâche que vous jugez <span class="tooltip">dangereuse<span class="tooltiptext">Tâche présentant un risque immédiat pour votre santé ou sécurité</span></span> sans votre tuteur.</div>
+                </div>
+                <div class="right-card">
+                    <div class="right-icon">⏰</div>
+                    <div class="right-title">Temps de travail adapté</div>
+                    <div class="right-description">Horaires respectant la <span class="tooltip">réglementation jeunes<span class="tooltiptext">Maximum 8h/jour, interdiction du travail de nuit, repos hebdomadaire obligatoire</span></span> et temps de formation inclus.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QCM 1 -->
+        <div class="activity" id="qcm1">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 1/2 — Document unique</h3>
+            </div>
+            <div class="doc-ref">📖 Consulte le document INRS « Mon métier plombier-chauffagiste » ED 6232 <span class="page-hint"> — Pages 4-5</span></div>
+            <div class="qcm-question">
+                <p><strong>Selon l'INRS, le document unique d'évaluation des risques :</strong></p>
+            </div>
+            <div class="qcm-options" id="qcm1-options">
+                <div class="qcm-option" onclick="selectOption(this, 0, 'qcm1', 'C2')" data-feedback="Non, vous avez le droit de le consulter">A. Est confidentiel et réservé à l'employeur</div>
+                <div class="qcm-option" onclick="selectOption(this, 1, 'qcm1', 'C2')" data-feedback="Exact ! L'INRS précise : 'Vous pouvez le consulter librement'">B. Peut être consulté librement par les salariés</div>
+                <div class="qcm-option" onclick="selectOption(this, 2, 'qcm1', 'C2')" data-feedback="Faux, il vous concerne directement">C. Ne concerne pas les apprentis</div>
+                <div class="qcm-option" onclick="selectOption(this, 3, 'qcm1', 'C2')" data-feedback="Il existe et est obligatoire">D. N'est pas obligatoire pour les petites entreprises</div>
+            </div>
+            <div class="qcm-feedback" id="feedback1"></div>
+        </div>
+
+        <!-- QCM 2 -->
+        <div class="activity" id="qcm2">
+            <div class="activity-header">
+                <span>❓</span>
+                <h3 class="activity-title">Question 2/2 — Vos obligations</h3>
+            </div>
+            <div class="doc-ref">📖 Consulte le document INRS « Mon métier plombier-chauffagiste » ED 6232 <span class="page-hint"> — Pages 4-5</span></div>
+            <div class="qcm-question">
+                <p><strong>Votre tuteur vous demande d'effectuer une tâche que vous ne comprenez pas. Que devez-vous faire ?</strong></p>
+            </div>
+            <div class="qcm-options" id="qcm2-options">
+                <div class="qcm-option" onclick="selectOption(this, 0, 'qcm2', 'C2')" data-feedback="Dangereux ! Ne jamais faire quelque chose qu'on ne comprend pas">A. Faire comme si vous compreniez</div>
+                <div class="qcm-option" onclick="selectOption(this, 1, 'qcm2', 'C2')" data-feedback="Exact ! Demander des explications est votre droit ET votre devoir">B. Demander des explications à votre tuteur</div>
+                <div class="qcm-option" onclick="selectOption(this, 2, 'qcm2', 'C2')" data-feedback="Non, il faut agir immédiatement pour votre sécurité">C. Attendre la fin de la journée pour demander</div>
+                <div class="qcm-option" onclick="selectOption(this, 3, 'qcm2', 'C2')" data-feedback="Votre tuteur est là pour vous aider">D. Ne rien dire pour ne pas déranger</div>
+            </div>
+            <div class="qcm-feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-display" id="scoreDisplay" style="display: none;">
+            <div class="score-number" id="scoreNumber">0%</div>
+            <div class="score-message" id="scoreMessage">Complétez les activités pour voir votre score</div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="theme-navigation">
+            <div class="theme-info">
+                <p><strong>Thème 2/3</strong> — Accueil en Entreprise Plombier</p>
+                <p>Compétence évaluée : <strong>C2</strong> — Droits et obligations</p>
+            </div>
+            <div class="navigation-buttons">
+                <a href="../index.html" class="btn btn-secondary">🏠 Retour accueil</a>
+                <button class="btn btn-success" onclick="validateTheme()" id="btnNext" style="display: none;">➡️ Thème 3 →</button>
+            </div>
+        </div>
+
+        <div class="site-footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+    </div>
+
+    <script>
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+
+        let activities = { qcm1: false, qcm2: false };
+        let currentScore = 0;
+
+        function setFont(font) {
+            if (font === 'dyslexic') document.body.classList.add('dyslexic-font');
+            else document.body.classList.remove('dyslexic-font');
+            document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
+                if (b.textContent === 'Standard' || b.textContent === 'OpenDyslexic') b.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            localStorage.setItem('accessibility-font', font);
+        }
+
+        function setFontSize(size) {
+            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
+            document.body.classList.add('font-' + size);
+            const sizeMap = {'small':'A-','normal':'A','large':'A+','xlarge':'A++'};
+            document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
+                if (['A-','A','A+','A++'].includes(b.textContent)) b.classList.toggle('active', b.textContent === sizeMap[size]);
+            });
+            localStorage.setItem('accessibility-font-size', size);
+        }
+
+        function showPDF() {
+            const pdfUrl = './Monmetierplombierchauffagiste.pdf';
+            const chapters = { 1:'#page=2', 2:'#page=4', 3:'#page=6' };
+            const n = getCurrentThemeNumber();
+            const anchor = chapters[n] || '';
+            fetch(pdfUrl, { method: 'HEAD' })
+                .then(r => { if (r.ok) { window.open(pdfUrl + anchor, '_blank'); showNotification('Document INRS ouvert', 'success'); } else showNotification('Document PDF non trouvé.', 'error'); })
+                .catch(() => window.open(pdfUrl + anchor, '_blank'));
+        }
+
+        function getCurrentThemeNumber() {
+            const f = window.location.pathname.split('/').pop();
+            if (f.includes('theme1')) return 1;
+            if (f.includes('theme2')) return 2;
+            if (f.includes('theme3')) return 3;
+            return 2;
+        }
+
+        function showHelp() {
+            showNotification('Objectif : Connaître vos droits et obligations. Cliquez sur les mots soulignés pour des explications. 70% minimum pour passer au thème suivant.', 'info');
+        }
+
+        function selectOption(element, optionIndex, qcmId, competence) {
+            const options = document.querySelectorAll('#' + qcmId + '-options .qcm-option');
+            const feedback = document.getElementById('feedback' + qcmId.slice(-1));
+            options.forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+            element.classList.add('selected');
+            if (optionIndex === 1) {
+                element.classList.add('correct');
+                feedback.textContent = element.dataset.feedback;
+                feedback.className = 'qcm-feedback success';
+                activities[qcmId] = true;
+            } else {
+                element.classList.add('incorrect');
+                feedback.textContent = '\u274C ' + element.dataset.feedback;
+                feedback.className = 'qcm-feedback error';
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const done = Object.values(activities).filter(Boolean).length;
+            const total = Object.keys(activities).length;
+            const score = Math.round((done / total) * 100);
+            currentScore = score;
+            const sd = document.getElementById('scoreDisplay');
+            const sn = document.getElementById('scoreNumber');
+            const sm = document.getElementById('scoreMessage');
+            const bn = document.getElementById('btnNext');
+            if (done > 0) {
+                sd.style.display = 'block';
+                sn.textContent = score + '%';
+                if (score >= 70) {
+                    sm.textContent = 'Excellent ! Vous connaissez vos droits et obligations';
+                    sm.style.color = '#27ae60';
+                    bn.style.display = 'flex';
+                } else if (done === total) {
+                    sm.textContent = 'Révisez les notions et recommencez';
+                    sm.style.color = '#e67e22';
+                } else {
+                    sm.textContent = 'Continuez, ' + (total - done) + ' activité(s) restante(s)';
+                    sm.style.color = '#2aafaf';
+                }
+            }
+        }
+
+        function validateTheme() {
+            if (currentScore >= 70) {
+                const d = JSON.parse(localStorage.getItem('inerweb_plombier_data') || '{}');
+                d.progress = d.progress || {};
+                d.progress.theme2 = { completed: true, score: currentScore, completedAt: new Date().toISOString() };
+                localStorage.setItem('inerweb_plombier_data', JSON.stringify(d));
+                showNotification('Thème 2 validé ! Redirection...', 'success');
+                setTimeout(() => { window.location.href = 'theme3.html'; }, 1500);
+            } else {
+                showNotification('Score insuffisant (minimum 70%)', 'error');
+            }
+        }
+
+        function showNotification(message, type) {
+            const ex = document.querySelector('.notification');
+            if (ex) ex.remove();
+            const n = document.createElement('div');
+            n.className = 'notification ' + type;
+            n.textContent = message;
+            document.body.appendChild(n);
+            setTimeout(() => n.classList.add('show'), 100);
+            setTimeout(() => { n.classList.remove('show'); setTimeout(() => n.remove(), 300); }, 4000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            const sf = localStorage.getItem('accessibility-font') || 'normal';
+            const ss = localStorage.getItem('accessibility-font-size') || 'normal';
+            if (sf === 'dyslexic') document.body.classList.add('dyslexic-font');
+            document.body.classList.add('font-' + ss);
+            updateProgress();
+            showNotification('Bienvenue — Thème 2 : Connaissez vos droits et obligations', 'info');
+        });
+    </script>
+</body>
+</html>
