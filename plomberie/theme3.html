@@ -12,26 +12,33 @@
     <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
-            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
-            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
-            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg); color: var(--text);
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text);
             line-height: 1.6; font-size: 16px;
-            transition: background 0.3s, color 0.3s;
         }
-        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
-        body.font-small { font-size: 14px; }
-        body.font-normal { font-size: 16px; }
-        body.font-large { font-size: 18px; }
-        body.font-xlarge { font-size: 20px; }
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
 
         .page-hint { display: none; color: var(--orange); font-weight: 700; }
         body.guided .page-hint { display: inline; }
@@ -42,10 +49,11 @@
         }
 
         .header-nav {
-            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
             color: white; padding: 0;
             box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100;
             border-bottom: 4px solid var(--orange);
+            border-radius: 0 0 0 40px;
         }
         .nav-container {
             max-width: 1200px; margin: 0 auto;
@@ -82,7 +90,7 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px 40px; }
 
         .theme-header {
-            background: linear-gradient(135deg, var(--orange), var(--error));
+            background: linear-gradient(135deg, var(--orange), var(--bad));
             color: white; border-radius: var(--radius); padding: 32px; margin-bottom: 28px;
             text-align: center; position: relative; overflow: hidden;
         }
@@ -94,15 +102,15 @@
         .theme-subtitle { font-size: 1.1em; opacity: 0.9; position: relative; z-index: 1; }
 
         .section {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
         }
         .section-header {
             display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
-            padding-bottom: 14px; border-bottom: 2px solid var(--border);
+            padding-bottom: 14px; border-bottom: 2px solid var(--line);
         }
         .section-icon {
-            font-size: 1.8em; background: linear-gradient(135deg, var(--orange), var(--error));
+            font-size: 1.8em; background: linear-gradient(135deg, var(--orange), var(--bad));
             border-radius: 50%; width: 54px; height: 54px;
             display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
@@ -132,19 +140,19 @@
             gap: 18px; margin-top: 18px;
         }
         .category-card {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 20px; box-shadow: var(--shadow); transition: all 0.3s ease;
         }
-        .category-card.interdit { border-top: 4px solid var(--error); }
+        .category-card.interdit { border-top: 4px solid var(--bad); }
         .category-card.reglemente { border-top: 4px solid #f0ad4e; }
-        .category-card.autorise { border-top: 4px solid var(--success); }
+        .category-card.autorise { border-top: 4px solid var(--ok); }
         .category-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,45,82,0.12); }
         .category-icon { font-size: 2.2em; margin-bottom: 12px; text-align: center; }
         .category-title { font-weight: 700; margin-bottom: 8px; text-align: center; }
         .category-description { color: #666; font-size: 0.9em; text-align: center; }
 
         .activity {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
         }
         .activity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--navy); }
@@ -153,13 +161,13 @@
 
         .qcm-options { display: grid; gap: 10px; margin-top: 16px; }
         .qcm-option {
-            padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+            padding: 14px 18px; border: 2px solid var(--line); border-radius: var(--radius-sm);
             cursor: pointer; transition: all 0.25s ease; background: var(--card);
         }
         .qcm-option:hover { border-color: var(--orange); transform: translateX(4px); }
         .qcm-option.selected { border-color: var(--orange); background: var(--orange-warm); }
-        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
-        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+        .qcm-option.correct { border-color: var(--ok); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--bad); background: #f8d7da; color: #721c24; }
 
         .qcm-feedback { margin-top: 14px; padding: 12px; border-radius: var(--radius-sm); font-weight: 600; }
         .qcm-feedback.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
@@ -170,7 +178,7 @@
         .drag-items {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 12px; margin-bottom: 22px; padding: 18px;
-            background: var(--orange-warm); border-radius: var(--radius-sm); border: 2px dashed var(--border);
+            background: var(--orange-warm); border-radius: var(--radius-sm); border: 2px dashed var(--line);
         }
         .drag-item {
             background: var(--navy); color: white; padding: 10px 14px; border-radius: 999px;
@@ -183,17 +191,17 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;
         }
         .sort-zone {
-            min-height: 180px; border: 2px dashed var(--border); border-radius: var(--radius-sm);
+            min-height: 180px; border: 2px dashed var(--line); border-radius: var(--radius-sm);
             padding: 18px; text-align: center; transition: all 0.25s ease;
         }
-        .sort-zone.zone-interdit { border-color: var(--error); background: rgba(231,76,60,0.04); }
+        .sort-zone.zone-interdit { border-color: var(--bad); background: rgba(231,76,60,0.04); }
         .sort-zone.zone-reglemente { border-color: #f0ad4e; background: rgba(240,173,78,0.04); }
-        .sort-zone.zone-autorise { border-color: var(--success); background: rgba(39,174,96,0.04); }
+        .sort-zone.zone-autorise { border-color: var(--ok); background: rgba(39,174,96,0.04); }
         .sort-zone.drag-over { background: var(--orange-warm); border-color: var(--orange); }
         .sort-zone h4 { margin-bottom: 8px; font-weight: 700; }
-        .zone-interdit h4 { color: var(--error); }
+        .zone-interdit h4 { color: var(--bad); }
         .zone-reglemente h4 { color: #d4880a; }
-        .zone-autorise h4 { color: var(--success); }
+        .zone-autorise h4 { color: var(--ok); }
         .dropped-item {
             background: var(--navy); color: white; padding: 6px 12px; margin: 4px;
             border-radius: 999px; font-size: 0.85em; display: inline-block;
@@ -208,7 +216,7 @@
 
         .theme-navigation {
             display: flex; justify-content: space-between; align-items: center;
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 24px; margin-top: 32px; box-shadow: var(--shadow);
         }
         .theme-info { font-size: 0.9em; color: #666; }
@@ -220,7 +228,7 @@
             display: flex; align-items: center; gap: 8px; text-decoration: none;
         }
         .btn-primary { background: var(--navy); color: white; }
-        .btn-success { background: var(--success); color: white; }
+        .btn-success { background: var(--ok); color: white; }
         .btn-secondary { background: #6c757d; color: white; }
         .btn-orange { background: var(--orange); color: white; }
         .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
@@ -228,13 +236,13 @@
 
         /* ========== BILAN DE PARCOURS ========== */
         .bilan-section {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 30px; margin-top: 32px; box-shadow: var(--shadow); display: none;
         }
         .bilan-section.visible { display: block; }
         .bilan-header {
             text-align: center; margin-bottom: 24px; padding-bottom: 16px;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 2px solid var(--line);
         }
         .bilan-header h2 { font-size: 1.6em; color: var(--navy); margin-bottom: 6px; }
         .bilan-header p { color: #666; font-size: 0.95em; }
@@ -244,15 +252,15 @@
         }
         .bilan-card {
             background: var(--bg); border-radius: var(--radius-sm); padding: 18px;
-            text-align: center; border: 1px solid var(--border);
+            text-align: center; border: 1px solid var(--line);
         }
-        .bilan-card.done { border-color: var(--success); background: #eafaf1; }
-        .bilan-card.pending { border-color: var(--border); }
+        .bilan-card.done { border-color: var(--ok); background: #eafaf1; }
+        .bilan-card.pending { border-color: var(--line); }
         .bilan-theme-num { font-size: 2em; font-weight: 700; color: var(--navy); }
         .bilan-theme-name { font-size: 0.85em; color: #666; margin: 4px 0; }
         .bilan-theme-score { font-weight: 700; font-size: 1.1em; }
-        .bilan-theme-score.pass { color: var(--success); }
-        .bilan-theme-score.fail { color: var(--error); }
+        .bilan-theme-score.pass { color: var(--ok); }
+        .bilan-theme-score.fail { color: var(--bad); }
         .bilan-theme-score.na { color: #999; }
         .bilan-summary {
             text-align: center; padding: 20px; background: var(--mint);
@@ -276,17 +284,17 @@
 
         .site-footer {
             text-align: center; padding: 18px 20px; margin-top: 30px;
-            font-size: 0.8em; color: #999; border-top: 1px solid var(--border);
+            font-size: 0.8em; color: #999; border-top: 1px solid var(--line);
         }
 
         .notification {
             position: fixed; top: 80px; right: 20px; padding: 14px 20px;
-            border-radius: 999px; color: white; font-weight: 600; z-index: 1000;
+            border-radius: var(--radius-sm); color: white; font-weight: 600; z-index: 1000;
             transform: translateX(400px); transition: all 0.3s ease; max-width: 380px; font-size: 0.9em;
         }
         .notification.show { transform: translateX(0); }
-        .notification.success { background: var(--success); }
-        .notification.error { background: var(--error); }
+        .notification.success { background: var(--ok); }
+        .notification.error { background: var(--bad); }
         .notification.warning { background: #f0ad4e; }
         .notification.info { background: var(--turquoise); }
 
@@ -301,7 +309,7 @@
         }
     </style>
 </head>
-<body class="font-normal">
+<body class="">
 
     <div class="a11y-bar">
         <span class="a11y-label">Police :</span>
@@ -364,7 +372,7 @@
             <div class="categories-grid">
                 <div class="category-card interdit">
                     <div class="category-icon">🚫</div>
-                    <div class="category-title" style="color: var(--error);">INTERDITS</div>
+                    <div class="category-title" style="color: var(--bad);">INTERDITS</div>
                     <div class="category-description">Jamais autorisés : <span class="tooltip">électricité sous tension<span class="tooltiptext">Travaux sur installations électriques alimentées - risque d'électrocution mortel</span></span>, <span class="tooltip">démolition<span class="tooltiptext">Destruction de murs, cloisons - risque d'effondrement</span></span>, <span class="tooltip">vibrations importantes<span class="tooltiptext">Utilisation de marteaux-piqueurs, perforateurs lourds</span></span></div>
                 </div>
                 <div class="category-card reglemente">
@@ -374,7 +382,7 @@
                 </div>
                 <div class="category-card autorise">
                     <div class="category-icon">✅</div>
-                    <div class="category-title" style="color: var(--success);">AUTORISÉS</div>
+                    <div class="category-title" style="color: var(--ok);">AUTORISÉS</div>
                     <div class="category-description">Avec protections normales : travaux sur <span class="tooltip">établi<span class="tooltiptext">Poste de travail fixe et sécurisé en atelier</span></span>, finitions, montage simple, <span class="tooltip">maintenance légère<span class="tooltiptext">Nettoyage, vérifications visuelles, petit entretien</span></span></div>
                 </div>
             </div>
@@ -528,8 +536,8 @@
         let currentScore = 0;
 
         function setFont(font) {
-            if (font === 'dyslexic') document.body.classList.add('dyslexic-font');
-            else document.body.classList.remove('dyslexic-font');
+            if (font === 'dyslexic') document.body.classList.add('dys');
+            else document.body.classList.remove('dys');
             document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
                 if (b.textContent === 'Standard' || b.textContent === 'OpenDyslexic') b.classList.remove('active');
             });
@@ -538,8 +546,9 @@
         }
 
         function setFontSize(size) {
-            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
-            document.body.classList.add('font-' + size);
+            document.body.classList.remove('f-lg', 'f-xl');
+            if (size === 'large') document.body.classList.add('f-lg');
+            if (size === 'xlarge') document.body.classList.add('f-xl');
             const sizeMap = {'small':'A-','normal':'A','large':'A+','xlarge':'A++'};
             document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
                 if (['A-','A','A+','A++'].includes(b.textContent)) b.classList.toggle('active', b.textContent === sizeMap[size]);
@@ -761,8 +770,9 @@
             if (guidedMode) document.body.classList.add('guided');
             const sf = localStorage.getItem('accessibility-font') || 'normal';
             const ss = localStorage.getItem('accessibility-font-size') || 'normal';
-            if (sf === 'dyslexic') document.body.classList.add('dyslexic-font');
-            document.body.classList.add('font-' + ss);
+            if (sf === 'dyslexic') document.body.classList.add('dys');
+            if (ss === 'large') document.body.classList.add('f-lg');
+            if (ss === 'xlarge') document.body.classList.add('f-xl');
             setupDragAndDrop();
             updateProgress();
             showNotification('Bienvenue — Thème 3 : Connaissez les limites légales', 'info');

@@ -12,42 +12,40 @@
     <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --navy: #0f2d52;
-            --navy-mid: #1a4a6e;
-            --orange: #e8914a;
-            --orange-hover: #d47a35;
-            --orange-warm: #fdf6ef;
-            --turquoise: #2aafaf;
-            --mint: #d4f0e8;
-            --bg: #faf7f2;
-            --text: #2c3e50;
-            --border: #ece4da;
-            --shadow: 0 4px 16px rgba(15,45,82,0.07);
-            --card: #ffffff;
-            --success: #27ae60;
-            --error: #e74c3c;
-            --radius: 22px;
-            --radius-sm: 14px;
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
             color: var(--text);
             line-height: 1.7;
             font-size: 16px;
         }
 
-        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, sans-serif; }
-        body.font-large { font-size: 18px; }
-        body.font-xlarge { font-size: 20px; }
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
 
         .topbar {
-            background: linear-gradient(135deg, var(--turquoise), var(--navy-mid), var(--navy));
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
             border-bottom: 4px solid var(--orange);
+            border-radius: 0 0 0 40px;
             padding: 18px 24px;
             display: flex;
             align-items: center;
@@ -75,7 +73,7 @@
 
         .navbar {
             background: var(--card);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--line);
             padding: 10px 24px;
             display: flex;
             align-items: center;
@@ -124,7 +122,7 @@
 
         .objectives {
             background: var(--orange-warm);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-left: 5px solid var(--orange);
             border-radius: var(--radius-sm);
             padding: 20px 24px;
@@ -144,7 +142,7 @@
 
         .epi-card {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-radius: var(--radius);
             padding: 20px;
             text-align: center;
@@ -160,7 +158,7 @@
 
         .storage-box {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-left: 5px solid var(--navy);
             border-radius: var(--radius-sm);
             padding: 20px 24px;
@@ -203,7 +201,7 @@
 
         .activity-block {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-radius: var(--radius);
             padding: 24px;
             margin-bottom: 22px;
@@ -215,7 +213,7 @@
 
         .qcm-btn {
             background: var(--bg);
-            border: 2px solid var(--border);
+            border: 2px solid var(--line);
             border-radius: 999px;
             padding: 12px 20px;
             text-align: left;
@@ -226,8 +224,8 @@
             color: var(--text);
         }
         .qcm-btn:hover:not(.disabled) { border-color: var(--orange); background: var(--orange-warm); }
-        .qcm-btn.correct { background: #d5f5e3; border-color: var(--success); color: var(--success); font-weight: 600; }
-        .qcm-btn.incorrect { background: #fde8e8; border-color: var(--error); color: var(--error); }
+        .qcm-btn.correct { background: #d5f5e3; border-color: var(--ok); color: var(--ok); font-weight: 600; }
+        .qcm-btn.incorrect { background: #fde8e8; border-color: var(--bad); color: var(--bad); }
         .qcm-btn.disabled { pointer-events: none; opacity: 0.6; }
 
         .qcm-feedback {
@@ -239,8 +237,8 @@
             display: none;
         }
         .qcm-feedback.show { display: block; }
-        .qcm-feedback.success { background: #d5f5e3; color: var(--success); }
-        .qcm-feedback.error { background: #fde8e8; color: var(--error); }
+        .qcm-feedback.success { background: #d5f5e3; color: var(--ok); }
+        .qcm-feedback.error { background: #fde8e8; color: var(--bad); }
 
         /* ── Drag & Drop Sorting ── */
         .dnd-sort-container {
@@ -286,18 +284,18 @@
 
         .dnd-column.obligatoire h5 {
             background: #d5f5e3;
-            border-left: 4px solid var(--success);
+            border-left: 4px solid var(--ok);
         }
 
         .dnd-column.interdit h5 {
             background: #fde8e8;
-            border-left: 4px solid var(--error);
+            border-left: 4px solid var(--bad);
         }
 
         .dnd-drop-list {
             min-height: 60px;
             background: var(--bg);
-            border: 2px dashed var(--border);
+            border: 2px dashed var(--line);
             border-radius: var(--radius-sm);
             padding: 10px;
             display: flex;
@@ -313,7 +311,7 @@
 
         .dnd-drop-list .dropped-item {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-radius: 999px;
             padding: 6px 16px;
             font-size: 0.88em;
@@ -328,12 +326,12 @@
             border: none;
             cursor: pointer;
             font-size: 1em;
-            color: var(--error);
+            color: var(--bad);
             padding: 0 4px;
         }
 
-        .dropped-item.correct-match { border-color: var(--success); background: #d5f5e3; }
-        .dropped-item.incorrect-match { border-color: var(--error); background: #fde8e8; }
+        .dropped-item.correct-match { border-color: var(--ok); background: #d5f5e3; }
+        .dropped-item.incorrect-match { border-color: var(--bad); background: #fde8e8; }
 
         .dnd-placeholder {
             color: #bbb;
@@ -359,7 +357,7 @@
         /* ── Score ── */
         .score-bar {
             background: var(--card);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-radius: var(--radius);
             padding: 18px 24px;
             margin: 28px 0;
@@ -413,7 +411,7 @@
 
         .bilan-card {
             background: var(--bg);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-radius: var(--radius-sm);
             padding: 16px;
             text-align: center;
@@ -430,8 +428,8 @@
             font-weight: 700;
         }
 
-        .bilan-card .bilan-score.pass { color: var(--success); }
-        .bilan-card .bilan-score.fail { color: var(--error); }
+        .bilan-card .bilan-score.pass { color: var(--ok); }
+        .bilan-card .bilan-score.fail { color: var(--bad); }
 
         .bilan-card .bilan-status {
             font-size: 0.85em;
@@ -710,10 +708,10 @@
         let dyslexicOn = localStorage.getItem('inerwebDyslexic') === 'true';
 
         function applyAccessibility() {
-            document.body.classList.toggle('dyslexic-font', dyslexicOn);
-            document.body.classList.remove('font-large', 'font-xlarge');
-            if (fontLevel === 1) document.body.classList.add('font-large');
-            if (fontLevel >= 2) document.body.classList.add('font-xlarge');
+            document.body.classList.toggle('dys', dyslexicOn);
+            document.body.classList.remove('f-lg', 'f-xl');
+            if (fontLevel === 1) document.body.classList.add('f-lg');
+            if (fontLevel >= 2) document.body.classList.add('f-xl');
             btnDyslexic.classList.toggle('active', dyslexicOn);
         }
         applyAccessibility();
@@ -955,7 +953,7 @@
                 document.getElementById('bilan-t1').textContent = data.theme1.pct + '%';
                 document.getElementById('bilan-t1').className = 'bilan-score ' + (data.theme1.pct >= 70 ? 'pass' : 'fail');
                 document.getElementById('bilan-t1-status').textContent = data.theme1.pct >= 70 ? 'Valid\u00e9' : 'Non valid\u00e9';
-                document.getElementById('bilan-t1-status').style.color = data.theme1.pct >= 70 ? 'var(--success)' : 'var(--error)';
+                document.getElementById('bilan-t1-status').style.color = data.theme1.pct >= 70 ? 'var(--ok)' : 'var(--bad)';
                 totalScore += data.theme1.score;
                 totalMax += data.theme1.total;
             } else {
@@ -969,7 +967,7 @@
                 document.getElementById('bilan-t2').textContent = data.theme2.pct + '%';
                 document.getElementById('bilan-t2').className = 'bilan-score ' + (data.theme2.pct >= 70 ? 'pass' : 'fail');
                 document.getElementById('bilan-t2-status').textContent = data.theme2.pct >= 70 ? 'Valid\u00e9' : 'Non valid\u00e9';
-                document.getElementById('bilan-t2-status').style.color = data.theme2.pct >= 70 ? 'var(--success)' : 'var(--error)';
+                document.getElementById('bilan-t2-status').style.color = data.theme2.pct >= 70 ? 'var(--ok)' : 'var(--bad)';
                 totalScore += data.theme2.score;
                 totalMax += data.theme2.total;
             } else {
@@ -983,7 +981,7 @@
                 document.getElementById('bilan-t3').textContent = data.theme3.pct + '%';
                 document.getElementById('bilan-t3').className = 'bilan-score ' + (data.theme3.pct >= 70 ? 'pass' : 'fail');
                 document.getElementById('bilan-t3-status').textContent = data.theme3.pct >= 70 ? 'Valid\u00e9' : 'Non valid\u00e9';
-                document.getElementById('bilan-t3-status').style.color = data.theme3.pct >= 70 ? 'var(--success)' : 'var(--error)';
+                document.getElementById('bilan-t3-status').style.color = data.theme3.pct >= 70 ? 'var(--ok)' : 'var(--bad)';
                 totalScore += data.theme3.score;
                 totalMax += data.theme3.total;
             } else {

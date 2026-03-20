@@ -12,26 +12,33 @@
     <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
-            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
-            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
-            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg); color: var(--text);
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text);
             line-height: 1.6; font-size: 16px;
-            transition: background 0.3s, color 0.3s;
         }
-        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
-        body.font-small { font-size: 14px; }
-        body.font-normal { font-size: 16px; }
-        body.font-large { font-size: 18px; }
-        body.font-xlarge { font-size: 20px; }
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
 
         .page-hint { display: none; color: var(--orange); font-weight: 700; }
         body.guided .page-hint { display: inline; }
@@ -42,10 +49,11 @@
         }
 
         .header-nav {
-            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
             color: white; padding: 0;
             box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100;
             border-bottom: 4px solid var(--orange);
+            border-radius: 0 0 0 40px;
         }
         .nav-container {
             max-width: 1200px; margin: 0 auto;
@@ -94,12 +102,12 @@
         .theme-subtitle { font-size: 1.1em; opacity: 0.9; position: relative; z-index: 1; }
 
         .section {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
         }
         .section-header {
             display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
-            padding-bottom: 14px; border-bottom: 2px solid var(--border);
+            padding-bottom: 14px; border-bottom: 2px solid var(--line);
         }
         .section-icon {
             font-size: 1.8em; background: linear-gradient(135deg, var(--navy), var(--turquoise));
@@ -132,7 +140,7 @@
             gap: 18px; margin-top: 18px;
         }
         .right-card {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 20px; box-shadow: var(--shadow); transition: all 0.3s ease;
             border-top: 4px solid var(--turquoise);
         }
@@ -142,7 +150,7 @@
         .right-description { color: #666; font-size: 0.9em; text-align: center; }
 
         .activity {
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
         }
         .activity-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--navy); }
@@ -151,13 +159,13 @@
 
         .qcm-options { display: grid; gap: 10px; margin-top: 16px; }
         .qcm-option {
-            padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+            padding: 14px 18px; border: 2px solid var(--line); border-radius: var(--radius-sm);
             cursor: pointer; transition: all 0.25s ease; background: var(--card);
         }
         .qcm-option:hover { border-color: var(--orange); transform: translateX(4px); }
         .qcm-option.selected { border-color: var(--orange); background: var(--orange-warm); }
-        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
-        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+        .qcm-option.correct { border-color: var(--ok); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--bad); background: #f8d7da; color: #721c24; }
 
         .qcm-feedback { margin-top: 14px; padding: 12px; border-radius: var(--radius-sm); font-weight: 600; }
         .qcm-feedback.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
@@ -172,7 +180,7 @@
 
         .theme-navigation {
             display: flex; justify-content: space-between; align-items: center;
-            background: var(--card); border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--card); border-radius: var(--radius); border: 1px solid var(--line);
             padding: 24px; margin-top: 32px; box-shadow: var(--shadow);
         }
         .theme-info { font-size: 0.9em; color: #666; }
@@ -184,24 +192,24 @@
             display: flex; align-items: center; gap: 8px; text-decoration: none;
         }
         .btn-primary { background: var(--navy); color: white; }
-        .btn-success { background: var(--success); color: white; }
+        .btn-success { background: var(--ok); color: white; }
         .btn-secondary { background: #6c757d; color: white; }
         .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
         .site-footer {
             text-align: center; padding: 18px 20px; margin-top: 30px;
-            font-size: 0.8em; color: #999; border-top: 1px solid var(--border);
+            font-size: 0.8em; color: #999; border-top: 1px solid var(--line);
         }
 
         .notification {
             position: fixed; top: 80px; right: 20px; padding: 14px 20px;
-            border-radius: 999px; color: white; font-weight: 600; z-index: 1000;
+            border-radius: var(--radius-sm); color: white; font-weight: 600; z-index: 1000;
             transform: translateX(400px); transition: all 0.3s ease; max-width: 380px; font-size: 0.9em;
         }
         .notification.show { transform: translateX(0); }
-        .notification.success { background: var(--success); }
-        .notification.error { background: var(--error); }
+        .notification.success { background: var(--ok); }
+        .notification.error { background: var(--bad); }
         .notification.warning { background: #f0ad4e; }
         .notification.info { background: var(--turquoise); }
 
@@ -214,7 +222,7 @@
         }
     </style>
 </head>
-<body class="font-normal">
+<body class="">
 
     <!-- Barre accessibilité -->
     <div class="a11y-bar">
@@ -377,8 +385,8 @@
         let currentScore = 0;
 
         function setFont(font) {
-            if (font === 'dyslexic') document.body.classList.add('dyslexic-font');
-            else document.body.classList.remove('dyslexic-font');
+            if (font === 'dyslexic') document.body.classList.add('dys');
+            else document.body.classList.remove('dys');
             document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
                 if (b.textContent === 'Standard' || b.textContent === 'OpenDyslexic') b.classList.remove('active');
             });
@@ -387,8 +395,9 @@
         }
 
         function setFontSize(size) {
-            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
-            document.body.classList.add('font-' + size);
+            document.body.classList.remove('f-lg', 'f-xl');
+            if (size === 'large') document.body.classList.add('f-lg');
+            if (size === 'xlarge') document.body.classList.add('f-xl');
             const sizeMap = {'small':'A-','normal':'A','large':'A+','xlarge':'A++'};
             document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
                 if (['A-','A','A+','A++'].includes(b.textContent)) b.classList.toggle('active', b.textContent === sizeMap[size]);
@@ -490,8 +499,9 @@
             if (guidedMode) document.body.classList.add('guided');
             const sf = localStorage.getItem('accessibility-font') || 'normal';
             const ss = localStorage.getItem('accessibility-font-size') || 'normal';
-            if (sf === 'dyslexic') document.body.classList.add('dyslexic-font');
-            document.body.classList.add('font-' + ss);
+            if (sf === 'dyslexic') document.body.classList.add('dys');
+            if (ss === 'large') document.body.classList.add('f-lg');
+            if (ss === 'xlarge') document.body.classList.add('f-xl');
             updateProgress();
             showNotification('Bienvenue — Thème 2 : Connaissez vos droits et obligations', 'info');
         });

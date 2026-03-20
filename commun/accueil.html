@@ -12,26 +12,35 @@
     <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
-            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
-            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
-            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
             color: var(--text);
             line-height: 1.7;
             font-size: 16px;
         }
 
-        body.dyslexic-font { font-family: 'OpenDyslexic', system-ui, sans-serif; }
-        body.font-large { font-size: 18px; }
-        body.font-xlarge { font-size: 20px; }
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
 
         /* Mode guidé */
         .page-hint { display: none; }
@@ -39,8 +48,9 @@
 
         /* Topbar */
         .topbar {
-            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
             border-bottom: 4px solid var(--orange);
+            border-radius: 0 0 0 40px;
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
@@ -180,7 +190,8 @@
             padding: 28px;
             margin-bottom: 22px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--orange);
         }
 
         .section-title {
@@ -192,7 +203,7 @@
             color: var(--navy);
             margin-bottom: 18px;
             padding-bottom: 12px;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 2px solid var(--line);
         }
 
         .section-title .icon {
@@ -215,7 +226,7 @@
         .objectives-list li {
             padding: 10px 0 10px 35px;
             position: relative;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--line);
         }
 
         .objectives-list li:last-child { border-bottom: none; }
@@ -224,7 +235,7 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--success);
+            color: var(--ok);
             font-weight: 700;
             font-size: 1.2em;
         }
@@ -239,7 +250,7 @@
 
         .info-card {
             background: var(--card);
-            border: 2px solid var(--border);
+            border: 2px solid var(--line);
             border-radius: var(--radius);
             padding: 20px;
             text-align: center;
@@ -272,7 +283,8 @@
             padding: 28px;
             margin-bottom: 22px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--orange);
         }
 
         .activity-header {
@@ -318,7 +330,7 @@
 
         .qcm-option {
             padding: 14px 18px;
-            border: 2px solid var(--border);
+            border: 2px solid var(--line);
             border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.2s;
@@ -336,14 +348,14 @@
         }
 
         .qcm-option.correct {
-            border-color: var(--success);
+            border-color: var(--ok);
             background: #d4edda;
             color: #155724;
             cursor: default;
         }
 
         .qcm-option.incorrect {
-            border-color: var(--error);
+            border-color: var(--bad);
             background: #f8d7da;
             color: #721c24;
             cursor: default;
@@ -380,12 +392,12 @@
             padding: 28px;
             margin-bottom: 22px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             text-align: center;
         }
 
         .score-bar-container {
-            background: var(--border);
+            background: var(--line);
             border-radius: 999px;
             height: 28px;
             margin: 18px 0;
@@ -397,7 +409,7 @@
             height: 100%;
             border-radius: 999px;
             transition: width 0.6s ease;
-            background: linear-gradient(90deg, var(--turquoise), var(--success));
+            background: linear-gradient(90deg, var(--turquoise), var(--ok));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -407,7 +419,7 @@
             min-width: 0;
         }
 
-        .score-bar.fail { background: linear-gradient(90deg, var(--orange), var(--error)); }
+        .score-bar.fail { background: linear-gradient(90deg, var(--orange), var(--bad)); }
 
         .score-text {
             font-size: 1.3em;
@@ -421,8 +433,8 @@
             font-weight: 600;
         }
 
-        .score-message.pass { color: var(--success); }
-        .score-message.no-pass { color: var(--error); }
+        .score-message.pass { color: var(--ok); }
+        .score-message.no-pass { color: var(--bad); }
 
         .threshold-line {
             font-size: 0.85em;
@@ -490,8 +502,8 @@
     <div class="a11y-bar">
         <button class="a11y-btn" id="btnDyslexic" onclick="toggleDyslexic()" title="Police OpenDyslexic">Dyslexie</button>
         <button class="a11y-btn" id="btnFontA" onclick="setFontSize('')" title="Taille normale">A</button>
-        <button class="a11y-btn" id="btnFontA1" onclick="setFontSize('font-large')" title="Taille grande">A+</button>
-        <button class="a11y-btn" id="btnFontA2" onclick="setFontSize('font-xlarge')" title="Taille très grande">A++</button>
+        <button class="a11y-btn" id="btnFontA1" onclick="setFontSize('f-lg')" title="Taille grande">A+</button>
+        <button class="a11y-btn" id="btnFontA2" onclick="setFontSize('f-xl')" title="Taille très grande">A++</button>
     </div>
 
     <!-- Navigation -->
@@ -634,7 +646,7 @@
 
     </div>
 
-    <div class="footer">inerWeb · F. Henninot</div>
+    <div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
 
     <script>
         // Mode guidé
@@ -645,32 +657,32 @@
 
         // Accessibilité
         function toggleDyslexic() {
-            document.body.classList.toggle('dyslexic-font');
+            document.body.classList.toggle('dys');
             document.getElementById('btnDyslexic').classList.toggle('active');
-            localStorage.setItem('dyslexicFont', document.body.classList.contains('dyslexic-font'));
+            localStorage.setItem('dyslexicFont', document.body.classList.contains('dys'));
         }
 
         function setFontSize(cls) {
-            document.body.classList.remove('font-large', 'font-xlarge');
+            document.body.classList.remove('f-lg', 'f-xl');
             if (cls) document.body.classList.add(cls);
             document.querySelectorAll('#btnFontA, #btnFontA1, #btnFontA2').forEach(b => b.classList.remove('active'));
             if (cls === '') document.getElementById('btnFontA').classList.add('active');
-            if (cls === 'font-large') document.getElementById('btnFontA1').classList.add('active');
-            if (cls === 'font-xlarge') document.getElementById('btnFontA2').classList.add('active');
+            if (cls === 'f-lg') document.getElementById('btnFontA1').classList.add('active');
+            if (cls === 'f-xl') document.getElementById('btnFontA2').classList.add('active');
             localStorage.setItem('fontSize', cls);
         }
 
         // Restaurer préférences
         (function() {
             if (localStorage.getItem('dyslexicFont') === 'true') {
-                document.body.classList.add('dyslexic-font');
+                document.body.classList.add('dys');
                 document.getElementById('btnDyslexic').classList.add('active');
             }
             var fs = localStorage.getItem('fontSize');
-            if (fs === 'font-large' || fs === 'font-xlarge') {
+            if (fs === 'f-lg' || fs === 'f-xl') {
                 document.body.classList.add(fs);
-                if (fs === 'font-large') document.getElementById('btnFontA1').classList.add('active');
-                if (fs === 'font-xlarge') document.getElementById('btnFontA2').classList.add('active');
+                if (fs === 'f-lg') document.getElementById('btnFontA1').classList.add('active');
+                if (fs === 'f-xl') document.getElementById('btnFontA2').classList.add('active');
             }
         })();
 

@@ -1,724 +1,390 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="LPP Jacques Raynaud · Campus Équatio — 2nde TNE — Prévention des Risques Professionnels">
-<meta name="author" content="F. Henninot">
-<title>LPP Jacques Raynaud · Campus Équatio — Risques Professionnels</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Risques Professionnels — 2nde TNE</title>
 <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --navy: #0f2d52;
-  --navy-mid: #1a4a6e;
-  --orange: #e8914a;
-  --orange-hover: #d47a35;
-  --orange-warm: #fdf6ef;
-  --turquoise: #2aafaf;
-  --mint: #d4f0e8;
-  --bg: #faf7f2;
-  --text: #2c3e50;
-  --border: #ece4da;
-  --shadow: 0 4px 16px rgba(15,45,82,0.07);
-  --card: #ffffff;
-  --success: #27ae60;
-  --error: #e74c3c;
-  --radius: 22px;
-  --radius-sm: 14px;
-  --font-size: 16px;
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+  --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+  --mint:#d4f0e8;--mint-deep:#b8e6d8;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --ok:#27ae60;--bad:#e74c3c;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:linear-gradient(180deg,var(--bg),var(--bg-end));
+  background-attachment:fixed;
+  color:var(--text);line-height:1.65;font-size:16px;
+}
+body.dys{font-family:'OpenDyslexic',var(--font)}
+body.f-lg{font-size:18px}
+body.f-xl{font-size:20px}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.95);font-size:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+.a11y{display:flex;gap:6px;align-items:center}
+.a11y-btn{
+  background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  font-size:.8em;font-family:inherit;transition:all .2s;
+}
+.a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+.hero{
+  text-align:center;padding:45px 20px 35px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 15px,rgba(255,255,255,.02) 15px,rgba(255,255,255,.02) 30px);
+}
+.hero *{position:relative;z-index:1}
+.hero h1{font-size:2.2em;font-weight:800;margin-bottom:6px}
+.hero p{font-size:1.1em;opacity:.85}
+
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:20px;
+}
+.card h2{color:var(--orange);font-size:1.3em;margin-bottom:8px}
+.card p,.card li{color:var(--muted);font-size:.95em}
+.card ul{margin:8px 0 0 18px}
+
+.quiz-box{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--turquoise);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:20px;
+}
+.progress{height:6px;background:var(--line);border-radius:4px;margin-bottom:22px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--turquoise));border-radius:4px;transition:width .4s;width:0}
+.q-block{display:none}
+.q-block.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.q-num{color:var(--turquoise);font-weight:700;font-size:.85em;margin-bottom:6px}
+.q-text{font-size:1.1em;font-weight:600;color:var(--text-strong);margin-bottom:16px;line-height:1.5}
+.opts{display:grid;gap:10px}
+.opt{
+  padding:16px 18px;border:2px solid var(--line);border-radius:var(--radius);
+  background:var(--card);cursor:pointer;font-family:inherit;font-size:1em;
+  text-align:left;color:var(--text);transition:all .2s;line-height:1.45;
+}
+.opt:hover{border-color:var(--orange);background:var(--orange-warm);transform:translateX(4px)}
+.opt.picked{border-color:var(--orange);background:var(--orange-warm);font-weight:600}
+.q-nav{display:flex;justify-content:flex-end;margin-top:18px}
+
+.btn{
+  border:none;border-radius:var(--radius-pill);padding:11px 22px;
+  font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;
+  font-family:inherit;font-size:.95em;transition:all .25s;
+}
+.btn--orange{background:var(--orange);color:#fff;box-shadow:var(--shadow-orange)}
+.btn--orange:hover{background:var(--orange-hover)}
+.btn--navy{background:var(--navy);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+.result{display:none;animation:fadeIn .4s ease}
+.result.show{display:block}
+.result-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:35px 24px;text-align:center;margin-bottom:20px;
+}
+.result-icon{font-size:3.5em;margin-bottom:12px}
+.result-title{font-size:1.6em;font-weight:800;color:var(--text-strong);margin-bottom:8px}
+.result-desc{color:var(--muted);max-width:550px;margin:0 auto 20px;line-height:1.5}
+.result-note{
+  background:var(--orange-warm);border:1px solid var(--line);border-left:4px solid var(--orange);
+  border-radius:var(--radius-sm);padding:14px;font-size:.9em;color:var(--muted);
+  margin-bottom:20px;text-align:left;
+}
+.result-note strong{color:var(--orange)}
+
+.parcours-title{font-size:1.2em;font-weight:800;color:var(--text-strong);margin-bottom:16px}
+.parcours{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.p-card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  text-align:center;transition:all .3s;text-decoration:none;color:var(--text);
+  display:block;background:var(--card);
+}
+.p-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--orange)}
+.p-card.commun{border-left:5px solid var(--turquoise)}
+.p-card.metier{border-left:5px solid var(--orange)}
+.p-card .ico{font-size:2.4em;margin-bottom:8px}
+.p-card .name{font-weight:700;color:var(--text-strong);margin-bottom:4px}
+.p-card .desc{font-size:.82em;color:var(--muted)}
+.p-card.recommended{border:2px solid var(--orange);box-shadow:var(--shadow-orange)}
+.p-card.recommended .name::after{content:' ★';color:var(--orange)}
+
+.teacher-zone{
+  margin-top:30px;padding:14px 18px;
+  background:var(--orange-warm);border:1px solid var(--line);border-left:4px solid var(--orange);
+  border-radius:var(--radius);font-size:.85em;color:var(--muted);
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.teacher-zone input{
+  width:80px;padding:6px 10px;border:2px solid var(--line);border-radius:var(--radius-sm);
+  font:inherit;outline:none;transition:all .25s;
+}
+.teacher-zone input:focus{border-color:var(--orange);box-shadow:0 0 0 4px var(--orange-glow)}
+
+.footer{
+  padding:16px;text-align:center;font-size:.72em;color:var(--muted);
+  border-top:1px solid var(--line);margin-top:30px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { font-size: var(--font-size); scroll-behavior: smooth; }
-
-body {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  min-height: 100vh;
+.notif{
+  position:fixed;top:70px;right:16px;padding:14px 18px;border-radius:var(--radius-sm);
+  color:#fff;font-weight:600;z-index:100;transform:translateX(400px);transition:all .3s;
+  max-width:340px;font-size:.9em;box-shadow:var(--shadow);
 }
+.notif.show{transform:translateX(0)}
+.notif.ok{background:var(--ok)}
+.notif.info{background:var(--navy)}
 
-body.dyslexic { font-family: 'OpenDyslexic', sans-serif; }
-
-/* ── TOPBAR ─────────────────────────────────────── */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 1.5rem;
-  background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
-  border-bottom: 4px solid var(--orange);
-}
-
-.topbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.topbar-brand svg { flex-shrink: 0; }
-
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.topbar-btn {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 999px;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.78rem;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  font-family: inherit;
-  white-space: nowrap;
-}
-
-.topbar-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-1px); }
-.topbar-btn.active { background: var(--orange); border-color: var(--orange); }
-
-/* ── HERO ───────────────────────────────────────── */
-.hero {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--turquoise) 100%);
-  color: #fff;
-  padding: 3rem 1.5rem 2.5rem;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
-}
-
-.hero p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* ── CONTAINER ──────────────────────────────────── */
-.container {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-/* ── CARDS ──────────────────────────────────────── */
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  padding: 1.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.card h2 {
-  font-size: 1.15rem;
-  color: var(--navy);
-  margin-bottom: 0.8rem;
-}
-
-.card p { font-size: 0.95rem; line-height: 1.65; }
-
-.card .note {
-  background: var(--orange-warm);
-  border-left: 4px solid var(--orange);
-  border-radius: var(--radius-sm);
-  padding: 0.9rem 1.1rem;
-  margin-top: 1rem;
-  font-size: 0.88rem;
-  color: var(--text);
-}
-
-/* ── QUIZ ───────────────────────────────────────── */
-.quiz-section { margin-bottom: 1.5rem; }
-
-.quiz-section h2 {
-  font-size: 1.1rem;
-  color: var(--navy);
-  margin-bottom: 1.2rem;
-  text-align: center;
-}
-
-.question-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  padding: 1.5rem;
-  margin-bottom: 1.2rem;
-}
-
-.question-card .q-number {
-  display: inline-block;
-  background: var(--navy);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.65rem;
-  border-radius: 999px;
-  margin-bottom: 0.6rem;
-}
-
-.question-card .q-text {
-  font-size: 0.97rem;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 1rem;
-}
-
-.option-group { display: flex; flex-direction: column; gap: 0.5rem; }
-
-.option-btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: var(--orange-warm);
-  border: 2px solid transparent;
-  border-radius: var(--radius-sm);
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
-  color: var(--text);
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, transform 0.15s;
-  font-family: inherit;
-  line-height: 1.45;
-}
-
-.option-btn:hover { border-color: var(--orange); background: #fef0e2; transform: translateX(3px); }
-.option-btn.selected { border-color: var(--orange); background: var(--orange); color: #fff; font-weight: 600; }
-
-.quiz-submit-wrap { text-align: center; margin-top: 1.5rem; }
-
-.btn-primary {
-  display: inline-block;
-  background: var(--orange);
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  padding: 0.85rem 2.2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  font-family: inherit;
-  text-decoration: none;
-}
-
-.btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,145,74,0.3); }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-/* ── RESULT ─────────────────────────────────────── */
-.result-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  padding: 2rem;
-  text-align: center;
-  display: none;
-  animation: fadeSlideIn 0.5s ease;
-}
-
-.result-card.visible { display: block; }
-
-.result-icon {
-  font-size: 2.8rem;
-  margin-bottom: 0.6rem;
-}
-
-.result-card h3 {
-  font-size: 1.25rem;
-  color: var(--navy);
-  margin-bottom: 0.5rem;
-}
-
-.result-card .result-desc {
-  font-size: 0.92rem;
-  color: var(--text);
-  margin-bottom: 1.3rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.result-card .result-note {
-  font-size: 0.82rem;
-  color: #888;
-  margin-top: 1rem;
-}
-
-/* ── PATHWAY GRID ───────────────────────────────── */
-.pathways-section {
-  display: none;
-  animation: fadeSlideIn 0.5s ease;
-}
-
-.pathways-section.visible { display: block; }
-
-.pathways-section h2 {
-  font-size: 1.15rem;
-  color: var(--navy);
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.pathways-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-@media (min-width: 580px) {
-  .pathways-grid { grid-template-columns: 1fr 1fr; }
-  .pathways-grid .pathway-card:first-child { grid-column: 1 / -1; }
-}
-
-.pathway-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  border-left: 5px solid var(--orange);
-  padding: 1.3rem 1.4rem;
-  text-decoration: none;
-  color: var(--text);
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.pathway-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(15,45,82,0.12); }
-
-.pathway-card.commun { border-left-color: var(--turquoise); }
-
-.pathway-card .pw-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 0.1rem; }
-
-.pathway-card .pw-body h3 {
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 0.25rem;
-}
-
-.pathway-card .pw-body p {
-  font-size: 0.82rem;
-  color: #666;
-  line-height: 1.5;
-}
-
-.pathway-card .pw-arrow {
-  margin-left: auto;
-  align-self: center;
-  color: var(--orange);
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  transition: transform 0.2s;
-}
-
-.pathway-card:hover .pw-arrow { transform: translateX(4px); }
-.pathway-card.commun .pw-arrow { color: var(--turquoise); }
-
-/* ── TEACHER CODE ───────────────────────────────── */
-.teacher-section {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.teacher-section label {
-  font-size: 0.78rem;
-  color: #999;
-}
-
-.teacher-section input {
-  width: 90px;
-  padding: 0.35rem 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 0.8rem;
-  text-align: center;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.teacher-section input:focus { border-color: var(--turquoise); }
-
-/* ── FOOTER ─────────────────────────────────────── */
-.footer {
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.72rem;
-  color: #aaa;
-  margin-top: 1rem;
-}
-
-/* ── NOTIFICATIONS ──────────────────────────────── */
-.notif-container {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  pointer-events: none;
-}
-
-.notif {
-  pointer-events: auto;
-  background: var(--card);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 6px 24px rgba(15,45,82,0.15);
-  border-left: 4px solid var(--success);
-  padding: 0.9rem 1.2rem;
-  font-size: 0.88rem;
-  max-width: 320px;
-  transform: translateX(120%);
-  animation: notifIn 0.35s ease forwards;
-}
-
-.notif.out { animation: notifOut 0.35s ease forwards; }
-
-.notif.error { border-left-color: var(--error); }
-
-@keyframes notifIn { to { transform: translateX(0); } }
-@keyframes notifOut { to { transform: translateX(120%); opacity: 0; } }
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── RESPONSIVE ─────────────────────────────────── */
-@media (max-width: 600px) {
-  .topbar { padding: 0.5rem 0.8rem; flex-wrap: wrap; gap: 0.4rem; }
-  .topbar-brand { font-size: 0.78rem; }
-  .topbar-btn { padding: 0.25rem 0.55rem; font-size: 0.72rem; }
-  .hero { padding: 2rem 1rem 1.8rem; }
-  .container { padding: 1rem; }
-  .card { padding: 1.3rem; }
-  .question-card { padding: 1.2rem; }
-  .result-card { padding: 1.4rem; }
+@media(max-width:600px){
+  .hero h1{font-size:1.6em}
+  .topbar{border-radius:0}
+  .parcours{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ── TOPBAR ──────────────────────────────────── -->
 <header class="topbar">
-  <span class="topbar-brand">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 7l-5-5-5 5"/><path d="M6 12H2M22 12h-4M7.8 7.8 4.6 4.6M16.2 7.8l3.2-3.2M7.8 16.2l-3.2 3.2M16.2 16.2l3.2 3.2"/></svg>
-    inerWeb Édu
-  </span>
-  <div class="topbar-actions">
-    <button class="topbar-btn" id="btnDyslexic" title="Police OpenDyslexic">Aa Dys</button>
-    <button class="topbar-btn" data-size="16" title="Taille normale">A</button>
-    <button class="topbar-btn" data-size="18" title="Taille moyenne">A+</button>
-    <button class="topbar-btn" data-size="20" title="Grande taille">A++</button>
+  <div class="brand">
+    <div class="brand__mark">❄️</div>
+    <div>
+      <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+      <div class="brand__sub">2nde TNE — Prévention des Risques Professionnels</div>
+    </div>
+  </div>
+  <div class="a11y">
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+    <button class="a11y-btn" onclick="setF('normal')">A</button>
+    <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+    <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
   </div>
 </header>
 
-<!-- ── HERO ────────────────────────────────────── -->
 <section class="hero">
-  <h1>LPP Jacques Raynaud · Campus Équatio</h1>
-  <p>2nde TNE — Prévention des Risques Professionnels</p>
+  <h1>Prévention des Risques Professionnels</h1>
+  <p>Découvre ta filière et apprends à te protéger sur le terrain</p>
 </section>
 
-<!-- ── CONTENU ─────────────────────────────────── -->
-<main class="container">
+<div class="wrap">
 
-  <!-- Intro -->
   <div class="card">
-    <h2>Bienvenue dans ton parcours sécurité</h2>
-    <p>Réponds à 5 questions pour identifier ta filière métier. Tu accéderas ensuite à un parcours commun, puis à ton parcours spécialisé.</p>
-    <div class="note">Les réponses aux QCM ne sont pas données à l'écran. Tu devras consulter le document INRS/IRIS-ST papier distribué en classe.</div>
+    <h2>Comment ça marche ?</h2>
+    <p>Réponds à <strong>5 questions simples</strong> pour découvrir quelle filière te correspond le mieux. Ensuite, tu suivras :</p>
+    <ul>
+      <li><strong>2 modules communs</strong> à tous les métiers (accueil sécurité + risque électrique)</li>
+      <li><strong>3 modules spécialisés</strong> selon ta filière</li>
+    </ul>
+    <p style="margin-top:10px">Pour les QCM, tu devras chercher les réponses dans le <strong>document papier</strong> distribué en classe. Rien n'est donné à l'écran !</p>
   </div>
 
-  <!-- Quiz -->
-  <section class="quiz-section" id="quizSection">
-    <h2>Quiz d'orientation</h2>
+  <div class="quiz-box" id="quizBox">
+    <div class="progress"><div class="progress-fill" id="pBar"></div></div>
 
-    <!-- Q1 -->
-    <div class="question-card">
-      <span class="q-number">Question 1 / 5</span>
-      <p class="q-text">Dans ton futur métier, tu travailles principalement avec :</p>
-      <div class="option-group" data-q="0">
-        <button class="option-btn" data-val="froid">Des fluides frigorigènes et des circuits sous pression</button>
-        <button class="option-btn" data-val="plombier">Des tuyaux, de la soudure cuivre et des chaudières</button>
-        <button class="option-btn" data-val="elec">Des câbles, des tableaux électriques et des disjoncteurs</button>
+    <div class="q-block active" data-q="1">
+      <div class="q-num">Question 1 / 5</div>
+      <div class="q-text">Qu'est-ce qui t'attire le plus ?</div>
+      <div class="opts">
+        <button class="opt" data-v="plombier" onclick="pick(this)">Travailler avec de l'eau, installer des tuyaux, réparer des fuites</button>
+        <button class="opt" data-v="froid" onclick="pick(this)">Être dans une salle des machines, entendre un compresseur tourner, faire du froid</button>
+        <button class="opt" data-v="elec" onclick="pick(this)">Câbler, brancher, faire fonctionner des appareils électriques</button>
       </div>
+      <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
-    <!-- Q2 -->
-    <div class="question-card">
-      <span class="q-number">Question 2 / 5</span>
-      <p class="q-text">Quel risque te semble le plus présent dans ton futur métier ?</p>
-      <div class="option-group" data-q="1">
-        <button class="option-btn" data-val="plombier">Brûlures par soudage et risque amiante</button>
-        <button class="option-btn" data-val="froid">Asphyxie par manque d'oxygène et brûlures cryogéniques</button>
-        <button class="option-btn" data-val="elec">Électrocution et arc électrique</button>
+    <div class="q-block" data-q="2">
+      <div class="q-num">Question 2 / 5</div>
+      <div class="q-text">Sur un chantier, tu préfères :</div>
+      <div class="opts">
+        <button class="opt" data-v="plombier" onclick="pick(this)">Souder des tubes de cuivre et raccorder des canalisations</button>
+        <button class="opt" data-v="froid" onclick="pick(this)">Charger un circuit en gaz, vérifier des températures et des pressions</button>
+        <button class="opt" data-v="elec" onclick="pick(this)">Tirer des câbles et raccorder un tableau électrique</button>
       </div>
+      <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
-    <!-- Q3 -->
-    <div class="question-card">
-      <span class="q-number">Question 3 / 5</span>
-      <p class="q-text">Quel document de sécurité correspond à ton métier ?</p>
-      <div class="option-group" data-q="2">
-        <button class="option-btn" data-val="froid">Mémo IRIS-ST « Frigoristes : les fluides frigorigènes »</button>
-        <button class="option-btn" data-val="plombier">INRS « Mon métier plombier-chauffagiste » (ED 6232)</button>
-        <button class="option-btn" data-val="elec">INRS « Mon métier électricien » (ED 6276)</button>
+    <div class="q-block" data-q="3">
+      <div class="q-num">Question 3 / 5</div>
+      <div class="q-text">Quel outil te parle le plus ?</div>
+      <div class="opts">
+        <button class="opt" data-v="plombier" onclick="pick(this)">Un chalumeau et une clé à molette</button>
+        <button class="opt" data-v="froid" onclick="pick(this)">Un manomètre et une bouteille de gaz réfrigérant</button>
+        <button class="opt" data-v="elec" onclick="pick(this)">Un multimètre et un tournevis testeur</button>
       </div>
+      <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
-    <!-- Q4 -->
-    <div class="question-card">
-      <span class="q-number">Question 4 / 5</span>
-      <p class="q-text">Parmi ces EPI, lequel utilises-tu le plus souvent ?</p>
-      <div class="option-group" data-q="3">
-        <button class="option-btn" data-val="froid">Gants cryogéniques et détecteur de fuites</button>
-        <button class="option-btn" data-val="plombier">Lunettes de soudeur et gants anti-coupure</button>
-        <button class="option-btn" data-val="elec">Gants isolants et VAT</button>
+    <div class="q-block" data-q="4">
+      <div class="q-num">Question 4 / 5</div>
+      <div class="q-text">Imagine ton premier jour de stage. On te dit :</div>
+      <div class="opts">
+        <button class="opt" data-v="plombier" onclick="pick(this)">« Viens, on va installer un chauffe-eau chez un client ! »</button>
+        <button class="opt" data-v="froid" onclick="pick(this)">« Aujourd'hui, on fait la maintenance d'une chambre froide ! »</button>
+        <button class="opt" data-v="elec" onclick="pick(this)">« On va câbler l'installation électrique d'un appartement neuf ! »</button>
       </div>
+      <div class="q-nav"><button class="btn btn--orange" onclick="next()" disabled>Suivant →</button></div>
     </div>
 
-    <!-- Q5 -->
-    <div class="question-card">
-      <span class="q-number">Question 5 / 5</span>
-      <p class="q-text">Sur un chantier, ta principale préoccupation sécurité serait :</p>
-      <div class="option-group" data-q="4">
-        <button class="option-btn" data-val="plombier">Vérifier l'absence d'amiante avant de percer</button>
-        <button class="option-btn" data-val="froid">Ventiler le local avant d'intervenir sur un circuit frigorigène</button>
-        <button class="option-btn" data-val="elec">Consigner l'installation électrique avant toute intervention</button>
+    <div class="q-block" data-q="5">
+      <div class="q-num">Question 5 / 5</div>
+      <div class="q-text">Le soir, tu racontes ta journée. Qu'est-ce qui te rendrait le plus fier ?</div>
+      <div class="opts">
+        <button class="opt" data-v="plombier" onclick="pick(this)">« J'ai réparé une fuite, le client était super content ! »</button>
+        <button class="opt" data-v="froid" onclick="pick(this)">« La clim remarche — il faisait 35° dehors et 22° dans le magasin ! »</button>
+        <button class="opt" data-v="elec" onclick="pick(this)">« J'ai branché tout le tableau, et quand on a mis le courant, tout marchait du premier coup ! »</button>
       </div>
+      <div class="q-nav"><button class="btn btn--orange" onclick="showResult()" disabled>Voir mon résultat →</button></div>
     </div>
-
-    <div class="quiz-submit-wrap">
-      <button class="btn-primary" id="btnSubmitQuiz" disabled>Voir mon résultat</button>
-    </div>
-  </section>
-
-  <!-- Résultat -->
-  <div class="result-card" id="resultCard">
-    <div class="result-icon" id="resultIcon"></div>
-    <h3 id="resultTitle"></h3>
-    <p class="result-desc" id="resultDesc"></p>
-    <a href="commun/accueil.html" class="btn-primary">Commencer le parcours commun</a>
-    <p class="result-note">Tu peux aussi choisir librement un autre parcours ci-dessous.</p>
   </div>
 
-  <!-- Parcours -->
-  <section class="pathways-section" id="pathwaysSection">
-    <h2>Tous les parcours</h2>
-    <div class="pathways-grid">
-
-      <a href="commun/accueil.html" class="pathway-card commun">
-        <span class="pw-icon">🛡️</span>
-        <div class="pw-body">
-          <h3>Parcours commun — Accueil sécurité</h3>
-          <p>Règles générales de prévention, accueil sur chantier, EPI de base, droits et devoirs du salarié.</p>
-        </div>
-        <span class="pw-arrow">›</span>
-      </a>
-
-      <a href="commun/electrique.html" class="pathway-card commun">
-        <span class="pw-icon">⚡</span>
-        <div class="pw-body">
-          <h3>Parcours commun — Risque électrique</h3>
-          <p>Dangers du courant, consignation, habilitations, gestes de premiers secours.</p>
-        </div>
-        <span class="pw-arrow">›</span>
-      </a>
-
-      <a href="plomberie/theme1.html" class="pathway-card">
-        <span class="pw-icon">🔧</span>
-        <div class="pw-body">
-          <h3>Plombier-Chauffagiste</h3>
-          <p>INRS ED 6232 — 3 thèmes : soudure, amiante, travail en hauteur.</p>
-        </div>
-        <span class="pw-arrow">›</span>
-      </a>
-
-      <a href="froid/theme1.html" class="pathway-card">
-        <span class="pw-icon">❄️</span>
-        <div class="pw-body">
-          <h3>Froid & Climatisation</h3>
-          <p>IRIS-ST Fluides frigorigènes — 3 thèmes : manipulation, toxicité, pression.</p>
-        </div>
-        <span class="pw-arrow">›</span>
-      </a>
-
-      <a href="electro/theme1.html" class="pathway-card">
-        <span class="pw-icon">🔌</span>
-        <div class="pw-body">
-          <h3>Électricien</h3>
-          <p>INRS ED 6276 — 3 thèmes : habilitation, armoires, interventions BT.</p>
-        </div>
-        <span class="pw-arrow">›</span>
-      </a>
-
+  <div class="result" id="resultZone">
+    <div class="result-card" id="resultCard"></div>
+    <div class="result-note">
+      <strong>Tu peux changer d'avis !</strong> Ce quiz te propose une filière, mais tu es libre de choisir n'importe quel parcours ci-dessous. Commence toujours par les <strong>2 modules communs</strong>.
     </div>
-  </section>
-
-  <!-- Code enseignant -->
-  <div class="teacher-section">
-    <label for="teacherCode">Code enseignant :</label>
-    <input type="text" id="teacherCode" autocomplete="off" spellcheck="false" maxlength="10">
+    <div class="parcours-title">Tous les parcours</div>
+    <div class="parcours" id="parcoursGrid">
+      <a href="commun/accueil.html" class="p-card commun"><div class="ico">🛡️</div><div class="name">Accueil sécurité apprenti</div><div class="desc">Tes droits, ton tuteur, le document unique</div></a>
+      <a href="commun/electrique.html" class="p-card commun"><div class="ico">⚡</div><div class="name">Risque électrique commun</div><div class="desc">Dangers de l'électricité pour tous les métiers</div></a>
+      <a href="plomberie/theme1.html" class="p-card metier" data-filiere="plombier"><div class="ico">🔧</div><div class="name">Plombier-Chauffagiste</div><div class="desc">INRS ED 6232 — 3 thèmes</div></a>
+      <a href="froid/theme1.html" class="p-card metier" data-filiere="froid"><div class="ico">❄️</div><div class="name">Froid & Climatisation</div><div class="desc">IRIS-ST Fluides frigorigènes — 3 thèmes</div></a>
+      <a href="electro/theme1.html" class="p-card metier" data-filiere="elec"><div class="ico">💡</div><div class="name">Électricien</div><div class="desc">INRS ED 6276 — 3 thèmes</div></a>
+    </div>
   </div>
 
-</main>
+  <div class="teacher-zone">
+    <span>🔑 Espace enseignant :</span>
+    <input type="password" id="tCode" placeholder="Code" maxlength="4" onkeyup="checkCode()"/>
+    <span id="tStatus"></span>
+  </div>
+</div>
 
-<!-- ── FOOTER ──────────────────────────────────── -->
-<footer class="footer">
-  inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio
-</footer>
-
-<!-- ── NOTIFICATIONS ───────────────────────────── -->
-<div class="notif-container" id="notifContainer"></div>
+<div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
 
 <script>
-(function(){
-  'use strict';
+let answers=[],curQ=1;
 
-  /* ── Notifications ──────────────────────────── */
-  function notify(msg, type){
-    const c = document.getElementById('notifContainer');
-    const el = document.createElement('div');
-    el.className = 'notif' + (type === 'error' ? ' error' : '');
-    el.textContent = msg;
-    c.appendChild(el);
-    setTimeout(function(){ el.classList.add('out'); }, 3500);
-    setTimeout(function(){ el.remove(); }, 3850);
-  }
+function pick(btn){
+  btn.closest('.q-block').querySelectorAll('.opt').forEach(o=>o.classList.remove('picked'));
+  btn.classList.add('picked');
+  btn.closest('.q-block').querySelector('.q-nav .btn').disabled=false;
+}
 
-  /* ── Accessibilité : OpenDyslexic ───────────── */
-  var dyslexicOn = localStorage.getItem('dyslexic') === 'true';
-  var btnDys = document.getElementById('btnDyslexic');
+function next(){
+  const block=document.querySelector('.q-block[data-q="'+curQ+'"]');
+  const sel=block.querySelector('.opt.picked');
+  if(!sel)return;
+  answers.push(sel.dataset.v);
+  block.classList.remove('active');
+  curQ++;
+  const nb=document.querySelector('.q-block[data-q="'+curQ+'"]');
+  if(nb){nb.classList.add('active');document.getElementById('pBar').style.width=((curQ-1)/5*100)+'%';}
+}
 
-  function applyDyslexic(){
-    document.body.classList.toggle('dyslexic', dyslexicOn);
-    btnDys.classList.toggle('active', dyslexicOn);
-  }
-  applyDyslexic();
+function showResult(){
+  const block=document.querySelector('.q-block[data-q="'+curQ+'"]');
+  const sel=block.querySelector('.opt.picked');
+  if(!sel)return;
+  answers.push(sel.dataset.v);
+  document.getElementById('pBar').style.width='100%';
 
-  btnDys.addEventListener('click', function(){
-    dyslexicOn = !dyslexicOn;
-    localStorage.setItem('dyslexic', dyslexicOn);
-    applyDyslexic();
-    notify(dyslexicOn ? 'Police OpenDyslexic activée' : 'Police standard rétablie');
-  });
+  const c={froid:0,plombier:0,elec:0};
+  answers.forEach(a=>c[a]++);
+  let fil='froid',mx=0;
+  for(const[k,v]of Object.entries(c)){if(v>mx){mx=v;fil=k;}}
 
-  /* ── Accessibilité : taille de police ───────── */
-  var sizeBtns = document.querySelectorAll('[data-size]');
-  var savedSize = localStorage.getItem('fontSize');
-  if(savedSize) document.documentElement.style.setProperty('--font-size', savedSize + 'px');
-
-  function updateSizeBtns(s){
-    sizeBtns.forEach(function(b){
-      b.classList.toggle('active', b.dataset.size === String(s));
-    });
-  }
-  if(savedSize) updateSizeBtns(parseInt(savedSize));
-
-  sizeBtns.forEach(function(b){
-    b.addEventListener('click', function(){
-      var s = this.dataset.size;
-      document.documentElement.style.setProperty('--font-size', s + 'px');
-      localStorage.setItem('fontSize', s);
-      updateSizeBtns(parseInt(s));
-    });
-  });
-
-  /* ── Quiz ───────────────────────────────────── */
-  var answers = [null, null, null, null, null];
-  var groups = document.querySelectorAll('.option-group');
-  var btnSubmit = document.getElementById('btnSubmitQuiz');
-
-  groups.forEach(function(g){
-    var qi = parseInt(g.dataset.q);
-    var btns = g.querySelectorAll('.option-btn');
-    btns.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        btns.forEach(function(b){ b.classList.remove('selected'); });
-        btn.classList.add('selected');
-        answers[qi] = btn.dataset.val;
-        btnSubmit.disabled = answers.some(function(a){ return a === null; });
-      });
-    });
-  });
-
-  /* ── Données filières ───────────────────────── */
-  var filieres = {
-    froid:    { icon: '❄️', title: 'Froid & Climatisation', desc: 'Ton profil correspond à la filière frigorigène. Tu manipuleras des fluides sous pression et travailleras sur des installations de froid commercial et climatisation.' },
-    plombier: { icon: '🔧', title: 'Plombier-Chauffagiste', desc: 'Ton profil correspond à la filière plomberie-chauffage. Tu interviendras sur des réseaux sanitaires, du chauffage et de la soudure cuivre.' },
-    elec:     { icon: '🔌', title: 'Électricien', desc: 'Ton profil correspond à la filière électricité. Tu travailleras sur des installations basse tension, des tableaux et des câblages.' }
+  const info={
+    froid:{ico:'❄️',title:'Froid & Climatisation',desc:'Tu es attiré par les systèmes de réfrigération et de climatisation. Tu vas découvrir les risques liés aux fluides frigorigènes et apprendre à te protéger sur le terrain.'},
+    plombier:{ico:'🔧',title:'Plombier-Chauffagiste',desc:'Tu aimes travailler avec l\'eau, le cuivre et le chauffage. Tu vas découvrir les risques du métier : brûlures, amiante, manutention, et comment t\'en protéger.'},
+    elec:{ico:'💡',title:'Électricien',desc:'Tu es passionné par l\'électricité et les installations. Tu vas apprendre à identifier les dangers du courant et les règles de sécurité pour intervenir sans risque.'}
   };
 
-  /* ── Soumission du quiz ─────────────────────── */
-  btnSubmit.addEventListener('click', function(){
-    var count = { froid: 0, plombier: 0, elec: 0 };
-    answers.forEach(function(a){ if(a) count[a]++; });
+  const f=info[fil];
+  document.getElementById('resultCard').innerHTML=
+    '<div class="result-icon">'+f.ico+'</div>'+
+    '<div class="result-title">'+f.title+'</div>'+
+    '<div class="result-desc">'+f.desc+'</div>'+
+    '<a href="commun/accueil.html" class="btn btn--orange" style="text-decoration:none">Commencer le parcours commun →</a>';
 
-    var best = 'froid';
-    if(count.plombier > count[best]) best = 'plombier';
-    if(count.elec > count[best]) best = 'elec';
-
-    var f = filieres[best];
-    document.getElementById('resultIcon').textContent = f.icon;
-    document.getElementById('resultTitle').textContent = f.title;
-    document.getElementById('resultDesc').textContent = f.desc;
-
-    document.getElementById('resultCard').classList.add('visible');
-    document.getElementById('pathwaysSection').classList.add('visible');
-
-    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('quizBox').style.display='none';
+  document.getElementById('resultZone').classList.add('show');
+  document.querySelectorAll('.p-card[data-filiere]').forEach(c=>{
+    c.classList.toggle('recommended',c.dataset.filiere===fil);
   });
+  localStorage.setItem('orientation_filiere',fil);
+  notif('Quiz terminé ! Ta filière suggérée : '+f.title,'ok');
+}
 
-  /* ── Code enseignant ────────────────────────── */
-  var teacherInput = document.getElementById('teacherCode');
-  teacherInput.addEventListener('input', function(){
-    if(this.value === '1234'){
-      localStorage.setItem('guidedMode', 'true');
-      notify('Mode guidé activé — les numéros de page seront affichés dans les modules.');
-      this.value = '';
-      this.blur();
-    }
-  });
-
-  /* ── Init : mode guidé déjà actif ──────────── */
-  if(localStorage.getItem('guidedMode') === 'true'){
-    /* silencieux au chargement */
+function checkCode(){
+  if(document.getElementById('tCode').value==='1234'){
+    localStorage.setItem('guidedMode','true');
+    document.getElementById('tStatus').textContent='✅ Mode guidé activé';
+    document.getElementById('tStatus').style.color='var(--ok)';
+    notif('Mode guidé activé — les pages apparaîtront dans les modules.','ok');
   }
+}
 
-})();
+function togDys(){
+  document.body.classList.toggle('dys');
+  document.getElementById('bDys').classList.toggle('on');
+  localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+}
+function setF(c){
+  document.body.classList.remove('f-lg','f-xl');
+  if(c!=='normal')document.body.classList.add(c);
+  localStorage.setItem('a11y-size',c);
+}
+
+function notif(msg,type){
+  const old=document.querySelector('.notif');if(old)old.remove();
+  const n=document.createElement('div');n.className='notif '+type;n.textContent=msg;
+  document.body.appendChild(n);
+  setTimeout(()=>n.classList.add('show'),50);
+  setTimeout(()=>{n.classList.remove('show');setTimeout(()=>n.remove(),300)},3500);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
+  const s=localStorage.getItem('a11y-size');if(s&&s!=='normal')document.body.classList.add(s);
+  if(localStorage.getItem('guidedMode')==='true'){
+    document.getElementById('tStatus').textContent='✅ Mode guidé actif';
+    document.getElementById('tStatus').style.color='var(--ok)';
+  }
+});
 </script>
 </body>
 </html>

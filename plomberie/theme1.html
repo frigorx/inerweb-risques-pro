@@ -12,32 +12,35 @@
     <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --navy: #0f2d52; --navy-mid: #1a4a6e; --orange: #e8914a; --orange-hover: #d47a35;
-            --orange-warm: #fdf6ef; --turquoise: #2aafaf; --mint: #d4f0e8; --bg: #faf7f2;
-            --text: #2c3e50; --border: #ece4da; --shadow: 0 4px 16px rgba(15,45,82,0.07);
-            --card: #ffffff; --success: #27ae60; --error: #e74c3c; --radius: 22px; --radius-sm: 14px;
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
             color: var(--text);
             line-height: 1.6;
             font-size: 16px;
-            transition: background 0.3s, color 0.3s;
         }
 
-        body.dyslexic-font {
-            font-family: 'OpenDyslexic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body.font-small { font-size: 14px; }
-        body.font-normal { font-size: 16px; }
-        body.font-large { font-size: 18px; }
-        body.font-xlarge { font-size: 20px; }
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
 
         /* ========== PAGE HINT (mode guidé) ========== */
         .page-hint { display: none; color: var(--orange); font-weight: 700; }
@@ -55,7 +58,7 @@
 
         /* ========== HEADER / TOPBAR ========== */
         .header-nav {
-            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
             color: white;
             padding: 0;
             box-shadow: var(--shadow);
@@ -63,6 +66,7 @@
             top: 0;
             z-index: 100;
             border-bottom: 4px solid var(--orange);
+            border-radius: 0 0 0 40px;
         }
 
         .nav-container {
@@ -201,7 +205,7 @@
         .section {
             background: var(--card);
             border-radius: var(--radius);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             padding: 28px;
             margin-bottom: 24px;
             box-shadow: var(--shadow);
@@ -212,7 +216,7 @@
             gap: 14px;
             margin-bottom: 22px;
             padding-bottom: 14px;
-            border-bottom: 2px solid var(--border);
+            border-bottom: 2px solid var(--line);
         }
         .section-icon {
             font-size: 1.8em;
@@ -284,25 +288,25 @@
         .risk-card {
             background: var(--card);
             border-radius: var(--radius);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             padding: 20px;
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
-            border-top: 4px solid var(--error);
+            border-top: 4px solid var(--bad);
         }
         .risk-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 24px rgba(15,45,82,0.12);
         }
         .risk-icon { font-size: 2.2em; margin-bottom: 12px; text-align: center; }
-        .risk-title { font-weight: 700; color: var(--error); margin-bottom: 8px; text-align: center; }
+        .risk-title { font-weight: 700; color: var(--bad); margin-bottom: 8px; text-align: center; }
         .risk-description { color: #666; font-size: 0.9em; text-align: center; }
 
         /* ========== ACTIVITIES / QCM ========== */
         .activity {
             background: var(--card);
             border-radius: var(--radius);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             padding: 24px;
             margin-bottom: 24px;
             box-shadow: var(--shadow);
@@ -320,7 +324,7 @@
         .qcm-options { display: grid; gap: 10px; margin-top: 16px; }
         .qcm-option {
             padding: 14px 18px;
-            border: 2px solid var(--border);
+            border: 2px solid var(--line);
             border-radius: var(--radius-sm);
             cursor: pointer;
             transition: all 0.25s ease;
@@ -331,8 +335,8 @@
             transform: translateX(4px);
         }
         .qcm-option.selected { border-color: var(--orange); background: var(--orange-warm); }
-        .qcm-option.correct { border-color: var(--success); background: #d4edda; color: #155724; }
-        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; color: #721c24; }
+        .qcm-option.correct { border-color: var(--ok); background: #d4edda; color: #155724; }
+        .qcm-option.incorrect { border-color: var(--bad); background: #f8d7da; color: #721c24; }
 
         .qcm-feedback { margin-top: 14px; padding: 12px; border-radius: var(--radius-sm); font-weight: 600; }
         .qcm-feedback.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
@@ -347,7 +351,7 @@
         }
         .drag-source, .drag-target {
             min-height: 180px;
-            border: 2px dashed var(--border);
+            border: 2px dashed var(--line);
             border-radius: var(--radius-sm);
             padding: 18px;
         }
@@ -366,7 +370,7 @@
 
         .drop-zone {
             background: var(--card);
-            border: 2px dashed var(--border);
+            border: 2px dashed var(--line);
             border-radius: var(--radius-sm);
             padding: 14px;
             margin: 6px 0;
@@ -394,7 +398,7 @@
             align-items: center;
             background: var(--card);
             border-radius: var(--radius);
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             padding: 24px;
             margin-top: 32px;
             box-shadow: var(--shadow);
@@ -416,7 +420,7 @@
             text-decoration: none;
         }
         .btn-primary { background: var(--navy); color: white; }
-        .btn-success { background: var(--success); color: white; }
+        .btn-success { background: var(--ok); color: white; }
         .btn-secondary { background: #6c757d; color: white; }
         .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
@@ -428,7 +432,7 @@
             margin-top: 30px;
             font-size: 0.8em;
             color: #999;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--line);
         }
 
         /* ========== NOTIFICATIONS ========== */
@@ -436,7 +440,7 @@
             position: fixed;
             top: 80px; right: 20px;
             padding: 14px 20px;
-            border-radius: 999px;
+            border-radius: var(--radius-sm);
             color: white;
             font-weight: 600;
             z-index: 1000;
@@ -446,8 +450,8 @@
             font-size: 0.9em;
         }
         .notification.show { transform: translateX(0); }
-        .notification.success { background: var(--success); }
-        .notification.error { background: var(--error); }
+        .notification.success { background: var(--ok); }
+        .notification.error { background: var(--bad); }
         .notification.warning { background: #f0ad4e; }
         .notification.info { background: var(--turquoise); }
 
@@ -462,7 +466,7 @@
         }
     </style>
 </head>
-<body class="font-normal">
+<body class="">
 
     <!-- Barre accessibilité -->
     <div class="a11y-bar">
@@ -638,9 +642,9 @@
         // ========== ACCESSIBILITÉ ==========
         function setFont(font) {
             if (font === 'dyslexic') {
-                document.body.classList.add('dyslexic-font');
+                document.body.classList.add('dys');
             } else {
-                document.body.classList.remove('dyslexic-font');
+                document.body.classList.remove('dys');
             }
             document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
                 if (b.textContent === 'Standard' || b.textContent === 'OpenDyslexic') b.classList.remove('active');
@@ -650,8 +654,9 @@
         }
 
         function setFontSize(size) {
-            document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
-            document.body.classList.add('font-' + size);
+            document.body.classList.remove('f-lg', 'f-xl');
+            if (size === 'large') document.body.classList.add('f-lg');
+            if (size === 'xlarge') document.body.classList.add('f-xl');
             const sizeMap = {'small': 'A-', 'normal': 'A', 'large': 'A+', 'xlarge': 'A++'};
             document.querySelectorAll('.a11y-bar .a11y-btn').forEach(b => {
                 if (['A-','A','A+','A++'].includes(b.textContent)) {
@@ -804,8 +809,9 @@
             if (guidedMode) document.body.classList.add('guided');
             const sf = localStorage.getItem('accessibility-font') || 'normal';
             const ss = localStorage.getItem('accessibility-font-size') || 'normal';
-            if (sf === 'dyslexic') document.body.classList.add('dyslexic-font');
-            document.body.classList.add('font-' + ss);
+            if (sf === 'dyslexic') document.body.classList.add('dys');
+            if (ss === 'large') document.body.classList.add('f-lg');
+            if (ss === 'xlarge') document.body.classList.add('f-xl');
             setupDragAndDrop();
             updateProgress();
             showNotification('Bienvenue — Thème 1 : Identifiez les risques professionnels', 'info');

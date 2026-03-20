@@ -12,46 +12,44 @@
     <link href="https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --navy: #0f2d52;
-            --navy-mid: #1a4a6e;
-            --orange: #e8914a;
-            --orange-hover: #d47a35;
-            --orange-warm: #fdf6ef;
-            --turquoise: #2aafaf;
-            --mint: #d4f0e8;
-            --bg: #faf7f2;
-            --text: #2c3e50;
-            --border: #ece4da;
-            --shadow: 0 4px 16px rgba(15,45,82,0.07);
-            --card: #ffffff;
-            --success: #27ae60;
-            --error: #e74c3c;
-            --radius: 22px;
-            --radius-sm: 14px;
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
             color: var(--text);
             line-height: 1.7;
             font-size: 16px;
         }
 
-        body.dyslexic { font-family: 'OpenDyslexic', system-ui, sans-serif; }
-        body.font-large { font-size: 18px; }
-        body.font-xlarge { font-size: 20px; }
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
 
         .page-hint { display: none; font-weight: 700; color: var(--orange); }
         body.guided .page-hint { display: inline; }
 
         /* ========== TOPBAR ========== */
         .topbar {
-            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid), var(--turquoise));
             border-bottom: 4px solid var(--orange);
+            border-radius: 0 0 0 40px;
             padding: 14px 24px;
             position: sticky; top: 0; z-index: 100;
         }
@@ -83,7 +81,7 @@
         .a11y-toggle:hover { transform: scale(1.1); }
         .a11y-panel {
             position: fixed; bottom: 80px; right: 20px; z-index: 200;
-            background: var(--card); border: 2px solid var(--border);
+            background: var(--card); border: 2px solid var(--line);
             border-radius: var(--radius); padding: 18px; width: 260px;
             box-shadow: var(--shadow); display: none;
         }
@@ -91,7 +89,7 @@
         .a11y-panel h4 { font-size: .9em; color: var(--navy); margin-bottom: 8px; }
         .a11y-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
         .a11y-btn {
-            padding: 5px 12px; border: 1px solid var(--border); background: var(--card);
+            padding: 5px 12px; border: 1px solid var(--line); background: var(--card);
             border-radius: 999px; cursor: pointer; font-size: .82em; transition: all .2s;
         }
         .a11y-btn:hover, .a11y-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
@@ -119,7 +117,7 @@
         }
         .section-title {
             font-size: 1.5em; font-weight: 700; margin-bottom: 18px;
-            padding-bottom: 12px; border-bottom: 2px solid var(--border);
+            padding-bottom: 12px; border-bottom: 2px solid var(--line);
             display: flex; align-items: center; gap: 12px;
         }
 
@@ -183,13 +181,13 @@
         .qcm-question { font-weight: 600; margin-bottom: 16px; }
         .qcm-options { display: grid; gap: 10px; }
         .qcm-option {
-            padding: 14px 18px; border: 2px solid var(--border);
+            padding: 14px 18px; border: 2px solid var(--line);
             border-radius: var(--radius-sm); cursor: pointer;
             transition: all .2s; background: var(--card);
         }
         .qcm-option:hover { border-color: var(--navy); transform: translateX(4px); }
-        .qcm-option.correct { border-color: var(--success); background: #d4edda; }
-        .qcm-option.incorrect { border-color: var(--error); background: #f8d7da; }
+        .qcm-option.correct { border-color: var(--ok); background: #d4edda; }
+        .qcm-option.incorrect { border-color: var(--bad); background: #f8d7da; }
         .qcm-option.disabled { pointer-events: none; opacity: .7; }
         .qcm-feedback {
             margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm);
@@ -222,13 +220,13 @@
         }
         .nav-pill.primary { background: var(--navy); color: #fff; }
         .nav-pill.primary:hover { background: var(--navy-mid); }
-        .nav-pill.success { background: var(--success); color: #fff; }
+        .nav-pill.success { background: var(--ok); color: #fff; }
         .nav-pill.success:hover { background: #219150; }
 
         /* ========== FOOTER ========== */
         .footer {
             text-align: center; padding: 24px; margin-top: 32px;
-            color: #888; font-size: .85em; border-top: 1px solid var(--border);
+            color: #888; font-size: .85em; border-top: 1px solid var(--line);
         }
 
         @media (max-width: 640px) {
@@ -243,7 +241,7 @@
     <!-- TOPBAR -->
     <div class="topbar">
         <div class="topbar-inner">
-            <div class="topbar-brand">inerWeb · Risques Pro</div>
+            <div class="topbar-brand">LPP Jacques Raynaud &middot; Campus &Eacute;quatio</div>
             <nav class="topbar-nav">
                 <a href="../index.html" class="topbar-btn secondary">Accueil</a>
                 <a href="../docs-irst/ed6276.pdf" target="_blank" class="topbar-btn">Doc INRS</a>
@@ -263,8 +261,8 @@
         <h4>Taille</h4>
         <div class="a11y-row">
             <button class="a11y-btn active" onclick="setSize('')">Normal</button>
-            <button class="a11y-btn" onclick="setSize('font-large')">Grand</button>
-            <button class="a11y-btn" onclick="setSize('font-xlarge')">Très grand</button>
+            <button class="a11y-btn" onclick="setSize('f-lg')">Grand</button>
+            <button class="a11y-btn" onclick="setSize('f-xl')">Très grand</button>
         </div>
     </div>
 
@@ -474,11 +472,11 @@
             const msg = document.getElementById('scoreMsg');
             if (pct >= 70) {
                 msg.textContent = 'Bravo ! Tu peux passer au thème suivant.';
-                msg.style.color = 'var(--success)';
+                msg.style.color = 'var(--ok)';
                 document.getElementById('btnNext').style.display = 'inline-flex';
             } else {
                 msg.textContent = 'Score insuffisant. Relis le document INRS et réessaie.';
-                msg.style.color = 'var(--error)';
+                msg.style.color = 'var(--bad)';
             }
 
             const data = loadData();
@@ -491,12 +489,12 @@
             document.getElementById('a11yPanel').classList.toggle('open');
         }
         function setDyslexic(on) {
-            document.body.classList.toggle('dyslexic', on);
+            document.body.classList.toggle('dys', on);
             document.querySelectorAll('.a11y-panel h4')[0].nextElementSibling.querySelectorAll('.a11y-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
         }
         function setSize(cls) {
-            document.body.classList.remove('font-large', 'font-xlarge');
+            document.body.classList.remove('f-lg', 'f-xl');
             if (cls) document.body.classList.add(cls);
             document.querySelectorAll('.a11y-panel h4')[1].nextElementSibling.querySelectorAll('.a11y-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
